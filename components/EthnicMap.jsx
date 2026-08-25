@@ -42,7 +42,6 @@ export default function EthnicMap() {
             <span className="eyebrow dark">Интерактивная коллекция</span>
             <h2>Карта расселения народов Сибири</h2>
           </div>
-          <p>Наведите на группу в легенде или на точку. Карточка остаётся в одном месте и не перекрывает карту.</p>
         </div>
 
         <div className="mapLegend" aria-label="Группы народов">
