@@ -457,6 +457,20 @@ main,
   border-radius: 999px;
   background: linear-gradient(180deg, #132c9a 0%, #37c8bd 100%);
   opacity: .8;
+  transform: scaleY(.82);
+  transform-origin: center;
+  transition: opacity .25s ease, filter .25s ease, transform .25s ease;
+}
+.waveform.isPlaying i {
+  animation: waveformPulse var(--wave-duration) ease-in-out var(--wave-delay) infinite alternate;
+  box-shadow: 0 0 10px rgba(55,200,189,.34);
+  filter: saturate(1.18) brightness(1.08);
+  opacity: 1;
+}
+@keyframes waveformPulse {
+  0% { transform: scaleY(.42); filter: saturate(1.08) brightness(.94); }
+  48% { transform: scaleY(1.08); filter: saturate(1.28) brightness(1.22); }
+  100% { transform: scaleY(.68); filter: saturate(1.16) brightness(1.06); }
 }
 .playerControls { display: flex; align-items: center; gap: 12px; }
 .time { color: #777; font-size: 12px; }
@@ -471,6 +485,8 @@ main,
 }
 .roundButton.primary { width: 48px; height: 48px; border: 0; color: #fff; background: #31bea9; }
 .roundButton.secondary { background: #fff; }
+.playerIcon { width: 18px; height: 18px; display: block; }
+.roundButton.primary .playerIcon { width: 21px; height: 21px; }
 .trackList { border-left: 1px solid #d6d6d6; padding-left: 38px; }
 .trackRow {
   width: 100%;
@@ -490,6 +506,7 @@ main,
 .trackRow:hover { background: #f6f6f6; }
 .trackRow.isActive { background: linear-gradient(90deg, rgba(225,86,170,.09), rgba(22,203,194,.1)); }
 .miniPlay { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: #9c9c9c; font-size: 10px; }
+.miniPlay .playerIcon { width: 12px; height: 12px; }
 .trackRow.isActive .miniPlay { background: linear-gradient(135deg, #df55aa, #14c9c1); }
 .trackRow.isActive .trackCopy strong { color: #173c3b; }
 .trackCopy { min-width: 0; display: flex; flex-direction: column; }

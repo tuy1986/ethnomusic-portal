@@ -447,6 +447,15 @@ main,
   border-radius: 999px;
   background: linear-gradient(180deg, #132c9a 0%, #37c8bd 100%);
   opacity: .8;
+  transform: scaleY(.82);
+  transform-origin: center;
+  transition: opacity .25s ease, filter .25s ease, transform .25s ease;
+}
+.waveform.isPlaying i { animation: waveformPulse var(--wave-duration) ease-in-out var(--wave-delay) infinite alternate; box-shadow: 0 0 10px rgba(55,200,189,.34); filter: saturate(1.18) brightness(1.08); opacity: 1; }
+@keyframes waveformPulse {
+  0% { transform: scaleY(.42); filter: saturate(1.08) brightness(.94); }
+  48% { transform: scaleY(1.08); filter: saturate(1.28) brightness(1.22); }
+  100% { transform: scaleY(.68); filter: saturate(1.16) brightness(1.06); }
 }
 .playerControls { display: flex; align-items: center; gap: 12px; }
 .time { color: #777; font-size: 12px; }
@@ -461,6 +470,8 @@ main,
 }
 .roundButton.primary { width: 48px; height: 48px; border: 0; color: #fff; background: #31bea9; }
 .roundButton.secondary { background: #fff; }
+.playerIcon { width: 18px; height: 18px; display: block; }
+.roundButton.primary .playerIcon { width: 21px; height: 21px; }
 .trackList { border-left: 1px solid #d6d6d6; padding-left: 38px; }
 .trackRow {
   width: 100%;
@@ -480,6 +491,7 @@ main,
 .trackRow:hover { background: #f6f6f6; }
 .trackRow.isActive { background: linear-gradient(90deg, rgba(225,86,170,.09), rgba(22,203,194,.1)); }
 .miniPlay { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: #9c9c9c; font-size: 10px; }
+.miniPlay .playerIcon { width: 12px; height: 12px; }
 .trackRow.isActive .miniPlay { background: linear-gradient(135deg, #df55aa, #14c9c1); }
 .trackRow.isActive .trackCopy strong { color: #173c3b; }
 .trackCopy { min-width: 0; display: flex; flex-direction: column; }
@@ -671,7 +683,7 @@ function renderMap(){
 }
 function setActive(id){ if(active===id) return; active=id; renderMap(); }
 renderMap();
-const bars=[18,26,34,23,43,50,38,60,31,48,64,54,70,42,28,55,78,65,44,61,83,72,53,47,66,57,38,50,42,29,34,24,20]; document.getElementById('waveform').innerHTML=bars.map(h=>`<i style="height:${h}%"></i>`).join('');
+const bars=[18,26,34,23,43,50,38,60,31,48,64,54,70,42,28,55,78,65,44,61,83,72,53,47,66,57,38,50,42,29,34,24,20]; document.getElementById('waveform').innerHTML=bars.map((h,index)=>`<i style="height:${h}%;--wave-duration:${560+(index%7)*70}ms;--wave-delay:${index*-43}ms"></i>`).join('');
 const archiveBase='https://old08-15.agiki.ru/music/audio/8/';
 const tracks=[
   {title:'Эбэм ырыата (Песня бабушки)',performer:'Готовцева Анна Егоровна',duration:5.4,src:archiveBase+'1.%20Песня%20бабушки.%20Исп.%20А.Е.%20Горохова.mp3'},
@@ -681,6 +693,8 @@ const tracks=[
   {title:'Ёхорьё (эвенкийский круговой танец)',performer:'Н. П. Колодезникова, М. И. Егорова, Л. И. Лыскаева',duration:35.88,src:archiveBase+'10.%20Ехорье.mp3'}
 ];
 const audio=document.getElementById('archiveAudio'), playButton=document.getElementById('playButton');
+const playIcon='<svg class="playerIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 6.7c0-1.1 1.2-1.8 2.1-1.2l8 5.3c.8.5.8 1.7 0 2.2l-8 5.3c-.9.6-2.1 0-2.1-1.2V6.7Z" fill="currentColor"/></svg>';
+const pauseIcon='<svg class="playerIcon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="2" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="2" fill="currentColor"/></svg>';
 let currentTrack=0;
 const formatTime=value=>{const safe=Number.isFinite(value)&&value>=0?value:0;return Math.floor(safe/60)+':'+String(Math.floor(safe%60)).padStart(2,'0')};
 function renderPlayer(){
@@ -688,10 +702,10 @@ function renderPlayer(){
   document.getElementById('trackTitle').textContent=track.title;
   document.getElementById('trackMeta').textContent=track.performer+' · Оленёкский район · 2014';
   document.getElementById('totalTime').textContent=formatTime(track.duration);
-  document.getElementById('trackList').innerHTML=tracks.map((item,index)=>`<button class="trackRow${index===currentTrack?' isActive':''}" data-track="${index}"${index===currentTrack?' aria-current="true"':''}><span class="miniPlay">${index===currentTrack&&!audio.paused?'Ⅱ':'▶'}</span><span class="trackCopy"><strong>${item.title}</strong><small>${item.performer} · 2014</small></span><span class="trackDuration">${formatTime(item.duration)}</span></button>`).join('');
+  document.getElementById('trackList').innerHTML=tracks.map((item,index)=>`<button class="trackRow${index===currentTrack?' isActive':''}" data-track="${index}"${index===currentTrack?' aria-current="true"':''}><span class="miniPlay">${index===currentTrack&&!audio.paused?pauseIcon:playIcon}</span><span class="trackCopy"><strong>${item.title}</strong><small>${item.performer} · 2014</small></span><span class="trackDuration">${formatTime(item.duration)}</span></button>`).join('');
   document.querySelectorAll('[data-track]').forEach(button=>button.onclick=()=>selectTrack(Number(button.dataset.track)));
 }
-function syncPlayButton(){playButton.textContent=audio.paused?'▶':'Ⅱ';playButton.setAttribute('aria-label',audio.paused?'Воспроизвести':'Пауза');renderPlayer()}
+function syncPlayButton(){playButton.innerHTML=audio.paused?playIcon:pauseIcon;playButton.setAttribute('aria-label',audio.paused?'Воспроизвести':'Пауза');document.getElementById('waveform').classList.toggle('isPlaying',!audio.paused);renderPlayer()}
 function loadTrack(index,autoplay=false){currentTrack=(index+tracks.length)%tracks.length;audio.src=tracks[currentTrack].src;audio.load();document.getElementById('currentTime').textContent='0:00';renderPlayer();if(autoplay)audio.play().catch(syncPlayButton)}
 function selectTrack(index){if(index===currentTrack){audio.paused?audio.play().catch(syncPlayButton):audio.pause()}else loadTrack(index,true)}
 playButton.onclick=()=>audio.paused?audio.play().catch(syncPlayButton):audio.pause();
@@ -700,6 +714,6 @@ document.getElementById('nextTrack').onclick=()=>loadTrack(currentTrack+1,!audio
 audio.ontimeupdate=()=>document.getElementById('currentTime').textContent=formatTime(audio.currentTime);
 audio.onloadedmetadata=()=>document.getElementById('totalTime').textContent=formatTime(audio.duration);
 audio.onplay=syncPlayButton; audio.onpause=syncPlayButton; audio.onended=()=>loadTrack(currentTrack+1,true); audio.onerror=syncPlayButton;
-loadTrack(0);
+loadTrack(0); syncPlayButton();
 </script>
 </body></html>

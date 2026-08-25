@@ -46,6 +46,23 @@ function formatTime(value) {
   return `${minutes}:${seconds}`;
 }
 
+function PlayerIcon({ paused }) {
+  if (paused) {
+    return (
+      <svg className="playerIcon" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="6" y="5" width="4" height="14" rx="2" fill="currentColor" />
+        <rect x="14" y="5" width="4" height="14" rx="2" fill="currentColor" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg className="playerIcon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M8.5 6.7c0-1.1 1.2-1.8 2.1-1.2l8 5.3c.8.5.8 1.7 0 2.2l-8 5.3c-.9.6-2.1 0-2.1-1.2V6.7Z" fill="currentColor" />
+    </svg>
+  );
+}
+
 export default function AudioArchive() {
   const audioRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -114,8 +131,17 @@ export default function AudioArchive() {
             Карточка экспедиции в старом архиве ↗
           </a>
 
-          <div className="waveform" aria-hidden="true">
-            {bars.map((height, index) => <i key={index} style={{ height: `${height}%` }} />)}
+          <div className={`waveform${playing ? " isPlaying" : ""}`} aria-hidden="true">
+            {bars.map((height, index) => (
+              <i
+                key={index}
+                style={{
+                  height: `${height}%`,
+                  "--wave-duration": `${560 + (index % 7) * 70}ms`,
+                  "--wave-delay": `${index * -43}ms`,
+                }}
+              />
+            ))}
           </div>
 
           <audio
@@ -146,7 +172,7 @@ export default function AudioArchive() {
               onClick={togglePlayback}
               aria-label={playing ? "Пауза" : "Воспроизвести"}
             >
-              {playing ? "Ⅱ" : "▶"}
+              <PlayerIcon paused={playing} />
             </button>
             <button
               className="roundButton secondary"
@@ -171,7 +197,7 @@ export default function AudioArchive() {
                 onClick={() => selectTrack(index)}
                 aria-current={isCurrent ? "true" : undefined}
               >
-                <span className="miniPlay">{isCurrent && playing ? "Ⅱ" : "▶"}</span>
+                <span className="miniPlay"><PlayerIcon paused={isCurrent && playing} /></span>
                 <span className="trackCopy">
                   <strong>{track.title}</strong>
                   <small>{track.performer} · 2014</small>
