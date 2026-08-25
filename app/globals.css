@@ -229,7 +229,7 @@ main,
 .mapStage {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 220px;
-  gap: clamp(16px, 1.4vw, 22px);
+  gap: clamp(10px, 1vw, 16px);
   align-items: center;
   min-width: 0;
   margin-top: 12px;
@@ -282,57 +282,50 @@ main,
   align-self: stretch;
   display: flex;
   align-items: flex-start;
-  padding-top: clamp(42px, 6vw, 78px);
+  padding-top: clamp(30px, 4.5vw, 58px);
 }
 .peopleCardDock {
   --group-color: #ffc000;
   position: relative;
   width: 100%;
-  min-height: 214px;
-  padding: 20px 18px 17px;
-  overflow: hidden;
-  border: 1px solid rgba(0,0,0,.84);
-  border-radius: 18px;
-  background: rgba(255,255,255,.91);
-  box-shadow: 0 14px 34px rgba(0,0,0,.12);
+  min-height: 0;
+  padding: 8px 0 8px 22px;
 }
 .peopleCardAccent {
   position: absolute;
-  inset: 0 auto 0 0;
-  width: 5px;
+  inset: 6px auto 6px 0;
+  width: 4px;
+  border-radius: 999px;
   background: var(--group-color);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--group-color) 28%, transparent);
 }
-.peopleCardDock h3 { margin: 0; font-size: 22px; line-height: 1; letter-spacing: -.03em; }
-.peopleCardDock p { margin: 6px 0 12px; min-height: 30px; font-size: 12px; line-height: 1.25; }
+.peopleCardDock h3 { margin: 0; font-size: 23px; line-height: 1.04; letter-spacing: -.03em; }
+.peopleCardDock p { margin: 7px 0 18px; font-size: 12px; line-height: 1.3; color: #676767; }
 .peopleCardDock dl { margin: 0; }
 .peopleCardDock dl div { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 6px 0; }
 .peopleCardDock dt { font-size: 13px; }
 .peopleCardDock dd { margin: 0; font-size: 13px; font-weight: 650; }
 .peopleCardDock button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  min-width: 154px;
-  margin: 17px auto 0;
-  padding: 10px 14px 10px 17px;
+  gap: 10px;
+  min-width: 0;
+  margin: 18px 0 0;
+  padding: 0;
   border: 0;
-  border-radius: 12px;
-  color: #fff;
-  background: linear-gradient(105deg, #e45cad 0%, #8a5fda 48%, #08d3cb 100%);
-  background-size: 220% 100%;
-  box-shadow: 0 9px 22px rgba(92, 77, 190, .24);
+  color: #333;
+  background: transparent;
   cursor: pointer;
-  font-size: 12px;
-  font-weight: 650;
+  font-size: 11px;
+  font-weight: 750;
   text-transform: uppercase;
-  letter-spacing: .02em;
-  animation: auroraFlow 7s ease-in-out infinite;
-  transition: transform .2s ease, box-shadow .2s ease;
+  letter-spacing: .05em;
+  transition: color .2s ease;
 }
-.peopleCardDock button:hover { transform: translateY(-2px); box-shadow: 0 13px 28px rgba(92, 77, 190, .32); }
-.peopleCardDock button:focus-visible { outline: 3px solid rgba(0, 211, 203, .32); outline-offset: 3px; }
-.auroraButtonArrow { font-size: 18px; line-height: 1; }
+.peopleCardDock button:hover { color: color-mix(in srgb, var(--group-color) 72%, #222); }
+.peopleCardDock button:focus-visible { outline: 2px solid color-mix(in srgb, var(--group-color) 45%, transparent); outline-offset: 4px; }
+.auroraButtonArrow { color: var(--group-color); font-size: 18px; line-height: 1; transition: transform .2s ease; }
+.peopleCardDock button:hover .auroraButtonArrow { transform: translateX(4px); }
 @keyframes auroraFlow {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -628,7 +621,7 @@ main,
   .legendItem { flex: 0 0 auto; max-width: 245px; }
   .mapCanvas { width: 100%; border-radius: 12px; }
   .mapInfoRail { width: 100%; }
-  .peopleCardDock { border-radius: 18px; padding: 20px 18px; }
+  .peopleCardDock { padding: 8px 0 8px 22px; }
   .peopleCardDock h3 { font-size: 22px; }
   .peopleCardDock p, .peopleCardDock dt, .peopleCardDock dd { font-size: 13px; }
   .mapStats div { min-height: 82px; }
