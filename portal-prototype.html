@@ -432,6 +432,7 @@ main,
 }
 .featuredTrack h3 { margin: 14px 0 6px; font-size: 31px; line-height: 1.06; letter-spacing: -.035em; }
 .featuredTrack p { margin: 0; color: #777; font-size: 13px; }
+.trackArchiveLink { display: inline-block; margin-top: 9px; color: #627071; font-size: 11px; text-decoration: underline; text-decoration-color: #b7c9c7; text-underline-offset: 3px; }
 .waveform {
   height: 100px;
   display: flex;
@@ -477,7 +478,10 @@ main,
   transition: background .2s ease;
 }
 .trackRow:hover { background: #f6f6f6; }
+.trackRow.isActive { background: linear-gradient(90deg, rgba(225,86,170,.09), rgba(22,203,194,.1)); }
 .miniPlay { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: #9c9c9c; font-size: 10px; }
+.trackRow.isActive .miniPlay { background: linear-gradient(135deg, #df55aa, #14c9c1); }
+.trackRow.isActive .trackCopy strong { color: #173c3b; }
 .trackCopy { min-width: 0; display: flex; flex-direction: column; }
 .trackCopy strong { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .trackCopy small { margin-top: 4px; color: #8c8c8c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -632,7 +636,7 @@ main,
     <section class="pageWidth contentPanel audioPanel" id="archive-content">
       <div class="sectionHeading compact"><div><span class="eyebrow dark">Фонограммархив</span><h2>Аудиоархив</h2></div><a class="textLink" href="https://old08-15.agiki.ru/music/" target="_blank" rel="noreferrer">Перейти <span>→</span></a></div>
       <div class="audioLayout">
-        <article class="featuredTrack"><span class="trackTag">Тувинцы</span><h3>Горловое пение — Хоомей</h3><p>Экспедиция · Тыва · В. С. Никифорова · 1987</p><div class="waveform" id="waveform"></div><div class="playerControls"><span class="time">2:14</span><button class="roundButton secondary">‹</button><button class="roundButton primary" id="playButton">▶</button><button class="roundButton secondary">›</button><span class="time">3:55</span></div></article>
+        <article class="featuredTrack"><span class="trackTag" id="trackTag">Эвенки · Саха</span><h3 id="trackTitle"></h3><p id="trackMeta"></p><a class="trackArchiveLink" href="https://old08-15.agiki.ru/music/Audio.aspx?id=8" target="_blank" rel="noreferrer">Карточка экспедиции в старом архиве ↗</a><div class="waveform" id="waveform"></div><audio id="archiveAudio" preload="metadata"></audio><div class="playerControls"><span class="time" id="currentTime">0:00</span><button class="roundButton secondary" id="previousTrack" aria-label="Предыдущая запись">‹</button><button class="roundButton primary" id="playButton" aria-label="Воспроизвести">▶</button><button class="roundButton secondary" id="nextTrack" aria-label="Следующая запись">›</button><span class="time" id="totalTime">0:00</span></div></article>
         <div class="trackList" id="trackList"></div>
       </div>
     </section>
@@ -668,7 +672,34 @@ function renderMap(){
 function setActive(id){ if(active===id) return; active=id; renderMap(); }
 renderMap();
 const bars=[18,26,34,23,43,50,38,60,31,48,64,54,70,42,28,55,78,65,44,61,83,72,53,47,66,57,38,50,42,29,34,24,20]; document.getElementById('waveform').innerHTML=bars.map(h=>`<i style="height:${h}%"></i>`).join('');
-const tracks=['3:55','2:48','4:12','1:57','3:19']; document.getElementById('trackList').innerHTML=tracks.map(d=>`<button class="trackRow"><span class="miniPlay">▶</span><span class="trackCopy"><strong>Игра на варгане — Хомус</strong><small>Экспедиция · Якутия · Ю. И. Шейкин · 1985</small></span><span class="trackDuration">${d}</span></button>`).join('');
-let playing=false; document.getElementById('playButton').onclick=e=>{playing=!playing;e.currentTarget.textContent=playing?'Ⅱ':'▶'};
+const archiveBase='https://old08-15.agiki.ru/music/audio/8/';
+const tracks=[
+  {title:'Эбэм ырыата (Песня бабушки)',performer:'Готовцева Анна Егоровна',duration:5.4,src:archiveBase+'1.%20Песня%20бабушки.%20Исп.%20А.Е.%20Горохова.mp3'},
+  {title:'Эбэҥкилии ырыа (Эвенкийская песня)',performer:'Готовцева Анна Егоровна',duration:63.072,src:archiveBase+'3.%20Эвенкийская%20песня%20Исп.%20А.Е.%20Горохова.mp3'},
+  {title:'Табаны ыҥырыы (Зов оленя)',performer:'Николаев Егор Иосифович',duration:18.756,src:archiveBase+'4.%20Зов%20оленя.%20Звукоподражание.%20Е.И.%20Николаев.mp3'},
+  {title:'Морсуо оҕото (Песня о Морсуо)',performer:'Обрядовый коллектив «Дылкэн»',duration:89.568,src:archiveBase+'7.%20Морсуо%20о5ото.%20Квинтет%20Илкэн.mp3'},
+  {title:'Ёхорьё (эвенкийский круговой танец)',performer:'Н. П. Колодезникова, М. И. Егорова, Л. И. Лыскаева',duration:35.88,src:archiveBase+'10.%20Ехорье.mp3'}
+];
+const audio=document.getElementById('archiveAudio'), playButton=document.getElementById('playButton');
+let currentTrack=0;
+const formatTime=value=>{const safe=Number.isFinite(value)&&value>=0?value:0;return Math.floor(safe/60)+':'+String(Math.floor(safe%60)).padStart(2,'0')};
+function renderPlayer(){
+  const track=tracks[currentTrack];
+  document.getElementById('trackTitle').textContent=track.title;
+  document.getElementById('trackMeta').textContent=track.performer+' · Оленёкский район · 2014';
+  document.getElementById('totalTime').textContent=formatTime(track.duration);
+  document.getElementById('trackList').innerHTML=tracks.map((item,index)=>`<button class="trackRow${index===currentTrack?' isActive':''}" data-track="${index}"${index===currentTrack?' aria-current="true"':''}><span class="miniPlay">${index===currentTrack&&!audio.paused?'Ⅱ':'▶'}</span><span class="trackCopy"><strong>${item.title}</strong><small>${item.performer} · 2014</small></span><span class="trackDuration">${formatTime(item.duration)}</span></button>`).join('');
+  document.querySelectorAll('[data-track]').forEach(button=>button.onclick=()=>selectTrack(Number(button.dataset.track)));
+}
+function syncPlayButton(){playButton.textContent=audio.paused?'▶':'Ⅱ';playButton.setAttribute('aria-label',audio.paused?'Воспроизвести':'Пауза');renderPlayer()}
+function loadTrack(index,autoplay=false){currentTrack=(index+tracks.length)%tracks.length;audio.src=tracks[currentTrack].src;audio.load();document.getElementById('currentTime').textContent='0:00';renderPlayer();if(autoplay)audio.play().catch(syncPlayButton)}
+function selectTrack(index){if(index===currentTrack){audio.paused?audio.play().catch(syncPlayButton):audio.pause()}else loadTrack(index,true)}
+playButton.onclick=()=>audio.paused?audio.play().catch(syncPlayButton):audio.pause();
+document.getElementById('previousTrack').onclick=()=>loadTrack(currentTrack-1,!audio.paused);
+document.getElementById('nextTrack').onclick=()=>loadTrack(currentTrack+1,!audio.paused);
+audio.ontimeupdate=()=>document.getElementById('currentTime').textContent=formatTime(audio.currentTime);
+audio.onloadedmetadata=()=>document.getElementById('totalTime').textContent=formatTime(audio.duration);
+audio.onplay=syncPlayButton; audio.onpause=syncPlayButton; audio.onended=()=>loadTrack(currentTrack+1,true); audio.onerror=syncPlayButton;
+loadTrack(0);
 </script>
 </body></html>
