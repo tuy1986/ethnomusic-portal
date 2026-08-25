@@ -235,7 +235,7 @@ main,
 .mapStage {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 220px;
-  gap: clamp(16px, 1.8vw, 26px);
+  gap: clamp(16px, 1.4vw, 22px);
   align-items: center;
   min-width: 0;
   margin-top: 12px;
@@ -244,11 +244,11 @@ main,
   min-width: 0;
   min-height: 0;
   display: grid;
-  place-items: center;
+  place-items: center start;
 }
 .mapCanvas {
   position: relative;
-  width: min(100%, calc(68svh * 1242 / 734));
+  width: min(100%, calc(82svh * 1242 / 734));
   max-width: 100%;
   aspect-ratio: 1242 / 734;
   overflow: hidden;
@@ -287,7 +287,8 @@ main,
   min-width: 0;
   align-self: stretch;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: clamp(42px, 6vw, 78px);
 }
 .peopleCardDock {
   --group-color: #ffc000;
@@ -573,7 +574,7 @@ main,
   .legendItem { font-size: 11px; }
   .mapStage { grid-template-columns: 1fr; gap: 18px; }
   .mapCanvas { width: min(100%, calc(50svh * 1242 / 734)); }
-  .mapInfoRail { width: min(100%, 420px); justify-self: center; }
+  .mapInfoRail { width: min(100%, 420px); justify-self: center; padding-top: 0; }
   .peopleCardDock { min-height: 0; }
   .mapStats strong { font-size: 32px; }
   .mapStats span { font-size: 11px; }
