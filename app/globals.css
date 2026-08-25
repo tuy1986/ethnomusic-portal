@@ -444,33 +444,56 @@ main,
 .featuredTrack p { margin: 0; color: #777; font-size: 13px; }
 .trackArchiveLink { display: inline-block; margin-top: 9px; color: #627071; font-size: 11px; text-decoration: underline; text-decoration-color: #b7c9c7; text-underline-offset: 3px; }
 .waveform {
+  position: relative;
+  isolation: isolate;
   height: 100px;
   display: flex;
   align-items: center;
   gap: 4px;
   margin: 28px 0 8px;
 }
+.waveform::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 22px -6px 15px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, transparent 0%, rgba(71,105,137,.08) 18%, rgba(104,86,135,.11) 44%, rgba(74,139,128,.11) 72%, transparent 100%);
+  filter: blur(18px);
+  opacity: .42;
+  transform: skewX(-8deg);
+  transition: opacity .3s ease;
+}
 .waveform i {
+  position: relative;
+  z-index: 1;
   flex: 1;
   min-width: 3px;
   max-width: 9px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #132c9a 0%, #37c8bd 100%);
-  opacity: .8;
-  transform: scaleY(.82);
+  border-radius: 60% 60% 45% 45% / 75% 75% 55% 55%;
+  background: linear-gradient(180deg, rgba(68,72,121,.76) 0%, rgba(86,108,143,.64) 48%, rgba(84,148,137,.56) 100%);
+  opacity: .56;
+  transform: translateY(var(--wave-offset)) scaleY(.76);
   transform-origin: center;
   transition: opacity .25s ease, filter .25s ease, transform .25s ease;
 }
+.waveform i:nth-child(3n+2) { background: linear-gradient(180deg, rgba(97,74,122,.68), rgba(77,128,137,.57)); }
+.waveform i:nth-child(4n) { background: linear-gradient(180deg, rgba(60,91,126,.69), rgba(93,151,132,.52)); }
+.waveform.isPlaying::before { animation: auroraHalo 4.8s ease-in-out infinite alternate; opacity: .68; }
 .waveform.isPlaying i {
   animation: waveformPulse var(--wave-duration) ease-in-out var(--wave-delay) infinite alternate;
-  box-shadow: 0 0 10px rgba(55,200,189,.34);
-  filter: saturate(1.18) brightness(1.08);
-  opacity: 1;
+  box-shadow: 0 0 9px rgba(82,139,133,.2);
+  filter: saturate(.92) brightness(1.05);
+  opacity: .8;
 }
 @keyframes waveformPulse {
-  0% { transform: scaleY(.42); filter: saturate(1.08) brightness(.94); }
-  48% { transform: scaleY(1.08); filter: saturate(1.28) brightness(1.22); }
-  100% { transform: scaleY(.68); filter: saturate(1.16) brightness(1.06); }
+  0% { transform: translateY(calc(var(--wave-offset) + 2px)) scaleY(.5); filter: saturate(.78) brightness(.94); }
+  48% { transform: translateY(calc(var(--wave-offset) - 3px)) scaleY(1.02); filter: saturate(.96) brightness(1.09); }
+  100% { transform: translateY(var(--wave-offset)) scaleY(.7); filter: saturate(.86) brightness(1.02); }
+}
+@keyframes auroraHalo {
+  from { transform: translateX(-2%) skewX(-9deg) scaleX(.96); }
+  to { transform: translateX(3%) skewX(-4deg) scaleX(1.04); }
 }
 .playerControls { display: flex; align-items: center; gap: 12px; }
 .time { color: #777; font-size: 12px; }

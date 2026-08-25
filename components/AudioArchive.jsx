@@ -139,6 +139,7 @@ export default function AudioArchive() {
                   height: `${height}%`,
                   "--wave-duration": `${560 + (index % 7) * 70}ms`,
                   "--wave-delay": `${index * -43}ms`,
+                  "--wave-offset": `${Math.round(Math.sin(index * 0.58) * 8 + Math.cos(index * 0.21) * 3)}px`,
                 }}
               />
             ))}
