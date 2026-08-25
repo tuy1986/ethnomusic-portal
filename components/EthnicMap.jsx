@@ -19,7 +19,10 @@ function PeopleCard({ group }) {
         <div><dt>Аудио:</dt><dd>{group.stats.audio}</dd></div>
         <div><dt>Публикации:</dt><dd>{group.stats.publications}</dd></div>
       </dl>
-      <button type="button">Подробнее</button>
+      <button className="auroraButton" type="button">
+        <span>Подробнее</span>
+        <span className="auroraButtonArrow" aria-hidden="true">→</span>
+      </button>
     </article>
   );
 }

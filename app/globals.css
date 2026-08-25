@@ -1,7 +1,7 @@
 :root {
   --page: 1440px;
-  --surface: rgba(235, 237, 239, .72);
-  --panel: rgba(255,255,255,.94);
+  --surface: rgba(235, 237, 239, .56);
+  --panel: rgba(255,255,255,.86);
   --text: #181818;
   --muted: #6e6e6e;
   --line: #d9d9d9;
@@ -101,8 +101,8 @@ button { color: inherit; }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(5,16,31,.42) 0%, rgba(5,16,31,.10) 40%, rgba(5,16,31,.36) 100%),
-    linear-gradient(90deg, rgba(5,16,31,.34), transparent 58%);
+    linear-gradient(180deg, rgba(5,16,31,.28) 0%, rgba(5,16,31,.03) 42%, rgba(5,16,31,.20) 100%),
+    linear-gradient(90deg, rgba(5,16,31,.22), transparent 56%);
 }
 
 main,
@@ -150,8 +150,8 @@ main,
   position: relative;
   z-index: 3;
   padding: 1px 0 72px;
-  background: linear-gradient(180deg, rgba(232,235,237,.72), rgba(232,235,237,.82));
-  backdrop-filter: blur(1.5px);
+  background: linear-gradient(180deg, rgba(232,235,237,.48), rgba(232,235,237,.64));
+  backdrop-filter: blur(.8px);
 }
 .mapSection {
   position: relative;
@@ -166,11 +166,11 @@ main,
   backdrop-filter: blur(18px);
   box-shadow: var(--shadow);
 }
-.mapPanel { padding: clamp(24px, 3.2vw, 48px); }
+.mapPanel { padding: clamp(22px, 2.6vw, 40px); }
 .sectionHeading {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: flex-end;
   gap: 30px;
 }
 .sectionHeading.compact { align-items: center; }
@@ -193,7 +193,7 @@ main,
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px 18px;
-  margin: 36px 0 18px;
+  margin: 30px 0 14px;
 }
 .legendItem {
   --group-color: #111;
@@ -201,10 +201,10 @@ main,
   border: 1px solid #ddd;
   background: #fff;
   border-radius: 999px;
-  padding: 9px 13px 9px 31px;
+  padding: 8px 12px 8px 29px;
   text-align: left;
   line-height: 1.15;
-  font-size: 12px;
+  font-size: 11px;
   cursor: pointer;
   transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, background .2s ease;
 }
@@ -219,8 +219,8 @@ main,
   position: absolute;
   left: 10px;
   top: 50%;
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   background: var(--group-color);
   transform: translateY(-50%);
@@ -228,11 +228,11 @@ main,
 
 .mapStage {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 270px;
-  gap: clamp(20px, 2.5vw, 36px);
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: clamp(16px, 1.8vw, 26px);
   align-items: center;
   min-width: 0;
-  margin-top: 18px;
+  margin-top: 12px;
 }
 .mapVisual {
   min-width: 0;
@@ -242,7 +242,7 @@ main,
 }
 .mapCanvas {
   position: relative;
-  width: min(100%, calc(56svh * 1242 / 734));
+  width: min(100%, calc(68svh * 1242 / 734));
   max-width: 100%;
   aspect-ratio: 1242 / 734;
   overflow: hidden;
@@ -287,13 +287,13 @@ main,
   --group-color: #ffc000;
   position: relative;
   width: 100%;
-  min-height: 255px;
-  padding: 25px 23px 21px;
+  min-height: 214px;
+  padding: 20px 18px 17px;
   overflow: hidden;
   border: 1px solid rgba(0,0,0,.84);
-  border-radius: 22px;
-  background: rgba(255,255,255,.96);
-  box-shadow: 0 18px 44px rgba(0,0,0,.14);
+  border-radius: 18px;
+  background: rgba(255,255,255,.91);
+  box-shadow: 0 14px 34px rgba(0,0,0,.12);
 }
 .peopleCardAccent {
   position: absolute;
@@ -301,23 +301,41 @@ main,
   width: 5px;
   background: var(--group-color);
 }
-.peopleCardDock h3 { margin: 0; font-size: 25px; line-height: 1; letter-spacing: -.03em; }
-.peopleCardDock p { margin: 7px 0 16px; min-height: 34px; font-size: 14px; line-height: 1.25; }
+.peopleCardDock h3 { margin: 0; font-size: 22px; line-height: 1; letter-spacing: -.03em; }
+.peopleCardDock p { margin: 6px 0 12px; min-height: 30px; font-size: 12px; line-height: 1.25; }
 .peopleCardDock dl { margin: 0; }
-.peopleCardDock dl div { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin: 9px 0; }
-.peopleCardDock dt { font-size: 15px; }
-.peopleCardDock dd { margin: 0; font-size: 15px; font-weight: 650; }
+.peopleCardDock dl div { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 6px 0; }
+.peopleCardDock dt { font-size: 13px; }
+.peopleCardDock dd { margin: 0; font-size: 13px; font-weight: 650; }
 .peopleCardDock button {
-  display: block;
-  margin: 27px auto 0;
-  padding: 8px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-width: 154px;
+  margin: 17px auto 0;
+  padding: 10px 14px 10px 17px;
   border: 0;
-  border-radius: 999px;
-  background: #c8c8c8;
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(105deg, #e45cad 0%, #8a5fda 48%, #08d3cb 100%);
+  background-size: 220% 100%;
+  box-shadow: 0 9px 22px rgba(92, 77, 190, .24);
   cursor: pointer;
-  transition: background .2s ease, transform .2s ease;
+  font-size: 12px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  animation: auroraFlow 7s ease-in-out infinite;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
-.peopleCardDock button:hover { background: #b8b8b8; transform: translateY(-1px); }
+.peopleCardDock button:hover { transform: translateY(-2px); box-shadow: 0 13px 28px rgba(92, 77, 190, .32); }
+.peopleCardDock button:focus-visible { outline: 3px solid rgba(0, 211, 203, .32); outline-offset: 3px; }
+.auroraButtonArrow { font-size: 18px; line-height: 1; }
+@keyframes auroraFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
 
 .mapStats {
   display: grid;
@@ -343,15 +361,18 @@ main,
   margin-top: 16px;
 }
 .directionCard {
-  min-height: 250px;
+  --accent-a: #e45cad;
+  --accent-b: #08d3cb;
+  min-height: 318px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  padding: 28px;
+  padding: 24px 26px 25px;
   border-radius: var(--radius-md);
-  background: rgba(255,255,255,.93);
+  border: 1px solid rgba(255,255,255,.66);
+  background: rgba(255,255,255,.80);
   backdrop-filter: blur(16px);
   box-shadow: 0 12px 35px rgba(0,0,0,.06);
   transition: transform .25s ease, box-shadow .25s ease;
@@ -359,19 +380,44 @@ main,
 .directionCard::before {
   content: "";
   position: absolute;
-  inset: auto -40px -70px auto;
-  width: 190px;
-  height: 190px;
+  inset: -72px -50px auto auto;
+  width: 210px;
+  height: 210px;
   border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(31, 67, 172, .11), transparent 68%);
+  background: radial-gradient(circle at center, color-mix(in srgb, var(--accent-b) 22%, transparent), transparent 68%);
   transition: transform .25s ease;
 }
 .directionCard:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(0,0,0,.09); }
 .directionCard:hover::before { transform: scale(1.15); }
+.directionCard-archive { --accent-a: #e45cad; --accent-b: #7161dd; }
+.directionCard-museum { --accent-a: #5968dd; --accent-b: #08d3cb; }
+.directionCard-science { --accent-a: #a55fd6; --accent-b: #e45c9f; }
+.directionCardTop { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; }
 .directionNo { color: #999; font-size: 12px; font-weight: 700; letter-spacing: .1em; }
-.directionCard h2 { max-width: 320px; margin: 0 0 11px; font-size: 25px; line-height: 1.02; letter-spacing: -.025em; }
+.directionIcon {
+  position: relative;
+  z-index: 2;
+  width: 74px;
+  height: 74px;
+  display: grid;
+  place-items: center;
+  margin: 18px 0 16px;
+  border: 1px solid rgba(255,255,255,.78);
+  border-radius: 22px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent-a), var(--accent-b));
+  box-shadow: 0 13px 28px color-mix(in srgb, var(--accent-a) 24%, transparent);
+}
+.directionIcon::after { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(255,255,255,.24); border-radius: 16px; }
+.directionIcon svg { width: 44px; height: 44px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.directionCopy { position: relative; z-index: 2; }
+.directionKicker { display: block; margin-bottom: 7px; color: color-mix(in srgb, var(--accent-a) 78%, #3a3a3a); font-size: 10px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+.directionCard h2 { max-width: 320px; margin: 0 0 10px; font-size: 25px; line-height: 1.02; letter-spacing: -.025em; }
 .directionCard p { max-width: 340px; margin: 0; color: #767676; font-size: 14px; line-height: 1.45; }
-.directionArrow { position: absolute; right: 26px; top: 24px; font-size: 24px; }
+.directionArrow { font-size: 24px; }
+.directionCta { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 9px; margin-top: 19px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.directionCta span { color: var(--accent-b); font-size: 17px; transition: transform .2s ease; }
+.directionCard:hover .directionCta span { transform: translateX(4px); }
 
 .contentPanel { margin-top: 16px; padding: clamp(28px, 4vw, 56px); }
 .textLink { font-size: 13px; font-weight: 650; }
@@ -488,7 +534,7 @@ main,
   .desktopNav a { font-size: 11px; }
   .brandText strong { max-width: 290px; }
   .mapLegend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .mapStage { grid-template-columns: minmax(0,1fr) 240px; }
+  .mapStage { grid-template-columns: minmax(0,1fr) 205px; }
   .galleryRail { grid-template-columns: 1fr 1fr; }
 }
 
@@ -517,7 +563,7 @@ main,
   .mapStats strong { font-size: 32px; }
   .mapStats span { font-size: 11px; }
   .directionGrid { grid-template-columns: 1fr; }
-  .directionCard { min-height: 190px; }
+  .directionCard { min-height: 270px; }
   .audioLayout { grid-template-columns: 1fr; gap: 30px; }
   .trackList { border-left: 0; border-top: 1px solid #ddd; padding: 22px 0 0; }
 }
@@ -543,7 +589,9 @@ main,
   .mapStats div { min-height: 82px; }
   .mapStats strong { font-size: 27px; }
   .mapStats span { margin-top: 7px; font-size: 9px; }
-  .directionCard { padding: 22px; }
+  .directionCard { min-height: 0; padding: 22px; }
+  .directionIcon { width: 64px; height: 64px; margin: 15px 0; border-radius: 18px; }
+  .directionIcon svg { width: 38px; height: 38px; }
   .contentPanel { padding: 24px 18px; }
   .sectionHeading.compact h2 { font-size: 28px; }
   .textLink { font-size: 11px; }
