@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Лаборатория этномузыковедения — прототип</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="siteHeader">
+  <div class="pageWidth headerInner">
+    <a class="brand" href="#top">
+      <span class="brandMark"><img src="../public/logo.png" alt="" /></span>
+      <span class="brandText"><strong>Лаборатория этномузыковедения им. Ю. И. Шейкина</strong><small>Цифровой архив исследовательской коллекции</small></span>
+    </a>
+    <nav class="desktopNav"><a class="isActive" href="#top">Главная</a><a href="#about">О лаборатории</a><a href="#archive">Фонограммархив</a><a href="#museum">Музей</a><a href="#contacts">Контакты</a></nav>
+  </div>
+</header>
+<main>
+  <section class="hero" id="top">
+    <div class="heroFixedMedia" aria-hidden="true">
+      <video autoplay muted loop playsinline poster="../public/hero-poster.jpg"></video>
+      <div class="heroShade"></div>
+    </div>
+    <div class="pageWidth heroContent"><div class="heroTitle"><span class="eyebrow">Исследовательская коллекция</span><h1>Музыкальные традиции народов Сибири</h1><p>Фонограммы, музыкальные инструменты, экспедиционные материалы и научные публикации в едином цифровом пространстве.</p></div></div>
+  </section>
+
+  <div class="contentSurface">
+    <section class="pageWidth mapSection" id="about">
+      <div class="mapPanel" id="mapPanel">
+        <div class="sectionHeading"><div><span class="eyebrow dark">Интерактивная коллекция</span><h2>Карта расселения народов Сибири</h2></div><p>Наведите на название в легенде или на точку на карте.</p></div>
+        <div class="mapLegend" id="legend"></div>
+        <div class="mapCanvas" id="mapCanvas">
+          <img src="../public/map-outline.png" alt="Контурная карта Сибири" />
+          <svg class="mapOverlay" id="mapSvg" viewBox="0 0 3360 1650" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <div class="mapStats"><div><strong>20</strong><span>этносов</span></div><div><strong>170</strong><span>экспедиций</span></div><div><strong>238</strong><span>аудио</span></div></div>
+      </div>
+    </section>
+
+    <section class="pageWidth directionGrid">
+      <a class="directionCard" id="archive" href="#archive-content"><span class="directionNo">01</span><div><h2>Электронный фонограммархив</h2><p>Экспедиционные записи, исполнители, жанры и музыкальные традиции.</p></div><span class="directionArrow">↗</span></a>
+      <a class="directionCard" id="museum" href="#museum-content"><span class="directionNo">02</span><div><h2>Музей музыкальных инструментов</h2><p>Каталог инструментов, 3D-модели, изображения и связанные фонограммы.</p></div><span class="directionArrow">↗</span></a>
+      <a class="directionCard" href="#"><span class="directionNo">03</span><div><h2>Научная деятельность</h2><p>Публикации, исследователи, экспедиции и материалы лаборатории.</p></div><span class="directionArrow">↗</span></a>
+    </section>
+
+    <section class="pageWidth contentPanel audioPanel" id="archive-content">
+      <div class="sectionHeading compact"><div><span class="eyebrow dark">Фонограммархив</span><h2>Аудиоархив</h2></div><a class="textLink" href="#">Перейти <span>→</span></a></div>
+      <div class="audioLayout">
+        <article class="featuredTrack"><span class="trackTag">Тувинцы</span><h3>Горловое пение — Хоомей</h3><p>Экспедиция · Тыва · В. С. Никифорова · 1987</p><div class="waveform" id="waveform"></div><div class="playerControls"><span class="time">2:14</span><button class="roundButton secondary">‹</button><button class="roundButton primary" id="playBtn">▶</button><button class="roundButton secondary">›</button><span class="time">3:55</span></div></article>
+        <div class="trackList" id="trackList"></div>
+      </div>
+    </section>
+
+    <section class="pageWidth contentPanel galleryPanel" id="museum-content">
+      <div class="sectionHeading compact"><div><span class="eyebrow dark">Коллекция</span><h2>Фотогалерея</h2></div><a class="textLink" href="#">Перейти <span>→</span></a></div>
+      <div class="galleryRail"><article class="galleryCard galleryCard1"><div class="galleryScrim"></div><span>Экспедиционные материалы</span></article><article class="galleryCard galleryCard2"><div class="galleryScrim"></div><span>Полевые исследования</span></article><article class="galleryCard galleryCard3"><div class="galleryScrim"></div><span>Музыкальные инструменты</span></article><article class="galleryCard galleryCard4"><div class="galleryScrim"></div><span>Архив лаборатории</span></article></div>
+    </section>
+  </div>
+</main>
+<footer class="footer"><div class="pageWidth footerInner"><span>Лаборатория этномузыковедения им. Ю. И. Шейкина</span><span>Цифровой архив исследовательской коллекции</span></div></footer>
+<script>
+const groups = [
+{id:'ugric',label:'Югорские народы',color:'#ff6800',title:'Югорские народы',subtitle:'Карточка народа подключается из CMS',stats:['—','—','—'],anchor:[500,560],points:[[302,210],[407,317],[407,467],[197,480],[330,550],[562,670],[435,715]]},
+{id:'samoyedic',label:'Северо-самодийские народы',color:'#ffc000',title:'Нганасаны',subtitle:'Самодийский народ в Сибири',stats:[32,100,15],anchor:[1100,230],points:[[330,19],[590,210],[1035,210],[1202,210],[910,265],[617,345],[590,522]]},
+{id:'ket-selkup',label:'Кето-селькупские народы Енисея',color:'#f4ff00',title:'Кето-селькупские народы Енисея',subtitle:'Карточка народа подключается из CMS',stats:['—','—','—'],anchor:[860,760],points:[[937,345],[780,467],[835,567],[807,687],[645,770],[845,1017]]},
+{id:'tungusic-siberia',label:'Тунгусские народы Сибири',color:'#baff00',title:'Тунгусские народы Сибири',subtitle:'Карточка народа подключается из CMS',stats:['—','—','—'],anchor:[2220,650],points:[[2332,517],[1090,632],[2715,637],[2125,645],[2275,705],[2385,875],[1612,1045],[1295,1140],[1917,1140],[2207,1352]]},
+{id:'tungus-manchu',label:'Тунгусо-маньчжурские народы Приамурья и Сахалина',color:'#18eb00',title:'Тунгусо-маньчжурские народы',subtitle:'Приамурье и Сахалин',stats:['—','—','—'],anchor:[2470,1350],points:[[435,865],[462,965],[500,1112],[862,1230],[400,1257],[2607,1325],[2372,1432],[2217,1512],[2430,1567],[2262,1607]]},
+{id:'paleo-se',label:'Палеоазиатские народы юго-востока Сибири',color:'#00e0cb',title:'Палеоазиатские народы',subtitle:'Юго-восток Сибири',stats:['—','—','—'],anchor:[2520,1280],points:[[2517,1170],[2345,1285],[2662,1512]]},
+{id:'north-turkic',label:'Северотюркские народы Сибири',color:'#1600ee',title:'Северотюркские народы Сибири',subtitle:'Карточка народа подключается из CMS',stats:['—','—','—'],anchor:[1770,760],points:[[1225,290],[1547,450],[1972,665],[1695,740],[1872,837],[2045,917]]},
+{id:'paleo-ne',label:'Палеоазиатские народы северо-востока Сибири',color:'#d000ec',title:'Палеоазиатские народы',subtitle:'Северо-восток Сибири',stats:['—','—','—'],anchor:[2850,500],points:[[3110,122],[2852,265],[2375,382],[2920,425],[3030,480],[2497,535],[2975,575],[3050,645],[2825,712],[3030,810],[2852,862],[3077,937],[2865,992],[3057,1115]]}
+];
+let active=null;
+const legend=document.getElementById('legend'); const svg=document.getElementById('mapSvg'); const canvas=document.getElementById('mapCanvas');
+function render(){
+ legend.innerHTML=''; svg.innerHTML=''; canvas.querySelector('.peopleCard')?.remove();
+ groups.forEach(g=>{ const b=document.createElement('button'); b.className='legendItem'+(active===g.id?' isActive':''); b.style.setProperty('--group-color',g.color); b.innerHTML='<span class="legendDot"></span>'+g.label; b.onmouseenter=()=>{active=g.id;render()}; b.onclick=()=>{active=g.id;render()}; legend.appendChild(b);
+ g.points.forEach(([cx,cy])=>{ const ns='http://www.w3.org/2000/svg'; const grp=document.createElementNS(ns,'g'); const hit=document.createElementNS(ns,'circle'); hit.setAttribute('class','mapPointHit'); hit.setAttribute('cx',cx);hit.setAttribute('cy',cy);hit.setAttribute('r','42'); hit.addEventListener('mouseenter',()=>{active=g.id;render()}); const dot=document.createElementNS(ns,'circle'); dot.setAttribute('class','mapPoint'+(active===g.id?' isActive':''));dot.setAttribute('cx',cx);dot.setAttribute('cy',cy);dot.setAttribute('r',active===g.id?'27':'20');dot.setAttribute('fill',active===g.id?g.color:'#bababa');dot.setAttribute('opacity',active&&active!==g.id?'.18':active===g.id?'1':'.46');grp.append(hit,dot);svg.appendChild(grp); });
+ });
+ if(active){ const g=groups.find(x=>x.id===active); const card=document.createElement('article'); card.className='peopleCard'; card.style.left=Math.min(78,Math.max(10,g.anchor[0]/3360*100))+'%'; card.style.top=Math.min(66,Math.max(10,g.anchor[1]/1650*100))+'%'; card.innerHTML=`<h3>${g.title}</h3><p>${g.subtitle}</p><dl><div><dt>Фото:</dt><dd>${g.stats[0]}</dd></div><div><dt>Аудио:</dt><dd>${g.stats[1]}</dd></div><div><dt>Публикации:</dt><dd>${g.stats[2]}</dd></div></dl><button type="button">Подробнее</button>`; canvas.appendChild(card); }
+}
+render(); document.getElementById('mapPanel').addEventListener('mouseleave',()=>{active=null;render()});
+const bars=[18,26,34,23,43,50,38,60,31,48,64,54,70,42,28,55,78,65,44,61,83,72,53,47,66,57,38,50,42,29,34,24,20]; document.getElementById('waveform').innerHTML=bars.map(h=>`<i style="height:${h}%"></i>`).join('');
+const tracks=Array.from({length:5},(_,i)=>({duration:['3:55','2:48','4:12','1:57','3:19'][i]}));document.getElementById('trackList').innerHTML=tracks.map(t=>`<button class="trackRow"><span class="miniPlay">▶</span><span class="trackCopy"><strong>Игра на варгане — Хомус</strong><small>Экспедиция · Якутия · Ю. И. Шейкин · 1985</small></span><span class="trackDuration">${t.duration}</span></button>`).join('');
+let playing=false; document.getElementById('playBtn').onclick=e=>{playing=!playing;e.currentTarget.textContent=playing?'Ⅱ':'▶'};
+</script>
+</body></html>
