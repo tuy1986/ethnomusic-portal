@@ -172,7 +172,7 @@ main,
   backdrop-filter: blur(18px);
   box-shadow: var(--shadow);
 }
-.mapPanel { padding: clamp(22px, 2.6vw, 40px); }
+.mapPanel { overflow: hidden; padding: clamp(22px, 2.6vw, 40px); background: rgba(248,249,250,.94); backdrop-filter: blur(28px) saturate(.88); }
 .sectionHeading {
   display: flex;
   justify-content: space-between;
@@ -234,8 +234,8 @@ main,
 
 .mapStage {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 220px;
-  gap: clamp(10px, 1vw, 16px);
+  grid-template-columns: minmax(0, 1fr) 205px;
+  gap: 8px;
   align-items: center;
   min-width: 0;
   margin-top: 12px;
@@ -248,7 +248,7 @@ main,
 }
 .mapCanvas {
   position: relative;
-  width: min(100%, calc(82svh * 1242 / 734));
+  width: 100%;
   max-width: 100%;
   aspect-ratio: 1242 / 734;
   overflow: hidden;
@@ -300,10 +300,12 @@ main,
 .peopleCardAccent {
   position: absolute;
   inset: 6px auto 6px 0;
-  width: 4px;
+  width: 3px;
   border-radius: 999px;
-  background: var(--group-color);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--group-color) 28%, transparent);
+  background: linear-gradient(180deg, transparent, var(--group-color) 20%, var(--group-color) 80%, transparent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--group-color) 20%, transparent);
+  filter: blur(.45px);
+  opacity: .52;
 }
 .peopleCardDock h3 { margin: 0; font-size: 23px; line-height: 1.04; letter-spacing: -.03em; }
 .peopleCardDock p { margin: 7px 0 18px; font-size: 12px; line-height: 1.3; color: #676767; }
@@ -314,23 +316,28 @@ main,
 .peopleCardDock button {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  min-width: 0;
-  margin: 18px 0 0;
-  padding: 0;
+  justify-content: space-between;
+  gap: 18px;
+  min-width: 154px;
+  margin: 19px 0 0;
+  padding: 10px 14px 10px 17px;
   border: 0;
-  color: #333;
-  background: transparent;
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(105deg, #d96ca9 0%, #866bd1 48%, #24beb7 100%);
+  background-size: 220% 100%;
+  box-shadow: 0 9px 22px rgba(92,77,190,.2);
   cursor: pointer;
-  font-size: 11px;
-  font-weight: 750;
+  font-size: 12px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .05em;
-  transition: color .2s ease;
+  letter-spacing: .02em;
+  animation: auroraFlow 7s ease-in-out infinite;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
-.peopleCardDock button:hover { color: color-mix(in srgb, var(--group-color) 72%, #222); }
-.peopleCardDock button:focus-visible { outline: 2px solid color-mix(in srgb, var(--group-color) 45%, transparent); outline-offset: 4px; }
-.auroraButtonArrow { color: var(--group-color); font-size: 18px; line-height: 1; transition: transform .2s ease; }
+.peopleCardDock button:hover { transform: translateY(-2px); box-shadow: 0 13px 28px rgba(92,77,190,.28); }
+.peopleCardDock button:focus-visible { outline: 3px solid rgba(0,211,203,.28); outline-offset: 3px; }
+.auroraButtonArrow { color: #fff; font-size: 18px; line-height: 1; transition: transform .2s ease; }
 .peopleCardDock button:hover .auroraButtonArrow { transform: translateX(4px); }
 @keyframes auroraFlow { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
@@ -430,36 +437,38 @@ main,
 .waveform {
   position: relative;
   isolation: isolate;
-  height: 100px;
+  height: 112px;
   display: flex;
-  align-items: center;
-  gap: 4px;
+  align-items: flex-end;
+  gap: 3px;
   margin: 28px 0 8px;
+  padding: 0 4px 16px;
 }
-.waveform::before { content: ""; position: absolute; z-index: 0; inset: 22px -6px 15px; border-radius: 50%; background: linear-gradient(90deg, transparent 0%, rgba(71,105,137,.08) 18%, rgba(104,86,135,.11) 44%, rgba(74,139,128,.11) 72%, transparent 100%); filter: blur(18px); opacity: .42; transform: skewX(-8deg); transition: opacity .3s ease; }
+.waveform::before { content: ""; position: absolute; z-index: 0; inset: 26px -8px 15px; border-radius: 46% 54% 18% 22%; background: linear-gradient(90deg, transparent 0%, rgba(217,108,169,.14) 18%, rgba(134,107,209,.17) 48%, rgba(36,190,183,.16) 78%, transparent 100%); filter: blur(16px); opacity: .48; transform: skewX(-5deg); transition: opacity .3s ease; }
+.waveform::after { content: ""; position: absolute; z-index: 0; inset: auto 2% 2px; height: 18px; border-radius: 50%; background: linear-gradient(90deg, transparent, rgba(217,108,169,.1), rgba(134,107,209,.12), rgba(36,190,183,.13), transparent); filter: blur(9px); opacity: .72; }
 .waveform i {
   position: relative;
   z-index: 1;
   flex: 1;
-  min-width: 3px;
-  max-width: 9px;
-  border-radius: 60% 60% 45% 45% / 75% 75% 55% 55%;
-  background: linear-gradient(180deg, rgba(68,72,121,.76) 0%, rgba(86,108,143,.64) 48%, rgba(84,148,137,.56) 100%);
-  opacity: .56;
-  transform: translateY(var(--wave-offset)) scaleY(.76);
-  transform-origin: center;
+  min-width: 2px;
+  max-width: 8px;
+  border-radius: 999px 999px 3px 3px;
+  background: linear-gradient(0deg, rgba(36,190,183,.24) 0%, rgba(36,190,183,.7) 22%, rgba(134,107,209,.72) 62%, rgba(217,108,169,.76) 100%);
+  opacity: .72;
+  transform: translateX(var(--wave-sway)) scaleY(.82);
+  transform-origin: center bottom;
   transition: opacity .25s ease, filter .25s ease, transform .25s ease;
 }
-.waveform i:nth-child(3n+2) { background: linear-gradient(180deg, rgba(97,74,122,.68), rgba(77,128,137,.57)); }
-.waveform i:nth-child(4n) { background: linear-gradient(180deg, rgba(60,91,126,.69), rgba(93,151,132,.52)); }
-.waveform.isPlaying::before { animation: auroraHalo 4.8s ease-in-out infinite alternate; opacity: .68; }
-.waveform.isPlaying i { animation: waveformPulse var(--wave-duration) ease-in-out var(--wave-delay) infinite alternate; box-shadow: 0 0 9px rgba(82,139,133,.2); filter: saturate(.92) brightness(1.05); opacity: .8; }
+.waveform i:nth-child(3n+2) { opacity: .62; }
+.waveform i:nth-child(4n) { filter: saturate(.82); }
+.waveform.isPlaying::before { animation: auroraHalo 4.8s ease-in-out infinite alternate; opacity: .7; }
+.waveform.isPlaying i { animation: waveformPulse var(--wave-duration) ease-in-out var(--wave-delay) infinite alternate; box-shadow: 0 0 8px rgba(117,102,193,.2), 0 0 12px rgba(45,173,166,.13); filter: saturate(.94) brightness(1.05); opacity: .88; }
 @keyframes waveformPulse {
-  0% { transform: translateY(calc(var(--wave-offset) + 2px)) scaleY(.5); filter: saturate(.78) brightness(.94); }
-  48% { transform: translateY(calc(var(--wave-offset) - 3px)) scaleY(1.02); filter: saturate(.96) brightness(1.09); }
-  100% { transform: translateY(var(--wave-offset)) scaleY(.7); filter: saturate(.86) brightness(1.02); }
+  0% { transform: translateX(calc(var(--wave-sway) - 1px)) scaleY(.48); filter: saturate(.82) brightness(.96); }
+  48% { transform: translateX(calc(var(--wave-sway) + 1px)) scaleY(1.04); filter: saturate(.98) brightness(1.08); }
+  100% { transform: translateX(var(--wave-sway)) scaleY(.72); filter: saturate(.9) brightness(1.02); }
 }
-@keyframes auroraHalo { from { transform: translateX(-2%) skewX(-9deg) scaleX(.96); } to { transform: translateX(3%) skewX(-4deg) scaleX(1.04); } }
+@keyframes auroraHalo { from { transform: translateX(-2%) skewX(-6deg) scaleX(.97); } to { transform: translateX(3%) skewX(-2deg) scaleX(1.03); } }
 .playerControls { display: flex; align-items: center; gap: 12px; }
 .time { color: #777; font-size: 12px; }
 .roundButton {
@@ -686,7 +695,7 @@ function renderMap(){
 }
 function setActive(id){ if(active===id) return; active=id; renderMap(); }
 renderMap();
-const bars=[18,26,34,23,43,50,38,60,31,48,64,54,70,42,28,55,78,65,44,61,83,72,53,47,66,57,38,50,42,29,34,24,20]; document.getElementById('waveform').innerHTML=bars.map((h,index)=>`<i style="height:${h}%;--wave-duration:${560+(index%7)*70}ms;--wave-delay:${index*-43}ms;--wave-offset:${Math.round(Math.sin(index*.58)*8+Math.cos(index*.21)*3)}px"></i>`).join('');
+const bars=[16,22,31,26,38,46,34,52,61,45,56,71,64,48,75,82,69,58,87,74,65,91,78,62,70,84,73,59,66,79,68,52,60,72,58,47,55,63,51,42,48,54,43,35,39,31,27,22]; document.getElementById('waveform').innerHTML=bars.map((h,index)=>`<i style="height:${h}%;--wave-duration:${560+(index%7)*70}ms;--wave-delay:${index*-43}ms;--wave-sway:${(Math.sin(index*.61)*1.8).toFixed(1)}px"></i>`).join('');
 const archiveBase='https://old08-15.agiki.ru/music/audio/8/';
 const tracks=[
   {title:'Эбэм ырыата (Песня бабушки)',performer:'Готовцева Анна Егоровна',duration:5.4,src:archiveBase+'1.%20Песня%20бабушки.%20Исп.%20А.Е.%20Горохова.mp3'},

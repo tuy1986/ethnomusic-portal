@@ -37,7 +37,7 @@ const tracks = [
   },
 ];
 
-const bars = [18,26,34,23,43,50,38,60,31,48,64,54,70,42,28,55,78,65,44,61,83,72,53,47,66,57,38,50,42,29,34,24,20];
+const bars = [16,22,31,26,38,46,34,52,61,45,56,71,64,48,75,82,69,58,87,74,65,91,78,62,70,84,73,59,66,79,68,52,60,72,58,47,55,63,51,42,48,54,43,35,39,31,27,22];
 
 function formatTime(value) {
   if (!Number.isFinite(value) || value < 0) return "0:00";
@@ -139,7 +139,7 @@ export default function AudioArchive() {
                   height: `${height}%`,
                   "--wave-duration": `${560 + (index % 7) * 70}ms`,
                   "--wave-delay": `${index * -43}ms`,
-                  "--wave-offset": `${Math.round(Math.sin(index * 0.58) * 8 + Math.cos(index * 0.21) * 3)}px`,
+                  "--wave-sway": `${(Math.sin(index * 0.61) * 1.8).toFixed(1)}px`,
                 }}
               />
             ))}
