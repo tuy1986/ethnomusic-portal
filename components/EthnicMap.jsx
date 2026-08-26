@@ -46,25 +46,26 @@ export default function EthnicMap() {
           </div>
         </div>
 
-        <div className="mapLegend" aria-label="Группы народов">
-          {mapGroups.map((group) => (
-            <button
-              key={group.id}
-              type="button"
-              className={activeId === group.id ? "legendItem isActive" : "legendItem"}
-              onMouseEnter={() => setActiveId(group.id)}
-              onFocus={() => setActiveId(group.id)}
-              onClick={() => setActiveId(group.id)}
-              style={{ "--group-color": group.color }}
-              aria-pressed={activeId === group.id}
-            >
-              <span className="legendDot" />
-              {group.label}
-            </button>
-          ))}
-        </div>
-
         <div className="mapStage">
+          <div className="mapLegend" aria-label="Группы народов">
+            {mapGroups.map((group) => (
+              <button
+                key={group.id}
+                type="button"
+                className={activeId === group.id ? "legendItem isActive" : "legendItem"}
+                onMouseEnter={() => setActiveId(group.id)}
+                onFocus={() => setActiveId(group.id)}
+                onClick={() => setActiveId(group.id)}
+                style={{ "--group-color": group.color }}
+                aria-pressed={activeId === group.id}
+              >
+                <span className="legendDot" />
+                <span className="legendTextFull">{group.label}</span>
+                <span className="legendTextShort">{group.shortLabel}</span>
+              </button>
+            ))}
+          </div>
+
           <div className="mapVisual">
             <div className="mapCanvas">
               <img src="/map-outline.svg" alt="Контурная карта Сибири" />
