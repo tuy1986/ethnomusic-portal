@@ -59,13 +59,13 @@ button { color: inherit; }
 }
 .brandMark img { width: 44px; height: 44px; object-fit: contain; }
 .brandText { display: flex; flex-direction: column; line-height: 1.2; }
-.brandText strong { font-size: 14px; font-weight: 650; }
-.brandText small { margin-top: 5px; font-size: 12px; opacity: .82; }
+.brandText strong { font-size: 16px; font-weight: 650; }
+.brandText small { margin-top: 5px; font-size: 13px; opacity: .82; }
 .desktopNav { display: flex; align-items: center; gap: clamp(18px, 2.2vw, 34px); }
 .desktopNav a {
   position: relative;
   padding: 10px 0;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .04em;
@@ -319,11 +319,11 @@ main,
   opacity: .52;
 }
 .peopleCardDock h3 { margin: 0; font-size: 23px; line-height: 1.04; letter-spacing: -.03em; }
-.peopleCardDock p { margin: 7px 0 18px; font-size: 12px; line-height: 1.3; color: #676767; }
+.peopleCardDock p { margin: 7px 0 18px; font-size: 13px; line-height: 1.3; color: #676767; }
 .peopleCardDock dl { margin: 0; }
 .peopleCardDock dl div { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 6px 0; }
-.peopleCardDock dt { font-size: 13px; }
-.peopleCardDock dd { margin: 0; font-size: 13px; font-weight: 650; }
+.peopleCardDock dt { font-size: 14px; }
+.peopleCardDock dd { margin: 0; font-size: 14px; font-weight: 650; }
 .peopleCardDock button {
   display: inline-flex;
   align-items: center;
@@ -339,7 +339,7 @@ main,
   background-size: 220% 100%;
   box-shadow: 0 9px 22px rgba(92,77,190,.2);
   cursor: pointer;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .02em;
@@ -433,7 +433,7 @@ main,
 .directionCard h2 { max-width: 320px; margin: 0 0 10px; font-size: 25px; line-height: 1.02; letter-spacing: -.025em; }
 .directionCard p { max-width: 340px; margin: 0; color: #767676; font-size: 14px; line-height: 1.45; }
 .directionArrow { font-size: 24px; }
-.directionCta { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 9px; margin-top: 19px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.directionCta { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 9px; margin-top: 19px; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
 .directionCta span { color: var(--accent-b); font-size: 17px; transition: transform .2s ease; }
 .directionCard:hover .directionCta span { transform: translateX(4px); }
 
@@ -471,23 +471,13 @@ main,
   align-items: center;
   gap: 10px;
   color: rgba(244,249,250,.78);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 650;
   white-space: nowrap;
   cursor: default;
 }
-.audioArchiveLink small {
-  padding: 4px 7px;
-  border-radius: 999px;
-  color: rgba(226,245,246,.64);
-  background: rgba(255,255,255,.08);
-  font-size: 8px;
-  font-weight: 750;
-  letter-spacing: .09em;
-  text-transform: uppercase;
-}
 .audioArchiveLink b { color: #52d6ce; font-size: 16px; font-weight: 500; }
-.textLink { font-size: 13px; font-weight: 650; }
+.textLink { font-size: 14px; font-weight: 650; }
 .textLink span { margin-left: 8px; transition: margin .2s ease; }
 .textLink:hover span { margin-left: 12px; }
 .audioLayout {
@@ -508,7 +498,7 @@ main,
   letter-spacing: .08em;
 }
 .featuredTrack h3 { margin: 14px 0 6px; font-size: 31px; line-height: 1.06; letter-spacing: -.035em; }
-.featuredTrack p { margin: 0; color: #777; font-size: 13px; }
+.featuredTrack p { margin: 0; color: #777; font-size: 14px; }
 .waveform {
   position: relative;
   isolation: isolate;
@@ -578,7 +568,7 @@ main,
   to { transform: translateX(3%) skewX(-3deg) scaleX(1.04); }
 }
 .playerControls { display: flex; align-items: center; gap: 12px; }
-.time { color: #777; font-size: 12px; }
+.time { color: #777; font-size: 13px; }
 .roundButton {
   width: 38px;
   height: 38px;
@@ -615,9 +605,9 @@ main,
 .trackRow.isActive .miniPlay { background: linear-gradient(135deg, #df55aa, #14c9c1); }
 .trackRow.isActive .trackCopy strong { color: #173c3b; }
 .trackCopy { min-width: 0; display: flex; flex-direction: column; }
-.trackCopy strong { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.trackCopy small { margin-top: 4px; color: #8c8c8c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.trackDuration { color: #8e8e8e; font-size: 12px; }
+.trackCopy strong { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.trackCopy small { margin-top: 4px; color: #8c8c8c; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.trackDuration { color: #8e8e8e; font-size: 13px; }
 
 .sheykinPanel {
   display: grid;
@@ -647,7 +637,7 @@ main,
 .sheykinCopy h2 { margin: 0 0 22px; font-size: clamp(38px, 4vw, 58px); line-height: .98; letter-spacing: -.045em; font-weight: 650; }
 .sheykinCopy p { margin: 0 0 16px; color: #666; font-size: 15px; line-height: 1.65; }
 .sheykinCopy .sheykinLead { color: #242424; font-size: 18px; line-height: 1.48; }
-.auroraTextLink { display: inline-flex; align-items: center; gap: 14px; margin-top: 13px; padding-bottom: 5px; border-bottom: 1px solid rgba(90,85,166,.24); font-size: 12px; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; }
+.auroraTextLink { display: inline-flex; align-items: center; gap: 14px; margin-top: 13px; padding-bottom: 5px; border-bottom: 1px solid rgba(90,85,166,.24); font-size: 13px; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; }
 .auroraTextLink span { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: linear-gradient(135deg, #df5ba7, #856bd0 50%, #18c5bd); transition: transform .2s ease; }
 .auroraTextLink:hover span { transform: translateX(4px); }
 
@@ -685,18 +675,18 @@ main,
   gap: 54px;
   padding-block: 48px;
   color: rgba(255,255,255,.66);
-  font-size: 12px;
+  font-size: 13px;
 }
 .footerIdentity, .footerContacts, .footerMeta { display: flex; flex-direction: column; gap: 8px; }
 .footerIdentity strong { max-width: 390px; color: #fff; font-size: 17px; line-height: 1.35; }
-.footerLabel { margin-bottom: 4px; color: #fff; font-size: 11px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+.footerLabel { margin-bottom: 4px; color: #fff; font-size: 12px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
 .footerContacts a { color: rgba(255,255,255,.9); }
 .footerContacts a:hover { color: #27c8bf; }
 .footerMeta { align-items: flex-end; text-align: right; }
 
 @media (max-width: 1120px) {
   .desktopNav { gap: 22px; }
-  .desktopNav a { font-size: 11px; }
+  .desktopNav a { font-size: 12px; }
   .brandText strong { max-width: 290px; }
   .mapLegend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mapStage { width: 100%; grid-template-columns: minmax(0,1fr) 205px; gap: 18px; }
@@ -707,8 +697,8 @@ main,
 @media (max-width: 860px) {
   .pageWidth { width: min(calc(100% - 28px), var(--page)); }
   .headerInner { min-height: 90px; }
-  .brandText strong { font-size: 12px; }
-  .brandText small { font-size: 10px; }
+  .brandText strong { font-size: 13px; }
+  .brandText small { font-size: 11px; }
   .brandMark { width: 48px; height: 48px; flex-basis: 48px; }
   .brandMark img { width: 36px; height: 36px; }
   .desktopNav { display: none; }
@@ -740,7 +730,7 @@ main,
 
 @media (max-width: 560px) {
   .brand { min-width: 0; }
-  .brandText strong { max-width: 230px; font-size: 11px; }
+  .brandText strong { max-width: 230px; font-size: 12px; }
   .brandText small { display: none; }
   .heroContent { padding-bottom: 86px; }
   .heroTitle h1 { font-size: 44px; }
@@ -758,15 +748,14 @@ main,
   .peopleCardDock p, .peopleCardDock dt, .peopleCardDock dd { font-size: 13px; }
   .mapStats div { min-height: 82px; }
   .mapStats strong { font-size: 27px; }
-  .mapStats span { margin-top: 7px; font-size: 9px; }
+  .mapStats span { margin-top: 7px; font-size: 10px; }
   .directionCard { min-height: 0; padding: 22px; }
   .directionIcon { width: 64px; height: 64px; margin: 15px 0; border-radius: 18px; }
   .directionIcon svg { width: 38px; height: 38px; }
   .contentPanel { padding: 24px 18px; }
   .sectionHeading.compact h2 { font-size: 28px; }
-  .audioArchiveLink { gap: 6px; font-size: 10px; }
-  .audioArchiveLink small { display: none; }
-  .textLink { font-size: 11px; }
+  .audioArchiveLink { gap: 6px; font-size: 11px; }
+  .textLink { font-size: 12px; }
   .featuredTrack h3 { font-size: 26px; }
   .waveform { height: 72px; }
   .trackRow { grid-template-columns: 30px 1fr; }
