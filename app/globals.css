@@ -456,10 +456,10 @@ main,
   inset: 0 auto 0 50%;
   width: 100vw;
   transform: translateX(-50%);
-  background: linear-gradient(100deg, rgba(10,22,37,.95), rgba(24,39,57,.90) 52%, rgba(12,32,46,.94));
+  background: linear-gradient(100deg, rgba(8,20,35,.74), rgba(21,38,55,.64) 52%, rgba(9,31,45,.72));
   border-top: 1px solid rgba(144,209,214,.18);
   border-bottom: 1px solid rgba(144,209,214,.18);
-  backdrop-filter: blur(9px) saturate(.84);
+  backdrop-filter: blur(3px) saturate(.92);
 }
 .audioPanel .eyebrow.dark { color: rgba(235,245,247,.58); }
 .audioPanel .trackTag { color: rgba(238,247,248,.66); border-color: rgba(226,243,245,.2); }
