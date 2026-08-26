@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Варианты оформления аудиоархива</title>
+<style>
+:root {
+  --ink:#17191d;
+  --muted:#6f747b;
+  --paper:rgba(250,251,252,.9);
+  --line:rgba(30,40,50,.12);
+  --pink:#d95ba9;
+  --violet:#806bd2;
+  --cyan:#20beb8;
+  --ice:#dcebf0;
+  --deep:#17283b;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif;background:#b6c5ce url('public/hero-poster.jpg') center/cover fixed no-repeat;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;z-index:-1;inset:0;background:linear-gradient(180deg,rgba(224,232,237,.74),rgba(190,205,215,.86));backdrop-filter:blur(5px)}
+button,a{font:inherit;color:inherit}
+button{cursor:pointer}
+.page{width:min(calc(100% - 48px),1440px);margin-inline:auto}
+.intro{padding:64px 0 34px}
+.eyebrow{display:block;margin-bottom:13px;color:#66717a;font-size:11px;font-weight:750;letter-spacing:.14em;text-transform:uppercase}
+.intro h1{max-width:850px;margin:0;font-size:clamp(42px,5vw,72px);line-height:.96;letter-spacing:-.05em;font-weight:650}
+.intro p{max-width:680px;margin:22px 0 0;color:#505861;font-size:16px;line-height:1.6}
+.variantNav{position:sticky;z-index:20;top:0;display:flex;gap:8px;overflow:auto;padding:14px 0 18px;background:linear-gradient(180deg,rgba(207,219,227,.97) 70%,transparent);scrollbar-width:none}
+.variantNav a{flex:0 0 auto;padding:9px 14px;border:1px solid rgba(255,255,255,.7);border-radius:999px;background:rgba(255,255,255,.6);text-decoration:none;font-size:12px;font-weight:650;backdrop-filter:blur(12px)}
+.variantNav a:hover{background:#fff}
+.variant{margin:28px 0 76px;scroll-margin-top:78px}
+.variantHead{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:20px;padding-inline:4px}
+.variantHead h2{margin:0;font-size:clamp(28px,3.5vw,46px);line-height:1;letter-spacing:-.04em}
+.variantHead p{max-width:470px;margin:0;color:#535b63;font-size:13px;line-height:1.55}
+.demo{position:relative;overflow:hidden}
+.tag{display:inline-flex;padding:5px 10px;border:1px solid rgba(40,50,60,.16);border-radius:999px;color:#667078;font-size:10px;letter-spacing:.09em;text-transform:uppercase}
+.trackTitle{margin:12px 0 5px;font-size:clamp(25px,3vw,40px);line-height:1.02;letter-spacing:-.04em}
+.trackMeta{margin:0;color:var(--muted);font-size:13px}
+.play{width:52px;height:52px;display:grid;place-items:center;border:0;border-radius:50%;color:#fff;background:linear-gradient(135deg,var(--pink),var(--violet) 50%,var(--cyan));box-shadow:0 11px 28px rgba(103,82,188,.24);font-size:17px;transition:transform .2s ease}
+.play:hover{transform:scale(1.05)}
+.time{color:#707980;font-size:11px;font-variant-numeric:tabular-nums}
+.controls{display:flex;align-items:center;gap:13px}
+.skip{width:36px;height:36px;border:1px solid rgba(30,40,50,.14);border-radius:50%;background:rgba(255,255,255,.68)}
+.horizontalWave{height:116px;display:flex;align-items:center;gap:4px;isolation:isolate}
+.horizontalWave::before{content:"";position:absolute;z-index:-1;left:0;right:0;height:70px;border-radius:50%;background:linear-gradient(90deg,transparent,rgba(217,91,169,.22),rgba(128,107,210,.27),rgba(32,190,184,.25),transparent);filter:blur(17px)}
+.horizontalWave span{flex:1;min-width:3px;max-width:10px;height:calc(var(--h)*1%);border-radius:60% 60% 45% 45%/75% 75% 55% 55%;background:linear-gradient(180deg,rgba(211,84,164,.82),rgba(121,101,202,.76) 50%,rgba(31,187,175,.72));opacity:.82;transform:translateY(var(--offset)) scaleY(.76);transform-origin:center}
+.isPlaying .horizontalWave span{animation:wavePulse calc(560ms + var(--i)*11ms) ease-in-out calc(var(--i)*-31ms) infinite alternate}
+@keyframes wavePulse{from{transform:translateY(3px) scaleY(.48);filter:saturate(.92)}to{transform:translateY(-4px) scaleY(1.04);filter:saturate(1.1) brightness(1.08)}}
+.trackList{display:grid;gap:0}
+.trackRow{display:grid;grid-template-columns:28px 1fr auto;gap:11px;align-items:center;padding:12px 6px;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:left}
+.trackRow i{width:25px;height:25px;display:grid;place-items:center;border-radius:50%;color:#fff;background:#9ca1a5;font-style:normal;font-size:9px}
+.trackRow strong{display:block;font-size:12px}
+.trackRow small{display:block;margin-top:3px;color:#888;font-size:11px}
+.trackRow.active i{background:linear-gradient(135deg,var(--pink),var(--cyan))}
+.trackRow.active strong{color:#285654}
+
+/* 01 — открытая звуковая сцена */
+.openStage{padding:50px 0 26px;border-top:1px solid rgba(255,255,255,.8);border-bottom:1px solid rgba(255,255,255,.8)}
+.openStage::before{content:"";position:absolute;inset:0 -12vw;background:linear-gradient(90deg,transparent,rgba(255,255,255,.36),transparent);filter:blur(20px)}
+.openTop,.openBottom{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:30px}
+.openStage .horizontalWave{position:relative;width:min(100%,980px);margin:9px auto 2px}
+.openBottom{align-items:center}
+.openTracks{display:flex;flex:1;gap:8px;overflow:auto;scrollbar-width:none}
+.openTracks button{flex:0 0 auto;padding:9px 13px;border:1px solid rgba(255,255,255,.72);border-radius:999px;background:rgba(255,255,255,.46);font-size:11px}
+.openTracks button:first-child{background:rgba(255,255,255,.9);box-shadow:0 8px 22px rgba(70,90,110,.1)}
+
+/* 02 — экспедиционная аудиолента */
+.tapeStage{padding:38px;border:1px solid rgba(255,255,255,.76);border-radius:6px;background:rgba(239,238,229,.9);box-shadow:0 24px 60px rgba(40,50,60,.09)}
+.tapeGrid{display:grid;grid-template-columns:1fr 1.1fr .8fr;gap:30px;align-items:center}
+.tapeLabel{padding-right:26px;border-right:1px solid rgba(80,80,70,.18)}
+.fieldNo{display:block;margin-bottom:15px;color:#8b8778;font-family:Consolas,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.tapeMachine{position:relative;min-height:190px;display:grid;grid-template-columns:86px 1fr 86px;align-items:center;gap:16px}
+.reel{width:78px;height:78px;display:grid;place-items:center;border:1px solid #b9b5a8;border-radius:50%;background:radial-gradient(circle,#f8f7f1 0 12%,#a9a69c 13% 16%,transparent 17%),repeating-conic-gradient(from 0deg,#d7d3c8 0 12deg,#f6f4ed 13deg 38deg);box-shadow:inset 0 0 0 7px rgba(255,255,255,.54)}
+.tapeLine{height:74px;display:flex;align-items:center;gap:3px;border-bottom:2px solid rgba(83,80,72,.36)}
+.tapeLine span{flex:1;height:calc(var(--h)*.62%);border-radius:999px;background:linear-gradient(180deg,#a36da0,#668c91)}
+.isPlaying .reel{animation:spin 2.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tapeControls{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.tapeIndex{display:flex;gap:5px;overflow:hidden;margin-top:26px;padding-top:18px;border-top:1px solid rgba(80,80,70,.16)}
+.tapeIndex span{flex:1;min-width:120px;color:#777368;font-family:Consolas,monospace;font-size:10px;text-transform:uppercase}
+.tapeIndex b{display:block;margin-bottom:5px;color:#333;font-size:12px}
+
+/* 03 — панель с волнистым краем */
+.shapedStage{min-height:480px;padding:52px 54px 100px;background:rgba(252,253,253,.88);clip-path:polygon(0 0,100% 0,100% 84%,88% 91%,73% 86%,58% 96%,41% 88%,23% 95%,8% 87%,0 93%)}
+.shapedStage::before{content:"";position:absolute;inset:auto 0 0;height:180px;background:radial-gradient(ellipse at 32% 100%,rgba(214,89,169,.2),transparent 45%),radial-gradient(ellipse at 65% 100%,rgba(124,97,203,.22),transparent 48%),radial-gradient(ellipse at 88% 100%,rgba(31,191,180,.22),transparent 40%);filter:blur(14px)}
+.shapeGrid{position:relative;display:grid;grid-template-columns:1fr 1.05fr;gap:68px;align-items:start}
+.shapedStage .horizontalWave{margin-top:30px}
+.shapedStage .trackList{padding-left:34px;border-left:1px solid var(--line)}
+
+/* 04 — вертикальный поток */
+.verticalStage{display:grid;grid-template-columns:270px 160px minmax(0,1fr);min-height:520px;padding:42px;border:1px solid rgba(255,255,255,.72);border-radius:26px;background:rgba(249,251,252,.78);box-shadow:0 24px 60px rgba(40,50,60,.08)}
+.verticalStage .trackList{align-self:center}
+.verticalFlow{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:7px;margin:0 25px}
+.verticalFlow::before{content:"";position:absolute;inset:3% 15%;border-radius:50%;background:linear-gradient(180deg,rgba(217,91,169,.2),rgba(128,107,210,.26),rgba(32,190,184,.25));filter:blur(20px)}
+.verticalFlow span{position:relative;height:5px;width:calc(var(--h)*1%);border-radius:999px;background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));opacity:.75}
+.isPlaying .verticalFlow span{animation:verticalPulse calc(650ms + var(--i)*14ms) ease-in-out calc(var(--i)*-41ms) infinite alternate}
+@keyframes verticalPulse{to{transform:scaleX(.55);filter:brightness(1.15)}}
+.verticalFeature{align-self:center;padding-left:42px;border-left:1px solid var(--line)}
+.verticalFeature .controls{margin-top:28px}
+
+/* 05 — центральный объект */
+.centerStage{padding:56px 70px 34px;border:1px solid rgba(255,255,255,.8);border-radius:46% 54% 28px 28px/20% 20% 28px 28px;background:rgba(250,252,253,.86);text-align:center;box-shadow:0 25px 70px rgba(30,50,70,.08)}
+.centerStage .tag{margin-inline:auto}
+.centerStage .trackMeta{margin-bottom:16px}
+.centerWaveWrap{position:relative;max-width:980px;margin:0 auto}
+.centerPlay{position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%)}
+.centerPlay:hover{transform:translate(-50%,-50%) scale(1.05)}
+.centerStage .horizontalWave span:nth-child(n+15):nth-child(-n+19){opacity:.18}
+.centerTracks{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;margin-top:18px;background:var(--line)}
+.centerTracks button{min-width:0;padding:14px 10px;border:0;background:rgba(250,252,253,.96);text-align:left}
+.centerTracks button.active{background:linear-gradient(135deg,rgba(217,91,169,.13),rgba(32,190,184,.14))}
+.centerTracks b{display:block;margin-bottom:5px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.centerTracks small{color:#858b90;font-size:10px}
+
+.choiceNote{margin-top:24px;padding:14px 17px;border-left:3px solid var(--violet);background:rgba(255,255,255,.5);color:#4f565d;font-size:12px;line-height:1.55}
+.footer{padding:10px 0 60px;color:#53606a;font-size:12px}
+@media(max-width:980px){.variantHead{display:block}.variantHead p{margin-top:12px}.tapeGrid{grid-template-columns:1fr}.tapeLabel{padding:0 0 22px;border-right:0;border-bottom:1px solid var(--line)}.shapeGrid{grid-template-columns:1fr;gap:30px}.shapedStage .trackList{padding:24px 0 0;border-left:0;border-top:1px solid var(--line)}.verticalStage{grid-template-columns:230px 110px 1fr;padding:26px}.centerTracks{grid-template-columns:1fr 1fr}.centerTracks button:last-child{grid-column:1/-1}}
+@media(max-width:700px){.page{width:min(calc(100% - 24px),1440px)}.intro{padding-top:38px}.variant{margin-bottom:56px}.openTop,.openBottom{align-items:flex-start;flex-direction:column}.tapeStage{padding:22px}.tapeMachine{grid-template-columns:58px 1fr 58px}.reel{width:54px;height:54px}.shapedStage{padding:34px 22px 88px;clip-path:polygon(0 0,100% 0,100% 90%,78% 95%,54% 90%,27% 97%,0 92%)}.verticalStage{grid-template-columns:1fr;gap:22px}.verticalStage .trackList{order:2}.verticalFlow{order:1;height:120px;flex-direction:row;margin:0}.verticalFlow span{width:5px;height:calc(var(--h)*1%)}.verticalFeature{order:0;padding:0 0 24px;border-left:0;border-bottom:1px solid var(--line)}.centerStage{padding:38px 18px 24px;border-radius:30px}.centerTracks{grid-template-columns:1fr}.centerTracks button:last-child{grid-column:auto}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="page intro">
+  <span class="eyebrow">Сравнение композиций</span>
+  <h1>Пять вариантов аудиоархива</h1>
+  <p>Во всех макетах используются одинаковые данные. Нажмите кнопку воспроизведения, чтобы увидеть движение визуализации, и выберите вариант по общему силуэту и удобству.</p>
+</header>
+<nav class="page variantNav" aria-label="Переход к вариантам">
+  <a href="#variant-1">01 · Звуковая волна</a><a href="#variant-2">02 · Аудиолента</a><a href="#variant-3">03 · Волнистая панель</a><a href="#variant-4">04 · Вертикальный поток</a><a href="#variant-5">05 · Центральный объект</a>
+</nav>
+<main class="page">
+  <section class="variant" id="variant-1">
+    <div class="variantHead"><div><span class="eyebrow">Вариант 01</span><h2>Звуковая волна без блока</h2></div><p>Нет внешней карточки: форму секции создают сияние, эквалайзер и тонкие линии.</p></div>
+    <div class="demo openStage" data-demo>
+      <div class="openTop"><div><span class="tag">Эвенки · Саха</span><h3 class="trackTitle">Эбэҥкилии ырыа</h3><p class="trackMeta">Готовцева Анна Егоровна · Оленёкский район · 2014</p></div><span class="time">0:32 / 1:03</span></div>
+      <div class="horizontalWave" data-wave></div>
+      <div class="openBottom"><div class="controls"><button class="skip">‹</button><button class="play demoPlay" aria-label="Показать анимацию">▶</button><button class="skip">›</button></div><div class="openTracks"><button>01 · Песня бабушки</button><button>02 · Эвенкийская песня</button><button>03 · Зов оленя</button><button>04 · Песня о Морсуо</button><button>05 · Ёхорьё</button></div></div>
+    </div>
+    <p class="choiceNote">Подходит, если аудиоархив должен ощущаться свободным, цифровым и не похожим на остальные белые блоки.</p>
+  </section>
+
+  <section class="variant" id="variant-2">
+    <div class="variantHead"><div><span class="eyebrow">Вариант 02</span><h2>Экспедиционная аудиолента</h2></div><p>Современная интерпретация полевой записи: катушки, номер фонда и линейная структура.</p></div>
+    <div class="demo tapeStage" data-demo>
+      <div class="tapeGrid"><div class="tapeLabel"><span class="fieldNo">Фонд 08 · Запись 15–03</span><span class="tag">Эвенки · Саха</span><h3 class="trackTitle">Эбэҥкилии ырыа</h3><p class="trackMeta">Готовцева Анна Егоровна · 2014</p></div><div class="tapeMachine"><div class="reel"></div><div class="tapeLine" data-wave></div><div class="reel"></div></div><div class="tapeControls"><span class="time">00:32:18</span><div class="controls"><button class="skip">‹</button><button class="play demoPlay">▶</button><button class="skip">›</button></div></div></div>
+      <div class="tapeIndex"><span><b>01</b>Песня бабушки</span><span><b>02</b>Эвенкийская песня</span><span><b>03</b>Зов оленя</span><span><b>04</b>Песня о Морсуо</span><span><b>05</b>Ёхорьё</span></div>
+    </div>
+    <p class="choiceNote">Самый тематический вариант: подчёркивает архивное происхождение записей, но остаётся достаточно современным.</p>
+  </section>
+
+  <section class="variant" id="variant-3">
+    <div class="variantHead"><div><span class="eyebrow">Вариант 03</span><h2>Панель с волнистым краем</h2></div><p>Светлая читаемая область, но нижняя граница превращается в мягкую линию северного сияния.</p></div>
+    <div class="demo shapedStage" data-demo><div class="shapeGrid"><div><span class="tag">Эвенки · Саха</span><h3 class="trackTitle">Эбэҥкилии ырыа</h3><p class="trackMeta">Готовцева Анна Егоровна · Оленёкский район · 2014</p><div class="horizontalWave" data-wave></div><div class="controls"><span class="time">0:32</span><button class="skip">‹</button><button class="play demoPlay">▶</button><button class="skip">›</button><span class="time">1:03</span></div></div><div class="trackList" data-track-list></div></div></div>
+    <p class="choiceNote">Компромисс между необычной формой и привычной компоновкой. Хорошо впишется в существующую страницу.</p>
+  </section>
+
+  <section class="variant" id="variant-4">
+    <div class="variantHead"><div><span class="eyebrow">Вариант 04</span><h2>Вертикальный звуковой поток</h2></div><p>Список, сияющая вертикальная ось и выбранная запись образуют три разных уровня.</p></div>
+    <div class="demo verticalStage" data-demo><div class="trackList" data-track-list></div><div class="verticalFlow" data-vertical-wave></div><div class="verticalFeature"><span class="tag">Эвенки · Саха</span><h3 class="trackTitle">Эбэҥкилии ырыа</h3><p class="trackMeta">Готовцева Анна Егоровна · Оленёкский район · 2014</p><div class="controls"><span class="time">0:32</span><button class="play demoPlay">▶</button><span class="time">1:03</span></div></div></div>
+    <p class="choiceNote">Самый экспериментальный вариант. Выразительный на большом экране, но на телефоне композиция станет горизонтальной.</p>
+  </section>
+
+  <section class="variant" id="variant-5">
+    <div class="variantHead"><div><span class="eyebrow">Вариант 05</span><h2>Аудиоплеер как центральный объект</h2></div><p>Симметричная композиция: запись и сияние становятся главным визуальным центром секции.</p></div>
+    <div class="demo centerStage" data-demo><span class="tag">Эвенки · Саха</span><h3 class="trackTitle">Эбэҥкилии ырыа</h3><p class="trackMeta">Готовцева Анна Егоровна · Оленёкский район · 2014</p><div class="centerWaveWrap"><div class="horizontalWave" data-wave></div><button class="play centerPlay demoPlay">▶</button></div><div class="centerTracks"><button><b>Песня бабушки</b><small>0:05</small></button><button class="active"><b>Эвенкийская песня</b><small>1:03</small></button><button><b>Зов оленя</b><small>0:18</small></button><button><b>Песня о Морсуо</b><small>1:29</small></button><button><b>Ёхорьё</b><small>0:35</small></button></div></div>
+    <p class="choiceNote">Спокойный выставочный вариант. Хорошо показывает одну выбранную запись, но занимает больше вертикального пространства.</p>
+  </section>
+</main>
+<footer class="page footer">Сравнительный макет · Лаборатория этномузыковедения им. Ю. И. Шейкина</footer>
+<script>
+const heights=[18,26,34,23,43,50,38,60,31,48,64,54,70,42,28,55,78,65,44,61,83,72,53,47,66,57,38,50,42,29,34,24,20];
+const tracks=[['Эбэм ырыата','Готовцева Анна Егоровна','0:05'],['Эбэҥкилии ырыа','Готовцева Анна Егоровна','1:03'],['Табаны ыҥырыы','Николаев Егор Иосифович','0:18'],['Морсуо оҕото','Коллектив «Дылкэн»','1:29'],['Ёхорьё','Экспедиционная запись','0:35']];
+document.querySelectorAll('[data-wave]').forEach(wave=>{wave.innerHTML=heights.map((h,i)=>`<span style="--h:${h};--i:${i};--offset:${Math.round(Math.sin(i*.58)*7+Math.cos(i*.21)*2)}px"></span>`).join('')});
+document.querySelectorAll('[data-vertical-wave]').forEach(wave=>{wave.innerHTML=heights.slice(0,25).map((h,i)=>`<span style="--h:${h};--i:${i}"></span>`).join('')});
+document.querySelectorAll('[data-track-list]').forEach(list=>{list.innerHTML=tracks.map((t,i)=>`<button class="trackRow${i===1?' active':''}"><i>${i===1?'Ⅱ':'▶'}</i><span><strong>${t[0]}</strong><small>${t[1]}</small></span><span class="time">${t[2]}</span></button>`).join('')});
+document.querySelectorAll('.demoPlay').forEach(button=>button.addEventListener('click',()=>{const demo=button.closest('[data-demo]');const playing=demo.classList.toggle('isPlaying');button.textContent=playing?'Ⅱ':'▶';button.setAttribute('aria-label',playing?'Остановить анимацию':'Показать анимацию')}));
+</script>
+</body>
+</html>
