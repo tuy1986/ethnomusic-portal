@@ -63,6 +63,15 @@ function PlayerIcon({ paused }) {
   );
 }
 
+function SkipIcon({ direction }) {
+  const previous = direction === "previous";
+  return (
+    <svg className="skipIcon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d={previous ? "M7 5v14M18 6.5 10 12l8 5.5Z" : "M17 5v14M6 6.5l8 5.5-8 5.5Z"} />
+    </svg>
+  );
+}
+
 export default function AudioArchive() {
   const audioRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -167,10 +176,10 @@ export default function AudioArchive() {
               onClick={() => moveTrack(-1)}
               aria-label="Предыдущая запись"
             >
-              ‹
+              <SkipIcon direction="previous" />
             </button>
             <button
-              className="roundButton primary"
+              className={`roundButton primary${playing ? " isPlaying" : ""}`}
               type="button"
               onClick={togglePlayback}
               aria-label={playing ? "Пауза" : "Воспроизвести"}
@@ -183,7 +192,7 @@ export default function AudioArchive() {
               onClick={() => moveTrack(1)}
               aria-label="Следующая запись"
             >
-              ›
+              <SkipIcon direction="next" />
             </button>
             <span className="time">{formatTime(duration)}</span>
           </div>
