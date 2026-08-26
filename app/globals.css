@@ -856,13 +856,13 @@ main,
   .sectionHeading h2 { font-size: 28px; }
   .sectionHeading p { font-size: 12px; }
   .mapStage { width: 100%; grid-template-columns: 1fr; gap: 0; margin-top: 14px; }
-  .mapVisual { order: 1; width: 100%; }
+  .mapVisual { order: 2; width: 100%; }
   .mapLegend {
-    order: 2;
+    order: 1;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
-    margin: 16px 14px 0;
+    margin: 16px 14px 14px;
     padding: 0;
     overflow: visible;
   }
