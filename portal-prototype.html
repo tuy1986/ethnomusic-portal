@@ -633,7 +633,7 @@ main,
 .desktopNav { gap: clamp(18px, 2.2vw, 34px); }
 .desktopNav a::after { content:""; position:absolute; left:0; right:0; bottom:1px; height:1px; background:currentColor; transform: scaleX(0); transform-origin: right; transition: transform .2s ease; }
 .desktopNav a:hover::after, .desktopNav a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
-.mapStage { grid-template-columns: minmax(0, 1fr) 218px; gap: 24px; }
+.mapStage { width:93%; margin-inline:auto; grid-template-columns: minmax(0, 1fr) 218px; gap: 24px; }
 .waveform { height:100px; align-items:center; gap:4px; max-width:560px; padding:0; }
 .waveform::before { inset:20px -12px 14px; border-radius:48% 52% 46% 54%; background:radial-gradient(ellipse at 22% 48%,rgba(222,82,166,.24),transparent 45%),radial-gradient(ellipse at 53% 52%,rgba(123,93,209,.28),transparent 48%),radial-gradient(ellipse at 80% 46%,rgba(22,193,183,.27),transparent 44%); filter:blur(18px); opacity:.74; transform:skewX(-7deg); }
 .waveform::after { inset:35% 1% 27%; height:auto; background:linear-gradient(90deg,transparent 0%,rgba(222,82,166,.13) 20%,rgba(123,93,209,.16) 52%,rgba(22,193,183,.16) 82%,transparent 100%); filter:blur(13px); opacity:.8; }
@@ -664,7 +664,7 @@ main,
 .footerContacts a { color: rgba(255,255,255,.9); }
 .footerContacts a:hover { color: #27c8bf; }
 .footerMeta { align-items: flex-end; text-align: right; }
-@media (max-width:1120px) { .mapStage { grid-template-columns:minmax(0,1fr) 205px; gap:18px; } .sheykinPanel { grid-template-columns:minmax(0,.9fr) minmax(320px,1.1fr); gap:34px; } }
+@media (max-width:1120px) { .mapStage { width:100%; grid-template-columns:minmax(0,1fr) 205px; gap:18px; } .sheykinPanel { grid-template-columns:minmax(0,.9fr) minmax(320px,1.1fr); gap:34px; } }
 @media (max-width:860px) { .sheykinPanel { grid-template-columns:1fr; } .sheykinPhoto { min-height:360px; } .footerInner { grid-template-columns:1fr 1fr; } .footerMeta { grid-column:1/-1; align-items:flex-start; text-align:left; } }
 @media (max-width:560px) { .sheykinPanel { padding:16px; } .sheykinPhoto { min-height:270px; border-radius:15px; } .sheykinCopy { padding:18px 4px 10px; } .sheykinCopy h2 { font-size:36px; } .sheykinCopy .sheykinLead { font-size:16px; } .footerInner { grid-template-columns:1fr; gap:28px; } .footerMeta { grid-column:auto; } }
 </style>

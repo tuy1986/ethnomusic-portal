@@ -241,6 +241,8 @@ main,
   grid-template-columns: minmax(0, 1fr) 218px;
   gap: 24px;
   align-items: center;
+  width: 93%;
+  margin-inline: auto;
   min-width: 0;
   margin-top: 12px;
 }
@@ -644,7 +646,7 @@ main,
   .desktopNav a { font-size: 11px; }
   .brandText strong { max-width: 290px; }
   .mapLegend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .mapStage { grid-template-columns: minmax(0,1fr) 205px; gap: 18px; }
+  .mapStage { width: 100%; grid-template-columns: minmax(0,1fr) 205px; gap: 18px; }
   .galleryRail { grid-template-columns: 1fr 1fr; }
   .sheykinPanel { grid-template-columns: minmax(0, .9fr) minmax(320px, 1.1fr); gap: 34px; }
 }
