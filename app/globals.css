@@ -155,7 +155,13 @@ main,
   position: relative;
   z-index: 3;
   padding: 1px 0 72px;
-  background: transparent;
+  background: linear-gradient(
+    180deg,
+    rgba(229, 235, 239, 0) 0%,
+    rgba(226, 233, 237, .12) 18%,
+    rgba(222, 230, 235, .20) 56%,
+    rgba(218, 227, 232, .25) 100%
+  );
 }
 .mapSection {
   position: relative;
