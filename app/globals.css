@@ -877,6 +877,17 @@ main,
   .galleryPanel { overflow: hidden; }
   .galleryRail { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; overflow: visible; padding-bottom: 0; }
   .galleryCard { min-width: 0; min-height: 165px; }
+  .galleryCard > span:last-child {
+    width: 100%;
+    min-width: 0;
+    padding: 14px 12px;
+    font-size: clamp(12px, 3.6vw, 15px);
+    line-height: 1.18;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+  .galleryCard2 > span:last-child,
+  .galleryCard3 > span:last-child { padding-inline: 10px; font-size: clamp(11px, 3.35vw, 13px); }
   .galleryCard1 { grid-column: 1 / -1; min-height: 220px; }
   .galleryCard4 { grid-column: 1 / -1; min-height: 175px; }
   .sheykinPanel { padding: 16px; }
