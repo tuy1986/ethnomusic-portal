@@ -13,7 +13,7 @@ export default function Header() {
         </a>
 
         <nav className="desktopNav" aria-label="Основная навигация">
-          <a href="#map">Карта народов</a>
+          <a href="#map">Этносы</a>
           <a href="#archive-content">Фонограммархив</a>
           <a href="#museum">Музей</a>
           <a href="#science">Исследования</a>
