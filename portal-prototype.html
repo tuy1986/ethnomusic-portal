@@ -156,8 +156,7 @@ main,
   position: relative;
   z-index: 3;
   padding: 1px 0 72px;
-  background: linear-gradient(180deg, rgba(232,235,237,.48), rgba(232,235,237,.64));
-  backdrop-filter: blur(.8px);
+  background: transparent;
 }
 .mapSection {
   position: relative;
@@ -433,7 +432,6 @@ main,
 }
 .featuredTrack h3 { margin: 14px 0 6px; font-size: 31px; line-height: 1.06; letter-spacing: -.035em; }
 .featuredTrack p { margin: 0; color: #777; font-size: 13px; }
-.trackArchiveLink { display: inline-block; margin-top: 9px; color: #627071; font-size: 11px; text-decoration: underline; text-decoration-color: #b7c9c7; text-underline-offset: 3px; }
 .waveform {
   position: relative;
   isolation: isolate;
@@ -697,9 +695,9 @@ main,
       <a class="directionCard directionCard-science" id="science" href="#"><div class="directionCardTop"><span class="directionNo">03</span><span class="directionArrow">↗</span></div><span class="directionIcon"><svg viewBox="0 0 64 64"><path d="M11 17c8-2 15 0 21 5v30c-6-5-13-7-21-5V17Zm42 0c-8-2-15 0-21 5v30c6-5 13-7 21-5V17Z"/><circle cx="32" cy="16" r="4"/><path d="M20 12c3-4 7-7 12-7s9 3 12 7" opacity=".55"/></svg></span><div class="directionCopy"><span class="directionKicker">Исследования</span><h2>Научная деятельность</h2><p>Публикации, исследователи, экспедиции и материалы лаборатории.</p></div><span class="directionCta">Открыть раздел <span>→</span></span></a>
     </section>
     <section class="pageWidth contentPanel audioPanel" id="archive-content">
-      <div class="sectionHeading compact"><div><span class="eyebrow dark">Фонограммархив</span><h2>Аудиоархив</h2></div><a class="textLink" href="https://old08-15.agiki.ru/music/" target="_blank" rel="noreferrer">Перейти <span>→</span></a></div>
+      <div class="sectionHeading compact"><div><span class="eyebrow dark">Фонограммархив</span><h2>Аудиоархив</h2></div></div>
       <div class="audioLayout">
-        <article class="featuredTrack"><span class="trackTag" id="trackTag">Эвенки · Саха</span><h3 id="trackTitle"></h3><p id="trackMeta"></p><a class="trackArchiveLink" href="https://old08-15.agiki.ru/music/Audio.aspx?id=8" target="_blank" rel="noreferrer">Карточка экспедиции в старом архиве ↗</a><div class="waveform" id="waveform"></div><audio id="archiveAudio" preload="metadata"></audio><div class="playerControls"><span class="time" id="currentTime">0:00</span><button class="roundButton secondary" id="previousTrack" aria-label="Предыдущая запись">‹</button><button class="roundButton primary" id="playButton" aria-label="Воспроизвести">▶</button><button class="roundButton secondary" id="nextTrack" aria-label="Следующая запись">›</button><span class="time" id="totalTime">0:00</span></div></article>
+        <article class="featuredTrack"><span class="trackTag" id="trackTag">Эвенки · Саха</span><h3 id="trackTitle"></h3><p id="trackMeta"></p><div class="waveform" id="waveform"></div><audio id="archiveAudio" preload="metadata"></audio><div class="playerControls"><span class="time" id="currentTime">0:00</span><button class="roundButton secondary" id="previousTrack" aria-label="Предыдущая запись">‹</button><button class="roundButton primary" id="playButton" aria-label="Воспроизвести">▶</button><button class="roundButton secondary" id="nextTrack" aria-label="Следующая запись">›</button><span class="time" id="totalTime">0:00</span></div></article>
         <div class="trackList" id="trackList"></div>
       </div>
     </section>

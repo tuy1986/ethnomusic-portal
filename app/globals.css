@@ -155,8 +155,7 @@ main,
   position: relative;
   z-index: 3;
   padding: 1px 0 72px;
-  background: linear-gradient(180deg, rgba(232,235,237,.48), rgba(232,235,237,.64));
-  backdrop-filter: blur(.8px);
+  background: transparent;
 }
 .mapSection {
   position: relative;
@@ -455,7 +454,6 @@ main,
 }
 .featuredTrack h3 { margin: 14px 0 6px; font-size: 31px; line-height: 1.06; letter-spacing: -.035em; }
 .featuredTrack p { margin: 0; color: #777; font-size: 13px; }
-.trackArchiveLink { display: inline-block; margin-top: 9px; color: #627071; font-size: 11px; text-decoration: underline; text-decoration-color: #b7c9c7; text-underline-offset: 3px; }
 .waveform {
   position: relative;
   isolation: isolate;

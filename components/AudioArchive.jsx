@@ -119,7 +119,6 @@ export default function AudioArchive() {
           <span className="eyebrow dark">Фонограммархив</span>
           <h2>Аудиоархив</h2>
         </div>
-        <a className="textLink" href="https://old08-15.agiki.ru/music/" target="_blank" rel="noreferrer">Перейти <span>→</span></a>
       </div>
 
       <div className="audioLayout">
@@ -127,9 +126,6 @@ export default function AudioArchive() {
           <span className="trackTag">Эвенки · Саха</span>
           <h3>{currentTrack.title}</h3>
           <p>{currentTrack.performer} · Оленёкский район · 2014</p>
-          <a className="trackArchiveLink" href="https://old08-15.agiki.ru/music/Audio.aspx?id=8" target="_blank" rel="noreferrer">
-            Карточка экспедиции в старом архиве ↗
-          </a>
 
           <div className={`waveform${playing ? " isPlaying" : ""}`} aria-hidden="true">
             {bars.map((height, index) => (
