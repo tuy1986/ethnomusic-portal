@@ -457,68 +457,70 @@ main,
 .waveform {
   position: relative;
   isolation: isolate;
-  height: 112px;
+  height: 100px;
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   margin: 28px 0 8px;
-  padding: 5px 4px;
   max-width: 560px;
 }
 .waveform::before {
   content: "";
   position: absolute;
   z-index: 0;
-  inset: 23px -8px;
-  border-radius: 46% 54% 18% 22%;
-  background: linear-gradient(90deg, transparent 0%, rgba(226,79,168,.24) 18%, rgba(123,91,210,.28) 50%, rgba(13,193,186,.28) 80%, transparent 100%);
-  filter: blur(15px);
-  opacity: .7;
-  transform: skewX(-5deg);
+  inset: 20px -12px 14px;
+  border-radius: 48% 52% 46% 54%;
+  background:
+    radial-gradient(ellipse at 22% 48%, rgba(222,82,166,.24), transparent 45%),
+    radial-gradient(ellipse at 53% 52%, rgba(123,93,209,.28), transparent 48%),
+    radial-gradient(ellipse at 80% 46%, rgba(22,193,183,.27), transparent 44%);
+  filter: blur(18px);
+  opacity: .74;
+  transform: skewX(-7deg);
   transition: opacity .3s ease;
 }
 .waveform::after {
   content: "";
   position: absolute;
   z-index: 0;
-  inset: 46% 2% auto;
-  height: 16px;
+  inset: 35% 1% 27%;
+  height: auto;
   border-radius: 50%;
-  background: linear-gradient(90deg, transparent, rgba(226,79,168,.18), rgba(123,91,210,.2), rgba(13,193,186,.2), transparent);
-  filter: blur(9px);
-  opacity: .72;
+  background: linear-gradient(90deg, transparent 0%, rgba(222,82,166,.13) 20%, rgba(123,93,209,.16) 52%, rgba(22,193,183,.16) 82%, transparent 100%);
+  filter: blur(13px);
+  opacity: .8;
 }
 .waveform i {
   position: relative;
   z-index: 1;
   flex: 1;
-  min-width: 2px;
-  max-width: 8px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #df5ba7 0%, #8a6fd4 48%, #18c5bd 100%);
-  opacity: .88;
-  box-shadow: 0 0 8px rgba(119,91,201,.15);
-  transform: translateX(var(--wave-sway)) scaleY(.92);
+  min-width: 3px;
+  max-width: 9px;
+  border-radius: 60% 60% 45% 45% / 75% 75% 55% 55%;
+  background: linear-gradient(180deg, rgba(203,83,165,.82) 0%, rgba(124,97,199,.78) 48%, rgba(29,187,175,.72) 100%);
+  opacity: .78;
+  box-shadow: 0 0 8px rgba(105,92,191,.14), 0 0 13px rgba(36,181,173,.1);
+  transform: translateY(var(--wave-offset)) scaleY(.76);
   transform-origin: center;
   transition: opacity .25s ease, filter .25s ease, transform .25s ease;
 }
-.waveform i:nth-child(3n+2) { opacity: .78; }
-.waveform i:nth-child(4n) { filter: saturate(.94); }
-.waveform.isPlaying::before { animation: auroraHalo 4.8s ease-in-out infinite alternate; opacity: .7; }
+.waveform i:nth-child(3n+2) { background: linear-gradient(180deg, rgba(178,82,176,.78), rgba(107,113,198,.72) 52%, rgba(31,191,178,.68)); }
+.waveform i:nth-child(4n) { background: linear-gradient(180deg, rgba(132,91,196,.78), rgba(72,136,187,.72) 48%, rgba(40,194,169,.68)); }
+.waveform.isPlaying::before { animation: auroraHalo 5.4s ease-in-out infinite alternate; opacity: .88; }
 .waveform.isPlaying i {
   animation: waveformPulse var(--wave-duration) ease-in-out var(--wave-delay) infinite alternate;
-  box-shadow: 0 0 10px rgba(117,82,204,.32), 0 0 17px rgba(24,197,189,.22);
-  filter: saturate(1.06) brightness(1.06);
-  opacity: .98;
+  box-shadow: 0 0 10px rgba(119,91,201,.22), 0 0 18px rgba(24,190,181,.16);
+  filter: saturate(1.04) brightness(1.07);
+  opacity: .94;
 }
 @keyframes waveformPulse {
-  0% { transform: translateX(calc(var(--wave-sway) - 1px)) scaleY(.5); filter: saturate(.94) brightness(.98); }
-  48% { transform: translateX(calc(var(--wave-sway) + 1px)) scaleY(1.06); filter: saturate(1.1) brightness(1.09); }
-  100% { transform: translateX(var(--wave-sway)) scaleY(.74); filter: saturate(1.02) brightness(1.03); }
+  0% { transform: translateY(calc(var(--wave-offset) + 2px)) scaleY(.5); filter: saturate(.92) brightness(.98); }
+  48% { transform: translateY(calc(var(--wave-offset) - 3px)) scaleY(1.02); filter: saturate(1.07) brightness(1.09); }
+  100% { transform: translateY(var(--wave-offset)) scaleY(.7); filter: saturate(1) brightness(1.03); }
 }
 @keyframes auroraHalo {
-  from { transform: translateX(-2%) skewX(-6deg) scaleX(.97); }
-  to { transform: translateX(3%) skewX(-2deg) scaleX(1.03); }
+  from { transform: translateX(-2%) skewX(-8deg) scaleX(.96); }
+  to { transform: translateX(3%) skewX(-3deg) scaleX(1.04); }
 }
 .playerControls { display: flex; align-items: center; gap: 12px; }
 .time { color: #777; font-size: 12px; }
