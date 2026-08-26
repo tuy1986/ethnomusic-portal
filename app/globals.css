@@ -157,10 +157,10 @@ main,
   padding: 1px 0 72px;
   background: linear-gradient(
     180deg,
-    rgba(210, 222, 230, .16) 0%,
-    rgba(205, 218, 227, .22) 18%,
-    rgba(198, 213, 223, .30) 56%,
-    rgba(191, 208, 219, .36) 100%
+    rgba(235, 244, 249, .12) 0%,
+    rgba(229, 240, 247, .17) 18%,
+    rgba(221, 235, 244, .23) 56%,
+    rgba(214, 231, 241, .29) 100%
   );
 }
 .mapSection {
@@ -466,6 +466,27 @@ main,
 .audioPanel .roundButton.secondary { color: #f6f9fa; border-color: rgba(235,246,248,.2); background: rgba(255,255,255,.075); }
 .audioPanel .miniPlay { background: rgba(235,243,245,.28); }
 .audioPanel .waveform::before { opacity: .92; }
+.audioArchiveLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(244,249,250,.78);
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
+  cursor: default;
+}
+.audioArchiveLink small {
+  padding: 4px 7px;
+  border-radius: 999px;
+  color: rgba(226,245,246,.64);
+  background: rgba(255,255,255,.08);
+  font-size: 8px;
+  font-weight: 750;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.audioArchiveLink b { color: #52d6ce; font-size: 16px; font-weight: 500; }
 .textLink { font-size: 13px; font-weight: 650; }
 .textLink span { margin-left: 8px; transition: margin .2s ease; }
 .textLink:hover span { margin-left: 12px; }
@@ -743,6 +764,8 @@ main,
   .directionIcon svg { width: 38px; height: 38px; }
   .contentPanel { padding: 24px 18px; }
   .sectionHeading.compact h2 { font-size: 28px; }
+  .audioArchiveLink { gap: 6px; font-size: 10px; }
+  .audioArchiveLink small { display: none; }
   .textLink { font-size: 11px; }
   .featuredTrack h3 { font-size: 26px; }
   .waveform { height: 72px; }

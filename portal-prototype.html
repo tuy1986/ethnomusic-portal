@@ -156,7 +156,7 @@ main,
   position: relative;
   z-index: 3;
   padding: 1px 0 72px;
-  background: linear-gradient(180deg, rgba(210,222,230,.16) 0%, rgba(205,218,227,.22) 18%, rgba(198,213,223,.30) 56%, rgba(191,208,219,.36) 100%);
+  background: linear-gradient(180deg, rgba(235,244,249,.12) 0%, rgba(229,240,247,.17) 18%, rgba(221,235,244,.23) 56%, rgba(214,231,241,.29) 100%);
 }
 .mapSection {
   position: relative;
@@ -643,6 +643,10 @@ main,
 .audioPanel .roundButton.secondary { color:#f6f9fa; border-color:rgba(235,246,248,.2); background:rgba(255,255,255,.075); }
 .audioPanel .miniPlay { background:rgba(235,243,245,.28); }
 .audioPanel .waveform::before { opacity:.92; }
+.audioArchiveLink { display:inline-flex; align-items:center; gap:10px; color:rgba(244,249,250,.78); font-size:12px; font-weight:650; white-space:nowrap; cursor:default; }
+.audioArchiveLink small { padding:4px 7px; border-radius:999px; color:rgba(226,245,246,.64); background:rgba(255,255,255,.08); font-size:8px; font-weight:750; letter-spacing:.09em; text-transform:uppercase; }
+.audioArchiveLink b { color:#52d6ce; font-size:16px; font-weight:500; }
+@media (max-width:520px) { .audioArchiveLink { gap:6px; font-size:10px; } .audioArchiveLink small { display:none; } }
 .desktopNav a::after { content:""; position:absolute; left:0; right:0; bottom:1px; height:1px; background:currentColor; transform: scaleX(0); transform-origin: right; transition: transform .2s ease; }
 .desktopNav a:hover::after, .desktopNav a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
 .mapStage { width:93%; margin-inline:auto; grid-template-columns: minmax(0, 1fr) 218px; gap: 24px; }
@@ -709,7 +713,7 @@ main,
       <a class="directionCard directionCard-science" id="science" href="#"><div class="directionCardTop"><span class="directionNo">03</span><span class="directionArrow">↗</span></div><span class="directionIcon"><svg viewBox="0 0 64 64"><path d="M11 17c8-2 15 0 21 5v30c-6-5-13-7-21-5V17Zm42 0c-8-2-15 0-21 5v30c6-5 13-7 21-5V17Z"/><circle cx="32" cy="16" r="4"/><path d="M20 12c3-4 7-7 12-7s9 3 12 7" opacity=".55"/></svg></span><div class="directionCopy"><span class="directionKicker">Исследования</span><h2>Научная деятельность</h2><p>Публикации, исследователи, экспедиции и материалы лаборатории.</p></div><span class="directionCta">Открыть раздел <span>→</span></span></a>
     </section>
     <section class="pageWidth contentPanel audioPanel" id="archive-content">
-      <div class="sectionHeading compact"><div><span class="eyebrow dark">Фонограммархив</span><h2>Аудиоархив</h2></div></div>
+      <div class="sectionHeading compact"><div><span class="eyebrow dark">Фонограммархив</span><h2>Аудиоархив</h2></div><span class="audioArchiveLink" role="link" aria-disabled="true" title="Раздел находится в разработке">Перейти в фонограммархив <small>Скоро</small><b aria-hidden="true">→</b></span></div>
       <div class="audioLayout">
         <article class="featuredTrack"><span class="trackTag" id="trackTag">Эвенки · Саха</span><h3 id="trackTitle"></h3><p id="trackMeta"></p><div class="waveform" id="waveform"></div><audio id="archiveAudio" preload="metadata"></audio><div class="playerControls"><span class="time" id="currentTime">0:00</span><button class="roundButton secondary" id="previousTrack" aria-label="Предыдущая запись">‹</button><button class="roundButton primary" id="playButton" aria-label="Воспроизвести">▶</button><button class="roundButton secondary" id="nextTrack" aria-label="Следующая запись">›</button><span class="time" id="totalTime">0:00</span></div></article>
         <div class="trackList" id="trackList"></div>
