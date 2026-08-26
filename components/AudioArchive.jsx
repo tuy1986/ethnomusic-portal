@@ -120,7 +120,10 @@ export default function AudioArchive() {
           <h2>Аудиоархив</h2>
         </div>
         <span className="audioArchiveLink" role="link" aria-disabled="true" title="Раздел находится в разработке">
-          Перейти в фонограммархив <b aria-hidden="true">→</b>
+          Перейти в фонограммархив
+          <svg className="inlineArrow" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14m-5-5 5 5-5 5" />
+          </svg>
         </span>
       </div>
 

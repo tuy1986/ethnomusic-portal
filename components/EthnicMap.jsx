@@ -21,7 +21,9 @@ function PeopleCard({ group }) {
       </dl>
       <button className="auroraButton" type="button">
         <span>Подробнее</span>
-        <span className="auroraButtonArrow" aria-hidden="true">→</span>
+        <svg className="auroraButtonArrow" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 12h14m-5-5 5 5-5 5" />
+        </svg>
       </button>
     </article>
   );

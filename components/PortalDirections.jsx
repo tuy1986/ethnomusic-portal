@@ -53,6 +53,22 @@ function DirectionIcon({ type }) {
   );
 }
 
+function DiagonalArrow() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M7 17 17 7M9 7h8v8" />
+    </svg>
+  );
+}
+
+function InlineArrow() {
+  return (
+    <svg className="inlineArrow" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 12h14m-5-5 5 5-5 5" />
+    </svg>
+  );
+}
+
 export default function PortalDirections() {
   return (
     <section className="pageWidth directionGrid" aria-label="Разделы портала">
@@ -65,7 +81,7 @@ export default function PortalDirections() {
         >
           <div className="directionCardTop">
             <span className="directionNo">{item.number}</span>
-            <span className="directionArrow" aria-hidden="true">↗</span>
+            <span className="directionArrow"><DiagonalArrow /></span>
           </div>
           <span className="directionIcon">
             <DirectionIcon type={item.icon} />
@@ -75,7 +91,7 @@ export default function PortalDirections() {
             <h2>{item.title}</h2>
             <p>{item.description}</p>
           </div>
-          <span className="directionCta">Открыть раздел <span aria-hidden="true">→</span></span>
+          <span className="directionCta">Открыть раздел <InlineArrow /></span>
         </a>
       ))}
     </section>

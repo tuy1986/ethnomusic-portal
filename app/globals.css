@@ -18,6 +18,7 @@ body {
   background: #071321;
   font-family: Inter, "Segoe UI", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 button, a { font: inherit; }
 a { color: inherit; text-decoration: none; }
@@ -35,6 +36,7 @@ button { color: inherit; }
   color: #fff;
 }
 .headerInner {
+  position: relative;
   min-height: 112px;
   display: flex;
   align-items: center;
@@ -85,6 +87,8 @@ button { color: inherit; }
 }
 .desktopNav a:hover::after,
 .desktopNav a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+.menuToggle,
+.mobileNav { display: none; }
 
 .siteVideoBackground {
   position: fixed;
@@ -348,7 +352,17 @@ main,
 }
 .peopleCardDock button:hover { transform: translateY(-2px); box-shadow: 0 13px 28px rgba(92,77,190,.28); }
 .peopleCardDock button:focus-visible { outline: 3px solid rgba(0,211,203,.28); outline-offset: 3px; }
-.auroraButtonArrow { color: #fff; font-size: 18px; line-height: 1; transition: transform .2s ease; }
+.auroraButtonArrow {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .2s ease;
+}
 .peopleCardDock button:hover .auroraButtonArrow { transform: translateX(4px); }
 @keyframes auroraFlow {
   0%, 100% { background-position: 0% 50%; }
@@ -432,10 +446,38 @@ main,
 .directionKicker { display: block; margin-bottom: 7px; color: color-mix(in srgb, var(--accent-a) 78%, #3a3a3a); font-size: 10px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
 .directionCard h2 { max-width: 320px; margin: 0 0 10px; font-size: 25px; line-height: 1.02; letter-spacing: -.025em; }
 .directionCard p { max-width: 340px; margin: 0; color: #767676; font-size: 14px; line-height: 1.45; }
-.directionArrow { font-size: 24px; }
+.directionArrow {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #5f6670;
+  background: rgba(255,255,255,.54);
+}
+.directionArrow svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .directionCta { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 9px; margin-top: 19px; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
-.directionCta span { color: var(--accent-b); font-size: 17px; transition: transform .2s ease; }
-.directionCard:hover .directionCta span { transform: translateX(4px); }
+.inlineArrow {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .2s ease;
+}
+.directionCta .inlineArrow { color: var(--accent-b); }
+.directionCard:hover .directionCta .inlineArrow { transform: translateX(4px); }
 
 .contentPanel { margin-top: 16px; padding: clamp(28px, 4vw, 56px); }
 .audioPanel {
@@ -476,10 +518,9 @@ main,
   white-space: nowrap;
   cursor: default;
 }
-.audioArchiveLink b { color: #52d6ce; font-size: 16px; font-weight: 500; }
-.textLink { font-size: 14px; font-weight: 650; }
-.textLink span { margin-left: 8px; transition: margin .2s ease; }
-.textLink:hover span { margin-left: 12px; }
+.audioArchiveLink .inlineArrow { color: #52d6ce; }
+.textLink { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 650; }
+.textLink:hover .inlineArrow { transform: translateX(4px); }
 .audioLayout {
   display: grid;
   grid-template-columns: minmax(0, 1.06fr) minmax(0, 1fr);
@@ -637,9 +678,29 @@ main,
 .sheykinCopy h2 { margin: 0 0 22px; font-size: clamp(38px, 4vw, 58px); line-height: .98; letter-spacing: -.045em; font-weight: 650; }
 .sheykinCopy p { margin: 0 0 16px; color: #666; font-size: 15px; line-height: 1.65; }
 .sheykinCopy .sheykinLead { color: #242424; font-size: 18px; line-height: 1.48; }
-.auroraTextLink { display: inline-flex; align-items: center; gap: 14px; margin-top: 13px; padding-bottom: 5px; border-bottom: 1px solid rgba(90,85,166,.24); font-size: 13px; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; }
-.auroraTextLink span { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: linear-gradient(135deg, #df5ba7, #856bd0 50%, #18c5bd); transition: transform .2s ease; }
-.auroraTextLink:hover span { transform: translateX(4px); }
+.auroraTextLink {
+  min-width: 178px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 13px;
+  padding: 11px 14px 11px 17px;
+  border: 0;
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(105deg, #d96ca9 0%, #866bd1 48%, #24beb7 100%);
+  background-size: 220% 100%;
+  box-shadow: 0 9px 22px rgba(92,77,190,.2);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  animation: auroraFlow 7s ease-in-out infinite;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.auroraTextLink:hover { transform: translateY(-2px); box-shadow: 0 13px 28px rgba(92,77,190,.28); }
+.auroraTextLink:hover .auroraButtonArrow { transform: translateX(4px); }
 
 .galleryRail {
   display: grid;
@@ -660,9 +721,9 @@ main,
 }
 .galleryCard:hover { transform: translateY(-3px); }
 .galleryCard1 { background-position: 7% 52%; }
-.galleryCard2 { background-position: 42% 51%; }
+.galleryCard2 { background-image: url('/sheykin-archive.jpg'); background-position: 35% 48%; }
 .galleryCard3 { background-position: 68% 48%; }
-.galleryCard4 { background-position: 95% 52%; }
+.galleryCard4 { background-image: url('/sheykin-archive.jpg'); background-position: 82% 45%; }
 .galleryScrim { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.68) 100%); }
 .galleryCard span { position: relative; z-index: 2; padding: 22px; color: #fff; font-size: 15px; font-weight: 600; }
 
@@ -702,6 +763,49 @@ main,
   .brandMark { width: 48px; height: 48px; flex-basis: 48px; }
   .brandMark img { width: 36px; height: 36px; }
   .desktopNav { display: none; }
+  .menuToggle {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+    border: 1px solid rgba(255,255,255,.28);
+    border-radius: 50%;
+    color: #fff;
+    background: rgba(8,22,38,.3);
+    backdrop-filter: blur(12px);
+    cursor: pointer;
+  }
+  .menuToggle span { width: 19px; height: 1.5px; border-radius: 2px; background: currentColor; transition: transform .2s ease, opacity .2s ease; }
+  .menuToggle.isOpen span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .menuToggle.isOpen span:nth-child(2) { opacity: 0; }
+  .menuToggle.isOpen span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .mobileNav {
+    position: absolute;
+    z-index: 40;
+    top: 78px;
+    left: 0;
+    right: 0;
+    display: grid;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 20px;
+    background: rgba(8,22,38,.9);
+    box-shadow: 0 22px 50px rgba(0,0,0,.26);
+    backdrop-filter: blur(18px) saturate(.9);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+  }
+  .mobileNav.isOpen { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
+  .mobileNav a { padding: 14px 12px; border-bottom: 1px solid rgba(255,255,255,.1); font-size: 14px; font-weight: 650; }
+  .mobileNav a:last-child { border-bottom: 0; }
   .hero, .heroContent { min-height: 100svh; }
   .heroContent { padding-bottom: 110px; }
   .heroTitle h1 { font-size: clamp(42px, 12vw, 64px); }
@@ -729,6 +833,7 @@ main,
 }
 
 @media (max-width: 560px) {
+  .headerInner { gap: 12px; }
   .brand { min-width: 0; }
   .brandText strong { max-width: 230px; font-size: 12px; }
   .brandText small { display: none; }
@@ -736,14 +841,21 @@ main,
   .heroTitle h1 { font-size: 44px; }
   .heroTitle p { font-size: 14px; }
   .mapPanel, .contentPanel { border-radius: 20px; }
-  .mapPanel { padding-inline: 14px; }
+  .mapPanel { padding: 24px 0 20px; }
+  .mapHeading,
+  .mapLegend,
+  .mapStats { margin-inline: 14px; }
   .sectionHeading h2 { font-size: 28px; }
   .sectionHeading p { font-size: 12px; }
   .mapLegend { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 4px; scrollbar-width: thin; }
   .legendItem { flex: 0 0 auto; max-width: 245px; }
-  .mapCanvas { width: 100%; border-radius: 12px; }
-  .mapInfoRail { width: 100%; }
-  .peopleCardDock { padding: 8px 0 8px 22px; }
+  .mapStage { width: 100%; grid-template-columns: 1fr; gap: 0; margin-top: 14px; }
+  .mapVisual { width: 100%; }
+  .mapCanvas { width: 100%; max-width: none; border-radius: 0; background: rgba(255,255,255,.72); }
+  .mapPoint { transform: scale(1.18); }
+  .mapPoint.isActive { transform: scale(1.32); }
+  .mapInfoRail { width: 100%; padding: 18px 18px 0; }
+  .peopleCardDock { padding: 8px 0 8px 18px; }
   .peopleCardDock h3 { font-size: 22px; }
   .peopleCardDock p, .peopleCardDock dt, .peopleCardDock dd { font-size: 13px; }
   .mapStats div { min-height: 82px; }
@@ -754,14 +866,18 @@ main,
   .directionIcon svg { width: 38px; height: 38px; }
   .contentPanel { padding: 24px 18px; }
   .sectionHeading.compact h2 { font-size: 28px; }
+  .audioPanel .sectionHeading.compact { flex-direction: column; align-items: flex-start; gap: 10px; }
   .audioArchiveLink { gap: 6px; font-size: 11px; }
   .textLink { font-size: 12px; }
   .featuredTrack h3 { font-size: 26px; }
   .waveform { height: 72px; }
   .trackRow { grid-template-columns: 30px 1fr; }
   .trackDuration { display: none; }
-  .galleryRail { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
-  .galleryCard { min-width: 80vw; min-height: 230px; scroll-snap-align: start; }
+  .galleryPanel { overflow: hidden; }
+  .galleryRail { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; overflow: visible; padding-bottom: 0; }
+  .galleryCard { min-width: 0; min-height: 165px; }
+  .galleryCard1 { grid-column: 1 / -1; min-height: 220px; }
+  .galleryCard4 { grid-column: 1 / -1; min-height: 175px; }
   .sheykinPanel { padding: 16px; }
   .sheykinPhoto { min-height: 270px; border-radius: 15px; }
   .sheykinCopy { padding: 18px 4px 10px; }

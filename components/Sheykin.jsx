@@ -28,7 +28,10 @@ export default function Sheykin() {
           target="_blank"
           rel="noreferrer"
         >
-          О научной школе <span aria-hidden="true">→</span>
+          О научной школе
+          <svg className="auroraButtonArrow" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14m-5-5 5 5-5 5" />
+          </svg>
         </a>
       </div>
     </section>

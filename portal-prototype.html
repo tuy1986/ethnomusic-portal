@@ -682,6 +682,52 @@ main,
 @media (max-width:1120px) { .mapStage { width:100%; grid-template-columns:minmax(0,1fr) 205px; gap:18px; } .sheykinPanel { grid-template-columns:minmax(0,.9fr) minmax(320px,1.1fr); gap:34px; } }
 @media (max-width:860px) { .sheykinPanel { grid-template-columns:1fr; } .sheykinPhoto { min-height:360px; } .footerInner { grid-template-columns:1fr 1fr; } .footerMeta { grid-column:1/-1; align-items:flex-start; text-align:left; } }
 @media (max-width:560px) { .waveform { height:84px; } .sheykinPanel { padding:16px; } .sheykinPhoto { min-height:270px; border-radius:15px; } .sheykinCopy { padding:18px 4px 10px; } .sheykinCopy h2 { font-size:36px; } .sheykinCopy .sheykinLead { font-size:16px; } .footerInner { grid-template-columns:1fr; gap:28px; } .footerMeta { grid-column:auto; } }
+body { overflow-x:hidden; }
+.headerInner { position:relative; }
+.menuToggle,.mobileNav { display:none; }
+.directionArrow { width:34px; height:34px; display:grid; place-items:center; border-radius:50%; color:#5f6670; background:rgba(255,255,255,.54); }
+.directionArrow svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.inlineArrow,.auroraButtonArrow { width:17px; height:17px; flex:0 0 17px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; transition:transform .2s ease; }
+.directionCta .inlineArrow { color:var(--accent-b); }
+.directionCard:hover .directionCta .inlineArrow,.textLink:hover .inlineArrow { transform:translateX(4px); }
+.audioArchiveLink .inlineArrow { color:#52d6ce; }
+.textLink { display:inline-flex; align-items:center; gap:8px; }
+.peopleCardDock button:hover .auroraButtonArrow,.auroraTextLink:hover .auroraButtonArrow { transform:translateX(4px); }
+.auroraTextLink { min-width:178px; display:inline-flex; align-items:center; justify-content:space-between; gap:18px; margin-top:13px; padding:11px 14px 11px 17px; border:0; border-radius:12px; color:#fff; background:linear-gradient(105deg,#d96ca9 0%,#866bd1 48%,#24beb7 100%); background-size:220% 100%; box-shadow:0 9px 22px rgba(92,77,190,.2); font-size:13px; font-weight:700; letter-spacing:.02em; text-transform:uppercase; animation:auroraFlow 7s ease-in-out infinite; transition:transform .2s ease,box-shadow .2s ease; }
+.auroraTextLink:hover { transform:translateY(-2px); box-shadow:0 13px 28px rgba(92,77,190,.28); }
+.galleryCard2 { background-image:url('public/sheykin-archive.jpg'); background-position:35% 48%; }
+.galleryCard4 { background-image:url('public/sheykin-archive.jpg'); background-position:82% 45%; }
+@media (max-width:860px) {
+  .menuToggle { width:46px; height:46px; flex:0 0 46px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; padding:0; border:1px solid rgba(255,255,255,.28); border-radius:50%; color:#fff; background:rgba(8,22,38,.3); backdrop-filter:blur(12px); cursor:pointer; }
+  .menuToggle span { width:19px; height:1.5px; border-radius:2px; background:currentColor; transition:transform .2s ease,opacity .2s ease; }
+  .menuToggle.isOpen span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+  .menuToggle.isOpen span:nth-child(2) { opacity:0; }
+  .menuToggle.isOpen span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+  .mobileNav { position:absolute; z-index:40; top:78px; left:0; right:0; display:grid; padding:12px; border:1px solid rgba(255,255,255,.16); border-radius:20px; background:rgba(8,22,38,.9); box-shadow:0 22px 50px rgba(0,0,0,.26); backdrop-filter:blur(18px) saturate(.9); opacity:0; visibility:hidden; pointer-events:none; transform:translateY(-8px); transition:opacity .2s ease,transform .2s ease,visibility .2s ease; }
+  .mobileNav.isOpen { opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0); }
+  .mobileNav a { padding:14px 12px; border-bottom:1px solid rgba(255,255,255,.1); font-size:14px; font-weight:650; }
+  .mobileNav a:last-child { border-bottom:0; }
+  .mapStage { width:100%; grid-template-columns:1fr; gap:18px; }
+}
+@media (max-width:560px) {
+  .headerInner { gap:12px; }
+  .mapPanel { padding:24px 0 20px; }
+  .mapHeading,.mapLegend,.mapStats { margin-inline:14px; }
+  .mapStage { width:100%; grid-template-columns:1fr; gap:0; margin-top:14px; }
+  .mapVisual { width:100%; }
+  .mapCanvas { width:100%; max-width:none; border-radius:0; background:rgba(255,255,255,.72); }
+  .mapPoint { transform:scale(1.18); }
+  .mapPoint.isActive { transform:scale(1.32); }
+  .mapInfoRail { width:100%; padding:18px 18px 0; }
+  .peopleCardDock { padding:8px 0 8px 18px; }
+  .audioPanel .sectionHeading.compact { flex-direction:column; align-items:flex-start; gap:10px; }
+  .audioArchiveLink { max-width:100%; white-space:normal; }
+  .galleryPanel { overflow:hidden; }
+  .galleryRail { display:grid; grid-template-columns:1fr 1fr; gap:10px; overflow:visible; padding-bottom:0; }
+  .galleryCard { min-width:0; min-height:165px; }
+  .galleryCard1 { grid-column:1/-1; min-height:220px; }
+  .galleryCard4 { grid-column:1/-1; min-height:175px; }
+}
 </style>
 </head>
 <body>
@@ -689,6 +735,8 @@ main,
   <div class="pageWidth headerInner">
     <a class="brand" href="#top"><span class="brandMark"><img src="public/logo.png" alt=""></span><span class="brandText"><strong>Лаборатория этномузыковедения им. Ю. И. Шейкина</strong><small>Цифровой архив исследовательской коллекции</small></span></a>
     <nav class="desktopNav"><a href="#map">Этносы</a><a href="#archive-content">Фонограммархив</a><a href="#museum">Музей</a><a href="#science">Исследования</a><a href="#sheykin">Ю. И. Шейкин</a></nav>
+    <button class="menuToggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobile-navigation" aria-label="Открыть меню"><span></span><span></span><span></span></button>
+    <nav class="mobileNav" id="mobile-navigation" aria-label="Мобильная навигация"><a href="#map">Этносы</a><a href="#archive-content">Фонограммархив</a><a href="#museum">Музей</a><a href="#science">Исследования</a><a href="#sheykin">Ю. И. Шейкин</a></nav>
   </div>
 </header>
 <main>
@@ -701,18 +749,18 @@ main,
         <div class="mapLegend" id="mapLegend"></div>
         <div class="mapStage">
           <div class="mapVisual"><div class="mapCanvas"><img src="public/map-outline.svg" alt="Контурная карта Сибири"><svg id="mapOverlay" class="mapOverlay" viewBox="0 0 1242 734" preserveAspectRatio="xMidYMid meet"></svg></div></div>
-          <aside class="mapInfoRail"><article class="peopleCardDock" id="peopleCard"><span class="peopleCardAccent"></span><h3 id="cardTitle"></h3><p id="cardSubtitle"></p><dl><div><dt>Фото:</dt><dd id="cardPhotos"></dd></div><div><dt>Аудио:</dt><dd id="cardAudio"></dd></div><div><dt>Публикации:</dt><dd id="cardPubs"></dd></div></dl><button class="auroraButton" type="button"><span>Подробнее</span><span class="auroraButtonArrow">→</span></button></article></aside>
+          <aside class="mapInfoRail"><article class="peopleCardDock" id="peopleCard"><span class="peopleCardAccent"></span><h3 id="cardTitle"></h3><p id="cardSubtitle"></p><dl><div><dt>Фото:</dt><dd id="cardPhotos"></dd></div><div><dt>Аудио:</dt><dd id="cardAudio"></dd></div><div><dt>Публикации:</dt><dd id="cardPubs"></dd></div></dl><button class="auroraButton" type="button"><span>Подробнее</span><svg class="auroraButtonArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button></article></aside>
         </div>
         <div class="mapStats"><div><strong>20</strong><span>этносов</span></div><div><strong>170</strong><span>экспедиций</span></div><div><strong>238</strong><span>аудио</span></div></div>
       </div>
     </section>
     <section class="pageWidth directionGrid" aria-label="Разделы портала">
-      <a class="directionCard directionCard-archive" id="archive" href="#archive-content"><div class="directionCardTop"><span class="directionNo">01</span><span class="directionArrow">↗</span></div><span class="directionIcon"><svg viewBox="0 0 64 64"><path d="M8 32h7l4-12 7 25 7-34 7 42 6-28 4 7h6"/><path d="M13 12.5A27 27 0 0 0 13 51.5M51 12.5A27 27 0 0 1 51 51.5" opacity=".48"/></svg></span><div class="directionCopy"><span class="directionKicker">Аудиоколлекция</span><h2>Электронный фонограммархив</h2><p>Экспедиционные записи, исполнители, жанры и музыкальные традиции.</p></div><span class="directionCta">Открыть раздел <span>→</span></span></a>
-      <a class="directionCard directionCard-museum" id="museum" href="#"><div class="directionCardTop"><span class="directionNo">02</span><span class="directionArrow">↗</span></div><span class="directionIcon"><svg viewBox="0 0 64 64"><path d="M12 48h40M17 48V26h30v22M14 26l18-12 18 12M24 26v22M40 26v22"/><path d="M28 36c0-3 2-5 4-5s4 2 4 5-2 7-4 10c-2-3-4-7-4-10Z" opacity=".72"/></svg></span><div class="directionCopy"><span class="directionKicker">3D-экспозиция</span><h2>Музей музыкальных инструментов</h2><p>Каталог инструментов, 3D-модели, изображения и связанные фонограммы.</p></div><span class="directionCta">Открыть раздел <span>→</span></span></a>
-      <a class="directionCard directionCard-science" id="science" href="#"><div class="directionCardTop"><span class="directionNo">03</span><span class="directionArrow">↗</span></div><span class="directionIcon"><svg viewBox="0 0 64 64"><path d="M11 17c8-2 15 0 21 5v30c-6-5-13-7-21-5V17Zm42 0c-8-2-15 0-21 5v30c6-5 13-7 21-5V17Z"/><circle cx="32" cy="16" r="4"/><path d="M20 12c3-4 7-7 12-7s9 3 12 7" opacity=".55"/></svg></span><div class="directionCopy"><span class="directionKicker">Исследования</span><h2>Научная деятельность</h2><p>Публикации, исследователи, экспедиции и материалы лаборатории.</p></div><span class="directionCta">Открыть раздел <span>→</span></span></a>
+      <a class="directionCard directionCard-archive" id="archive" href="#archive-content"><div class="directionCardTop"><span class="directionNo">01</span><span class="directionArrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div><span class="directionIcon"><svg viewBox="0 0 64 64"><path d="M8 32h7l4-12 7 25 7-34 7 42 6-28 4 7h6"/><path d="M13 12.5A27 27 0 0 0 13 51.5M51 12.5A27 27 0 0 1 51 51.5" opacity=".48"/></svg></span><div class="directionCopy"><span class="directionKicker">Аудиоколлекция</span><h2>Электронный фонограммархив</h2><p>Экспедиционные записи, исполнители, жанры и музыкальные традиции.</p></div><span class="directionCta">Открыть раздел <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></a>
+      <a class="directionCard directionCard-museum" id="museum" href="#"><div class="directionCardTop"><span class="directionNo">02</span><span class="directionArrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div><span class="directionIcon"><svg viewBox="0 0 64 64"><path d="M12 48h40M17 48V26h30v22M14 26l18-12 18 12M24 26v22M40 26v22"/><path d="M28 36c0-3 2-5 4-5s4 2 4 5-2 7-4 10c-2-3-4-7-4-10Z" opacity=".72"/></svg></span><div class="directionCopy"><span class="directionKicker">3D-экспозиция</span><h2>Музей музыкальных инструментов</h2><p>Каталог инструментов, 3D-модели, изображения и связанные фонограммы.</p></div><span class="directionCta">Открыть раздел <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></a>
+      <a class="directionCard directionCard-science" id="science" href="#"><div class="directionCardTop"><span class="directionNo">03</span><span class="directionArrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div><span class="directionIcon"><svg viewBox="0 0 64 64"><path d="M11 17c8-2 15 0 21 5v30c-6-5-13-7-21-5V17Zm42 0c-8-2-15 0-21 5v30c6-5 13-7 21-5V17Z"/><circle cx="32" cy="16" r="4"/><path d="M20 12c3-4 7-7 12-7s9 3 12 7" opacity=".55"/></svg></span><div class="directionCopy"><span class="directionKicker">Исследования</span><h2>Научная деятельность</h2><p>Публикации, исследователи, экспедиции и материалы лаборатории.</p></div><span class="directionCta">Открыть раздел <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></a>
     </section>
     <section class="pageWidth contentPanel audioPanel" id="archive-content">
-      <div class="sectionHeading compact"><div><span class="eyebrow dark">Фонограммархив</span><h2>Аудиоархив</h2></div><span class="audioArchiveLink" role="link" aria-disabled="true" title="Раздел находится в разработке">Перейти в фонограммархив <b aria-hidden="true">→</b></span></div>
+      <div class="sectionHeading compact"><div><span class="eyebrow dark">Фонограммархив</span><h2>Аудиоархив</h2></div><span class="audioArchiveLink" role="link" aria-disabled="true" title="Раздел находится в разработке">Перейти в фонограммархив <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></div>
       <div class="audioLayout">
         <article class="featuredTrack"><span class="trackTag" id="trackTag">Эвенки · Саха</span><h3 id="trackTitle"></h3><p id="trackMeta"></p><div class="waveform" id="waveform"></div><audio id="archiveAudio" preload="metadata"></audio><div class="playerControls"><span class="time" id="currentTime">0:00</span><button class="roundButton secondary" id="previousTrack" aria-label="Предыдущая запись">‹</button><button class="roundButton primary" id="playButton" aria-label="Воспроизвести">▶</button><button class="roundButton secondary" id="nextTrack" aria-label="Следующая запись">›</button><span class="time" id="totalTime">0:00</span></div></article>
         <div class="trackList" id="trackList"></div>
@@ -720,13 +768,18 @@ main,
     </section>
     <section class="pageWidth contentPanel sheykinPanel" id="sheykin">
       <div class="sheykinPhoto"><img src="public/sheykin-archive.jpg" alt="Юрий Ильич Шейкин во время работы с архивными материалами"><span>Из архива лаборатории</span></div>
-      <div class="sheykinCopy"><span class="eyebrow dark">Научная школа</span><h2>Юрий Ильич Шейкин</h2><p class="sheykinLead">Доктор искусствоведения, профессор, исследователь музыкальных культур народов Сибири и Дальнего Востока.</p><p>Собранные и систематизированные им материалы стали основой уникального фольклорного архива и коллекции традиционных музыкальных инструментов. Цифровой портал продолжает эту исследовательскую работу и открывает коллекцию для новых поколений.</p><a class="auroraTextLink" href="https://old2025.agiki.ru/life/institut-segodnya.php" target="_blank" rel="noreferrer">О научной школе <span>→</span></a></div>
+      <div class="sheykinCopy"><span class="eyebrow dark">Научная школа</span><h2>Юрий Ильич Шейкин</h2><p class="sheykinLead">Доктор искусствоведения, профессор, исследователь музыкальных культур народов Сибири и Дальнего Востока.</p><p>Собранные и систематизированные им материалы стали основой уникального фольклорного архива и коллекции традиционных музыкальных инструментов. Цифровой портал продолжает эту исследовательскую работу и открывает коллекцию для новых поколений.</p><a class="auroraTextLink" href="https://old2025.agiki.ru/life/institut-segodnya.php" target="_blank" rel="noreferrer">О научной школе <svg class="auroraButtonArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></div>
     </section>
-    <section class="pageWidth contentPanel" id="gallery"><div class="sectionHeading compact"><div><span class="eyebrow dark">Архив изображений</span><h2>Фотогалерея</h2></div><a class="textLink" href="#">Перейти <span>→</span></a></div><div class="galleryRail"><a class="galleryCard galleryCard1"><span class="galleryScrim"></span><span>Экспедиции</span></a><a class="galleryCard galleryCard2"><span class="galleryScrim"></span><span>Исполнители</span></a><a class="galleryCard galleryCard3"><span class="galleryScrim"></span><span>Инструменты</span></a><a class="galleryCard galleryCard4"><span class="galleryScrim"></span><span>Архив</span></a></div></section>
+    <section class="pageWidth contentPanel galleryPanel" id="gallery"><div class="sectionHeading compact"><div><span class="eyebrow dark">Архив изображений</span><h2>Фотогалерея</h2></div><a class="textLink" href="#">Перейти <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></div><div class="galleryRail"><a class="galleryCard galleryCard1"><span class="galleryScrim"></span><span>Экспедиции</span></a><a class="galleryCard galleryCard2"><span class="galleryScrim"></span><span>Исполнители</span></a><a class="galleryCard galleryCard3"><span class="galleryScrim"></span><span>Инструменты</span></a><a class="galleryCard galleryCard4"><span class="galleryScrim"></span><span>Архив</span></a></div></section>
   </div>
 </main>
 <footer class="footer" id="contacts"><div class="pageWidth footerInner"><div class="footerIdentity"><strong>Лаборатория этномузыковедения им. Ю. И. Шейкина</strong><span>Цифровой архив исследовательской коллекции</span></div><div class="footerContacts"><span class="footerLabel">Контакты</span><a href="mailto:info@ethnomusic-lab.ru">info@ethnomusic-lab.ru</a><a href="tel:+74112000000">+7 (4112) 00-00-00</a><span>Якутск, Республика Саха (Якутия)</span></div><div class="footerMeta"><span>Информация для прототипа</span><span>© 2026</span></div></div></footer>
 <script>
+const menuToggle=document.getElementById('menuToggle');
+const mobileNav=document.getElementById('mobile-navigation');
+function setMenu(open){menuToggle.classList.toggle('isOpen',open);mobileNav.classList.toggle('isOpen',open);menuToggle.setAttribute('aria-expanded',String(open));menuToggle.setAttribute('aria-label',open?'Закрыть меню':'Открыть меню')}
+menuToggle.addEventListener('click',()=>setMenu(!mobileNav.classList.contains('isOpen')));
+mobileNav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>setMenu(false)));
 const groups = [
   {id:'ugric',label:'Югорские народы',color:'#ff6800',title:'Югорские народы',subtitle:'Народы Сибири',stats:['—','—','—'],points:[[111.6,93.4],[150.4,141],[150.4,207.7],[72.8,213.5],[122,244.7],[207.7,298],[160.8,318.1]]},
   {id:'samoyedic',label:'Северо-самодийские народы',color:'#ffc000',title:'Нганасаны',subtitle:'Самодийский народ в Сибири',stats:[32,100,15],points:[[122,8.5],[218.1,93.4],[382.6,93.4],[444.3,93.4],[336.4,117.9],[228.1,153.5],[218.1,232.2]]},
