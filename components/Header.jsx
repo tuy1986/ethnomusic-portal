@@ -13,11 +13,11 @@ export default function Header() {
         </a>
 
         <nav className="desktopNav" aria-label="Основная навигация">
-          <a className="isActive" href="#top">Главная</a>
-          <a href="#about">О лаборатории</a>
-          <a href="#archive">Фонограммархив</a>
+          <a href="#map">Карта народов</a>
+          <a href="#archive-content">Фонограммархив</a>
           <a href="#museum">Музей</a>
-          <a href="#contacts">Контакты</a>
+          <a href="#science">Исследования</a>
+          <a href="#sheykin">Ю. И. Шейкин</a>
         </nav>
       </div>
     </header>

@@ -629,19 +629,56 @@ main,
 
 .staticMapSvg { position:absolute; inset:0; width:100%; height:100%; }
 </style>
+<style>
+.desktopNav { gap: clamp(18px, 2.2vw, 34px); }
+.desktopNav a::after { content:""; position:absolute; left:0; right:0; bottom:1px; height:1px; background:currentColor; transform: scaleX(0); transform-origin: right; transition: transform .2s ease; }
+.desktopNav a:hover::after, .desktopNav a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+.mapStage { grid-template-columns: minmax(0, 1fr) 218px; gap: 24px; }
+.waveform { align-items: center; max-width: 560px; padding: 5px 4px; }
+.waveform::before { inset: 23px -8px; background: linear-gradient(90deg, transparent 0%, rgba(226,79,168,.24) 18%, rgba(123,91,210,.28) 50%, rgba(13,193,186,.28) 80%, transparent 100%); filter: blur(15px); opacity: .7; }
+.waveform::after { inset: 46% 2% auto; height: 16px; background: linear-gradient(90deg, transparent, rgba(226,79,168,.18), rgba(123,91,210,.2), rgba(13,193,186,.2), transparent); }
+.waveform i { border-radius: 999px; background: linear-gradient(180deg, #df5ba7 0%, #8a6fd4 48%, #18c5bd 100%); opacity: .88; box-shadow: 0 0 8px rgba(119,91,201,.15); transform: translateX(var(--wave-sway)) scaleY(.92); transform-origin: center; }
+.waveform i:nth-child(3n+2) { opacity: .78; }
+.waveform i:nth-child(4n) { filter: saturate(.94); }
+.waveform.isPlaying i { box-shadow: 0 0 10px rgba(117,82,204,.32), 0 0 17px rgba(24,197,189,.22); filter: saturate(1.06) brightness(1.06); opacity: .98; }
+@keyframes waveformPulse { 0% { transform: translateX(calc(var(--wave-sway) - 1px)) scaleY(.5); filter: saturate(.94) brightness(.98); } 48% { transform: translateX(calc(var(--wave-sway) + 1px)) scaleY(1.06); filter: saturate(1.1) brightness(1.09); } 100% { transform: translateX(var(--wave-sway)) scaleY(.74); filter: saturate(1.02) brightness(1.03); } }
+.sheykinPanel { display: grid; grid-template-columns: minmax(0, .96fr) minmax(340px, 1.04fr); gap: clamp(34px, 5vw, 76px); align-items: stretch; padding: clamp(22px, 2.7vw, 38px); overflow: hidden; }
+.sheykinPhoto { position: relative; min-height: 390px; overflow: hidden; border-radius: 20px; background: #252525; }
+.sheykinPhoto::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 58%, rgba(5,12,20,.7)); pointer-events: none; }
+.sheykinPhoto img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; filter: contrast(1.04); }
+.sheykinPhoto > span { position: absolute; z-index: 1; left: 22px; bottom: 18px; color: rgba(255,255,255,.8); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.sheykinCopy { align-self: center; max-width: 590px; padding: 24px 4px; }
+.sheykinCopy h2 { margin: 0 0 22px; font-size: clamp(38px, 4vw, 58px); line-height: .98; letter-spacing: -.045em; font-weight: 650; }
+.sheykinCopy p { margin: 0 0 16px; color: #666; font-size: 15px; line-height: 1.65; }
+.sheykinCopy .sheykinLead { color: #242424; font-size: 18px; line-height: 1.48; }
+.auroraTextLink { display: inline-flex; align-items: center; gap: 14px; margin-top: 13px; padding-bottom: 5px; border-bottom: 1px solid rgba(90,85,166,.24); font-size: 12px; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; }
+.auroraTextLink span { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: linear-gradient(135deg, #df5ba7, #856bd0 50%, #18c5bd); transition: transform .2s ease; }
+.auroraTextLink:hover span { transform: translateX(4px); }
+.footer { background: rgba(18,28,41,.94); color: #fff; backdrop-filter: blur(16px); border-top: 1px solid rgba(255,255,255,.08); }
+.footerInner { min-height: 210px; display: grid; grid-template-columns: 1.5fr 1fr auto; align-items: start; gap: 54px; padding-block: 48px; color: rgba(255,255,255,.66); font-size: 12px; }
+.footerIdentity, .footerContacts, .footerMeta { display: flex; flex-direction: column; gap: 8px; }
+.footerIdentity strong { max-width: 390px; color: #fff; font-size: 17px; line-height: 1.35; }
+.footerLabel { margin-bottom: 4px; color: #fff; font-size: 11px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+.footerContacts a { color: rgba(255,255,255,.9); }
+.footerContacts a:hover { color: #27c8bf; }
+.footerMeta { align-items: flex-end; text-align: right; }
+@media (max-width:1120px) { .mapStage { grid-template-columns:minmax(0,1fr) 205px; gap:18px; } .sheykinPanel { grid-template-columns:minmax(0,.9fr) minmax(320px,1.1fr); gap:34px; } }
+@media (max-width:860px) { .sheykinPanel { grid-template-columns:1fr; } .sheykinPhoto { min-height:360px; } .footerInner { grid-template-columns:1fr 1fr; } .footerMeta { grid-column:1/-1; align-items:flex-start; text-align:left; } }
+@media (max-width:560px) { .sheykinPanel { padding:16px; } .sheykinPhoto { min-height:270px; border-radius:15px; } .sheykinCopy { padding:18px 4px 10px; } .sheykinCopy h2 { font-size:36px; } .sheykinCopy .sheykinLead { font-size:16px; } .footerInner { grid-template-columns:1fr; gap:28px; } .footerMeta { grid-column:auto; } }
+</style>
 </head>
 <body>
 <header class="siteHeader">
   <div class="pageWidth headerInner">
     <a class="brand" href="#top"><span class="brandMark"><img src="public/logo.png" alt=""></span><span class="brandText"><strong>Лаборатория этномузыковедения им. Ю. И. Шейкина</strong><small>Цифровой архив исследовательской коллекции</small></span></a>
-    <nav class="desktopNav"><a class="isActive" href="#top">Главная</a><a href="#about">О лаборатории</a><a href="#archive">Фонограммархив</a><a href="#museum">Музей</a><a href="#contacts">Контакты</a></nav>
+    <nav class="desktopNav"><a href="#map">Карта народов</a><a href="#archive-content">Фонограммархив</a><a href="#museum">Музей</a><a href="#science">Исследования</a><a href="#sheykin">Ю. И. Шейкин</a></nav>
   </div>
 </header>
 <main>
   <div class="siteVideoBackground" aria-hidden="true"><video autoplay muted loop playsinline poster="public/hero-poster.jpg" preload="metadata"><source src="public/hero.mp4" type="video/mp4"></video><div class="siteVideoShade"></div></div>
   <section class="hero" id="top"><div class="pageWidth heroContent"><div class="heroTitle"><span class="eyebrow">Исследовательская коллекция</span><h1>Музыкальные традиции народов Сибири</h1><p>Фонограммы, музыкальные инструменты, экспедиционные материалы и научные публикации в едином цифровом пространстве.</p></div></div></section>
   <div class="contentSurface">
-    <section class="pageWidth mapSection" id="about">
+    <section class="pageWidth mapSection" id="map">
       <div class="mapPanel">
         <div class="sectionHeading mapHeading"><div><span class="eyebrow dark">Интерактивная коллекция</span><h2>Карта расселения народов Сибири</h2></div></div>
         <div class="mapLegend" id="mapLegend"></div>
@@ -664,10 +701,14 @@ main,
         <div class="trackList" id="trackList"></div>
       </div>
     </section>
+    <section class="pageWidth contentPanel sheykinPanel" id="sheykin">
+      <div class="sheykinPhoto"><img src="public/sheykin-archive.jpg" alt="Юрий Ильич Шейкин во время работы с архивными материалами"><span>Из архива лаборатории</span></div>
+      <div class="sheykinCopy"><span class="eyebrow dark">Научная школа</span><h2>Юрий Ильич Шейкин</h2><p class="sheykinLead">Доктор искусствоведения, профессор, исследователь музыкальных культур народов Сибири и Дальнего Востока.</p><p>Собранные и систематизированные им материалы стали основой уникального фольклорного архива и коллекции традиционных музыкальных инструментов. Цифровой портал продолжает эту исследовательскую работу и открывает коллекцию для новых поколений.</p><a class="auroraTextLink" href="https://old2025.agiki.ru/life/institut-segodnya.php" target="_blank" rel="noreferrer">О научной школе <span>→</span></a></div>
+    </section>
     <section class="pageWidth contentPanel" id="gallery"><div class="sectionHeading compact"><div><span class="eyebrow dark">Архив изображений</span><h2>Фотогалерея</h2></div><a class="textLink" href="#">Перейти <span>→</span></a></div><div class="galleryRail"><a class="galleryCard galleryCard1"><span class="galleryScrim"></span><span>Экспедиции</span></a><a class="galleryCard galleryCard2"><span class="galleryScrim"></span><span>Исполнители</span></a><a class="galleryCard galleryCard3"><span class="galleryScrim"></span><span>Инструменты</span></a><a class="galleryCard galleryCard4"><span class="galleryScrim"></span><span>Архив</span></a></div></section>
   </div>
 </main>
-<footer class="footer" id="contacts"><div class="pageWidth footerInner"><span>Лаборатория этномузыковедения им. Ю. И. Шейкина</span><span>Цифровой архив исследовательской коллекции</span></div></footer>
+<footer class="footer" id="contacts"><div class="pageWidth footerInner"><div class="footerIdentity"><strong>Лаборатория этномузыковедения им. Ю. И. Шейкина</strong><span>Цифровой архив исследовательской коллекции</span></div><div class="footerContacts"><span class="footerLabel">Контакты</span><a href="mailto:info@ethnomusic-lab.ru">info@ethnomusic-lab.ru</a><a href="tel:+74112000000">+7 (4112) 00-00-00</a><span>Якутск, Республика Саха (Якутия)</span></div><div class="footerMeta"><span>Информация для прототипа</span><span>© 2026</span></div></div></footer>
 <script>
 const groups = [
   {id:'ugric',label:'Югорские народы',color:'#ff6800',title:'Югорские народы',subtitle:'Народы Сибири',stats:['—','—','—'],points:[[111.6,93.4],[150.4,141],[150.4,207.7],[72.8,213.5],[122,244.7],[207.7,298],[160.8,318.1]]},

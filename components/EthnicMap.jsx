@@ -35,7 +35,7 @@ export default function EthnicMap() {
   );
 
   return (
-    <section className="pageWidth mapSection" id="about">
+    <section className="pageWidth mapSection" id="map">
       <div className="mapPanel">
         <div className="sectionHeading mapHeading">
           <div>
