@@ -438,6 +438,16 @@ main,
 .directionCard:hover .directionCta span { transform: translateX(4px); }
 
 .contentPanel { margin-top: 16px; padding: clamp(28px, 4vw, 56px); }
+.audioPanel {
+  padding-inline: clamp(18px, 3.2vw, 46px);
+  border: 0;
+  border-top: 1px solid rgba(255,255,255,.62);
+  border-bottom: 1px solid rgba(255,255,255,.62);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
 .textLink { font-size: 13px; font-weight: 650; }
 .textLink span { margin-left: 8px; transition: margin .2s ease; }
 .textLink:hover span { margin-left: 12px; }
@@ -463,12 +473,12 @@ main,
 .waveform {
   position: relative;
   isolation: isolate;
-  height: 100px;
+  height: 120px;
   display: flex;
   align-items: center;
   gap: 4px;
   margin: 28px 0 8px;
-  max-width: 560px;
+  max-width: 620px;
 }
 .waveform::before {
   content: "";
