@@ -5,7 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Прототип главной страницы Музея музыкальных инструментов народов Северной Азии">
   <title>Коллекция Юрия Шейкина — музей музыкальных инструментов</title>
-  <script type="module" src="https://unpkg.com/@google/model-viewer@4.1.0/dist/model-viewer.min.js"></script>
+  <script>
+    (async () => {
+      try {
+        const response = await fetch('public/museum/model-viewer.min.js');
+        if (!response.ok) throw new Error('Не удалось загрузить модуль 3D-просмотра');
+        const source = await response.text();
+        const moduleUrl = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
+        await import(moduleUrl);
+        URL.revokeObjectURL(moduleUrl);
+      } catch (error) {
+        document.documentElement.classList.add('model-viewer-failed');
+      }
+    })();
+  </script>
   <style>
     :root {
       --ink: #202124;
@@ -176,7 +189,8 @@
       min-height: 610px;
       overflow: hidden;
       background:
-        radial-gradient(circle at 48% 45%, rgba(255,255,255,.96), rgba(235,247,251,.72) 46%, rgba(215,234,244,.75) 100%),
+        url('public/museum/hero-instrument.webp') center / 72% auto no-repeat,
+        radial-gradient(circle at 48% 45%, rgba(255,255,255,.9), rgba(235,247,251,.64) 46%, rgba(215,234,244,.72) 100%),
         #e7f2f8;
       isolation: isolate;
     }
@@ -190,6 +204,11 @@
       filter: blur(42px);
     }
     model-viewer { width: 100%; height: 100%; min-height: 610px; --poster-color: transparent; }
+    .model-stage.is-model-loaded {
+      background:
+        radial-gradient(circle at 48% 45%, rgba(255,255,255,.96), rgba(235,247,251,.72) 46%, rgba(215,234,244,.75) 100%),
+        #e7f2f8;
+    }
     .model-loading {
       position: absolute;
       inset: 0;
@@ -199,7 +218,8 @@
       font-size: 14px;
       letter-spacing: .04em;
     }
-    model-viewer[loaded] + .model-loading { display: none; }
+    model-viewer[loaded] + .model-loading,
+    .model-viewer-failed .model-loading { display: none; }
     .model-hint {
       position: absolute;
       left: 24px; bottom: 22px;
@@ -692,6 +712,9 @@
     }));
 
     const modelStage = document.getElementById('modelStage');
+    const museumModel = document.getElementById('museumModel');
+    museumModel.addEventListener('load', () => modelStage.classList.add('is-model-loaded'));
+    museumModel.addEventListener('error', () => document.documentElement.classList.add('model-viewer-failed'));
     document.getElementById('fullscreenButton').addEventListener('click', async () => {
       try {
         if (!document.fullscreenElement) await modelStage.requestFullscreen();
