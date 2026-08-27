@@ -513,29 +513,61 @@ main,
 
 .galleryRail {
   display: grid;
-  grid-template-columns: 1.1fr 1.7fr 1.05fr 1fr;
-  gap: 12px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: 340px 242px 242px;
+  gap: 14px;
   margin-top: 30px;
 }
 .galleryCard {
-  min-height: 280px;
   position: relative;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
-  border-radius: 16px;
-  background-image: url('public/hero-poster.jpg');
+  min-width: 0;
+  border-radius: 18px;
   background-size: cover;
-  transition: transform .25s ease;
+  background-position: center;
+  isolation: isolate;
+  box-shadow: 0 12px 32px rgba(16, 34, 48, .09);
+  transition: transform .3s ease, box-shadow .3s ease;
 }
-.galleryCard:hover { transform: translateY(-3px); }
-.galleryCard1 { background-position: 7% 52%; }
-.galleryCard2 { background-position: 42% 51%; }
-.galleryCard3 { background-position: 68% 48%; }
-.galleryCard4 { background-position: 95% 52%; }
-.galleryCard .galleryScrim { position:absolute; inset:0; padding:0; background:linear-gradient(180deg,transparent 26%,rgba(3,12,22,.18) 52%,rgba(3,12,22,.86) 100%); }
-.galleryCard span { position: relative; z-index: 2; padding: 22px; color: #fff; font-size: 15px; font-weight: 600; }
-.galleryCard > span:last-child { width:100%; background:linear-gradient(90deg,rgba(4,14,24,.72),rgba(4,14,24,.4) 72%,transparent); backdrop-filter:blur(2px); text-shadow:0 1px 8px rgba(0,0,0,.5); }
+.galleryCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(3, 12, 22, .02) 30%, rgba(3, 12, 22, .26) 62%, rgba(3, 12, 22, .88) 100%);
+}
+.galleryCard::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 48%;
+  z-index: -1;
+  background: linear-gradient(105deg, rgba(218, 78, 165, .16), rgba(61, 120, 205, .08) 52%, rgba(17, 197, 188, .16));
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.galleryCard:hover { transform: translateY(-4px); box-shadow: 0 18px 42px rgba(16, 34, 48, .16); }
+.galleryCard:hover::after { opacity: 1; }
+.galleryCard1 { grid-column: 1 / -1; grid-row: 1; background-image: url('public/hero-poster.jpg'); background-position: center 48%; }
+.galleryCard2 { grid-column: 1 / span 5; grid-row: 2 / span 2; background-image: url('public/museum/gallery-1.jpg'); background-position: center 34%; }
+.galleryCard3 { grid-column: 6 / -1; grid-row: 2; background-image: url('public/museum/gallery-2.jpg'); background-position: center 46%; }
+.galleryCard4 { grid-column: 6 / -1; grid-row: 3; background-image: url('public/sheykin-archive.jpg'); background-position: center 42%; }
+.galleryScrim { display: none; }
+.galleryCopy {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 28px;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .7);
+}
+.galleryCopy strong { font-size: clamp(22px, 2.2vw, 34px); line-height: 1.05; font-weight: 650; letter-spacing: -.025em; }
+.galleryCopy small { max-width: 560px; color: rgba(255,255,255,.86); font-size: 14px; line-height: 1.35; font-weight: 480; }
 
 .footer { background: rgba(229,229,229,.84); backdrop-filter: blur(14px); border-top: 1px solid rgba(215,215,215,.7); }
 .footerInner {
@@ -554,7 +586,7 @@ main,
   .brandText strong { max-width: 290px; }
   .mapLegend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mapStage { grid-template-columns: minmax(0,1fr) 205px; }
-  .galleryRail { grid-template-columns: 1fr 1fr; }
+  .galleryRail { grid-template-rows: 310px 220px 220px; }
 }
 
 @media (max-width: 860px) {
@@ -713,8 +745,6 @@ body { overflow-x:hidden; }
 .peopleCardDock button:hover .auroraButtonArrow,.auroraTextLink:hover .auroraButtonArrow { transform:translateX(4px); }
 .auroraTextLink { min-width:178px; display:inline-flex; align-items:center; justify-content:space-between; gap:18px; margin-top:13px; padding:11px 14px 11px 17px; border:0; border-radius:12px; color:#fff; background:linear-gradient(105deg,#d96ca9 0%,#866bd1 48%,#24beb7 100%); background-size:220% 100%; box-shadow:0 9px 22px rgba(92,77,190,.2); font-size:13px; font-weight:700; letter-spacing:.02em; text-transform:uppercase; animation:auroraFlow 7s ease-in-out infinite; transition:transform .2s ease,box-shadow .2s ease; }
 .auroraTextLink:hover { transform:translateY(-2px); box-shadow:0 13px 28px rgba(92,77,190,.28); }
-.galleryCard2 { background-image:url('public/sheykin-archive.jpg'); background-position:35% 48%; }
-.galleryCard4 { background-image:url('public/sheykin-archive.jpg'); background-position:82% 45%; }
 @media (max-width:860px) {
   .menuToggle { width:46px; height:46px; flex:0 0 46px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; padding:0; border:1px solid rgba(255,255,255,.28); border-radius:50%; color:#fff; background:rgba(8,22,38,.3); backdrop-filter:blur(12px); cursor:pointer; }
   .menuToggle span { width:19px; height:1.5px; border-radius:2px; background:currentColor; transition:transform .2s ease,opacity .2s ease; }
@@ -747,12 +777,18 @@ body { overflow-x:hidden; }
   .audioPanel .sectionHeading.compact { flex-direction:column; align-items:flex-start; gap:10px; }
   .audioArchiveLink { max-width:100%; white-space:normal; }
   .galleryPanel { overflow:hidden; }
-  .galleryRail { display:grid; grid-template-columns:1fr 1fr; gap:10px; overflow:visible; padding-bottom:0; }
-  .galleryCard { min-width:0; min-height:165px; }
-  .galleryCard > span:last-child { width:100%; min-width:0; padding:14px 12px; font-size:clamp(12px,3.6vw,15px); line-height:1.18; overflow-wrap:anywhere; hyphens:auto; }
-  .galleryCard2 > span:last-child,.galleryCard3 > span:last-child { padding-inline:10px; font-size:clamp(11px,3.35vw,13px); }
-  .galleryCard1 { grid-column:1/-1; min-height:220px; }
-  .galleryCard4 { grid-column:1/-1; min-height:175px; }
+  .galleryRail { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:230px 172px 172px; gap:10px; overflow:visible; padding-bottom:0; }
+  .galleryCard { min-width:0; min-height:0; border-radius:15px; box-shadow:0 8px 24px rgba(16,34,48,.08); }
+  .galleryCard1 { grid-column:1/-1; grid-row:1; }
+  .galleryCard2 { grid-column:1; grid-row:2/span 2; background-position:center 28%; }
+  .galleryCard3 { grid-column:2; grid-row:2; }
+  .galleryCard4 { grid-column:2; grid-row:3; background-position:center; }
+  .galleryCopy { gap:4px; padding:15px 14px; overflow-wrap:anywhere; }
+  .galleryCopy strong { font-size:clamp(15px,4.4vw,20px); line-height:1.08; }
+  .galleryCopy small { font-size:clamp(10px,3vw,12px); line-height:1.25; }
+  .galleryCard1 .galleryCopy { padding:20px; }
+  .galleryCard1 .galleryCopy strong { font-size:clamp(22px,7vw,30px); }
+  .galleryCard1 .galleryCopy small { font-size:13px; }
 }
 </style>
 </head>
@@ -796,7 +832,7 @@ body { overflow-x:hidden; }
       <div class="sheykinPhoto"><img src="public/sheykin-archive.jpg" alt="Юрий Ильич Шейкин во время работы с архивными материалами"><span>Из архива лаборатории</span></div>
       <div class="sheykinCopy"><span class="eyebrow dark">Научная школа</span><h2>Юрий Ильич Шейкин</h2><p class="sheykinLead">Доктор искусствоведения, профессор, исследователь музыкальных культур народов Сибири и Дальнего Востока.</p><p>Собранные и систематизированные им материалы стали основой уникального фольклорного архива и коллекции традиционных музыкальных инструментов. Цифровой портал продолжает эту исследовательскую работу и открывает коллекцию для новых поколений.</p><a class="auroraTextLink" href="https://old2025.agiki.ru/life/institut-segodnya.php" target="_blank" rel="noreferrer">О научной школе <svg class="auroraButtonArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></div>
     </section>
-    <section class="pageWidth contentPanel galleryPanel" id="gallery"><div class="sectionHeading compact"><div><span class="eyebrow dark">Архив изображений</span><h2>Фотогалерея</h2></div><a class="textLink" href="#">Перейти <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></div><div class="galleryRail"><a class="galleryCard galleryCard1"><span class="galleryScrim"></span><span>Экспедиции</span></a><a class="galleryCard galleryCard2"><span class="galleryScrim"></span><span>Исполнители</span></a><a class="galleryCard galleryCard3"><span class="galleryScrim"></span><span>Инструменты</span></a><a class="galleryCard galleryCard4"><span class="galleryScrim"></span><span>Архив</span></a></div></section>
+    <section class="pageWidth contentPanel galleryPanel" id="gallery"><div class="sectionHeading compact"><div><span class="eyebrow dark">Архив изображений</span><h2>Фотогалерея</h2></div><a class="textLink" href="#">Перейти <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></div><div class="galleryRail"><a class="galleryCard galleryCard1" href="#" aria-label="Экспедиции — полевые материалы народов Сибири"><span class="galleryCopy"><strong>Экспедиции</strong><small>Полевые материалы народов Сибири</small></span></a><a class="galleryCard galleryCard2" href="#" aria-label="Исполнители — певцы, сказители и музыканты"><span class="galleryCopy"><strong>Исполнители</strong><small>Певцы, сказители и музыканты</small></span></a><a class="galleryCard galleryCard3" href="#" aria-label="Инструменты — традиционные музыкальные инструменты"><span class="galleryCopy"><strong>Инструменты</strong><small>Традиционные музыкальные инструменты</small></span></a><a class="galleryCard galleryCard4" href="#" aria-label="Архив — история лаборатории в фотографиях"><span class="galleryCopy"><strong>Архив</strong><small>История лаборатории в фотографиях</small></span></a></div></section>
   </div>
 </main>
 <footer class="footer" id="contacts"><div class="pageWidth footerInner"><div class="footerIdentity"><strong>Лаборатория этномузыковедения им. Ю. И. Шейкина</strong><span>Цифровой архив исследовательской коллекции</span></div><div class="footerContacts"><span class="footerLabel">Контакты</span><a href="mailto:info@ethnomusic-lab.ru">info@ethnomusic-lab.ru</a><a href="tel:+74112000000">+7 (4112) 00-00-00</a><span>Якутск, Республика Саха (Якутия)</span></div><div class="footerMeta"><span>Информация для прототипа</span><span>© 2026</span></div></div></footer>
