@@ -8,7 +8,7 @@
   <script>
     (async () => {
       try {
-        const response = await fetch('public/museum/model-viewer.min.js');
+        const response = await fetch('https://raw.githubusercontent.com/tuy1986/ethnomusic-portal/f5024221497d0acfed6e4a80553137fd80becb2f/public/museum/model-viewer.min.js');
         if (!response.ok) throw new Error('Не удалось загрузить модуль 3D-просмотра');
         const source = await response.text();
         const moduleUrl = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
@@ -189,7 +189,7 @@
       min-height: 610px;
       overflow: hidden;
       background:
-        url('public/museum/hero-instrument.webp') center / 72% auto no-repeat,
+        url('https://raw.githubusercontent.com/tuy1986/ethnomusic-portal/f5024221497d0acfed6e4a80553137fd80becb2f/public/museum/hero-instrument.webp') center / 72% auto no-repeat,
         radial-gradient(circle at 48% 45%, rgba(255,255,255,.9), rgba(235,247,251,.64) 46%, rgba(215,234,244,.72) 100%),
         #e7f2f8;
       isolation: isolate;
@@ -597,7 +597,7 @@
         </a>
       </div>
       <div class="model-stage" id="modelStage">
-        <model-viewer id="museumModel" src="public/museum/hero-instrument.glb" poster="public/museum/hero-instrument.webp" alt="Трёхмерная модель музыкального инструмента" camera-controls auto-rotate rotation-per-second="14deg" interaction-prompt="none" shadow-intensity="1.15" shadow-softness=".8" exposure="1.05" environment-image="neutral" camera-orbit="32deg 72deg 105%" min-camera-orbit="auto 35deg 65%" max-camera-orbit="auto 110deg 170%" field-of-view="28deg"></model-viewer>
+        <model-viewer id="museumModel" src="https://raw.githubusercontent.com/tuy1986/ethnomusic-portal/f5024221497d0acfed6e4a80553137fd80becb2f/public/museum/hero-instrument.glb" poster="https://raw.githubusercontent.com/tuy1986/ethnomusic-portal/f5024221497d0acfed6e4a80553137fd80becb2f/public/museum/hero-instrument.webp" alt="Трёхмерная модель музыкального инструмента" camera-controls auto-rotate rotation-per-second="14deg" interaction-prompt="none" shadow-intensity="1.15" shadow-softness=".8" exposure="1.05" environment-image="neutral" camera-orbit="32deg 72deg 105%" min-camera-orbit="auto 35deg 65%" max-camera-orbit="auto 110deg 170%" field-of-view="28deg"></model-viewer>
         <div class="model-loading">Загружается 3D-модель…</div>
         <div class="model-hint">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 10V6a2 2 0 1 1 4 0v3-1a2 2 0 1 1 4 0v2-1a2 2 0 1 1 4 0v5c0 4-3 7-7 7h-1c-3 0-5-1-7-4l-2-3a2 2 0 0 1 3-2l2 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
