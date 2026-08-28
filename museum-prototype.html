@@ -248,18 +248,6 @@
     }
     .instrument-caption strong { display: block; font-size: 16px; line-height: 1.15; }
     .instrument-caption span { display: block; margin-top: 5px; color: #64717a; font-size: 12px; line-height: 1.35; }
-    .model-hint {
-      position: absolute;
-      left: 24px; bottom: 22px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 0;
-      background: transparent;
-      color: #64717a;
-      font-size: 12px;
-      pointer-events: none;
-    }
     .fullscreen-button {
       position: absolute;
       right: 22px; bottom: 20px;
@@ -652,7 +640,6 @@
       .instrument-caption { top: 16px; left: 16px; max-width: calc(100% - 82px); padding: 0; }
       .instrument-caption strong { font-size: 14px; }
       .instrument-caption span { font-size: 11px; }
-      .model-hint { display: none; }
       .fullscreen-button { right: 13px; bottom: 13px; width: 46px; height: 46px; }
       .features { grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 38px; }
       .feature {
@@ -746,10 +733,6 @@
         <model-viewer id="museumModel" src="public/museum/hero-instrument.glb" poster="public/museum/hero-harp-poster-transparent.webp" alt="Трёхмерная модель традиционной арфы" camera-controls auto-rotate rotation-per-second="14deg" interaction-prompt="none" shadow-intensity="1.15" shadow-softness=".8" exposure="1.05" environment-image="neutral" camera-orbit="32deg 72deg 105%" min-camera-orbit="auto 35deg 65%" max-camera-orbit="auto 110deg 170%" field-of-view="28deg"></model-viewer>
         <div class="model-loading" aria-live="polite"><span>Загружается 3D-модель…</span></div>
         <div class="instrument-caption"><strong>Традиционная арфа</strong><span>Струнный инструмент · экспонат коллекции Юрия Шейкина</span></div>
-        <div class="model-hint">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 10V6a2 2 0 1 1 4 0v3-1a2 2 0 1 1 4 0v2-1a2 2 0 1 1 4 0v5c0 4-3 7-7 7h-1c-3 0-5-1-7-4l-2-3a2 2 0 0 1 3-2l2 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Вращайте модель
-        </div>
         <button class="fullscreen-button" id="fullscreenButton" type="button" aria-label="Развернуть модель на весь экран">
           <svg class="expand-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5m13 5h5v-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <svg class="close-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
