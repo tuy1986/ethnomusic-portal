@@ -26,7 +26,7 @@
     body {
       margin: 0;
       color: var(--ink);
-      background: var(--paper);
+      background: linear-gradient(180deg, #fff 0%, #fbfdff 58%, #f5fbfe 100%);
       font-family: Inter, "Segoe UI", Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
@@ -34,6 +34,7 @@
     a { color: inherit; text-decoration: none; }
     button { color: inherit; }
     img { display: block; max-width: 100%; }
+    a:focus-visible, button:focus-visible { outline: 3px solid rgba(60,132,218,.45); outline-offset: 4px; }
 
     .page-width {
       width: min(calc(100% - 64px), var(--page));
@@ -41,10 +42,12 @@
     }
 
     .site-header {
-      position: relative;
+      position: sticky;
+      top: 0;
       z-index: 20;
       background: rgba(255,255,255,.94);
       backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(73, 115, 144, .08);
     }
     .header-inner {
       min-height: 102px;
@@ -149,6 +152,8 @@
       color: var(--muted);
     }
     .aurora-button {
+      position: relative;
+      isolation: isolate;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -160,25 +165,45 @@
       border-radius: 7px;
       color: #fff;
       background: var(--gradient);
-      box-shadow: 0 13px 28px rgba(91, 104, 214, .2);
+      background-size: 220% 100%;
+      box-shadow: 0 13px 28px rgba(91, 104, 214, .26), 0 0 22px rgba(20, 207, 209, .18);
       font-size: 15px;
       font-weight: 760;
       text-transform: uppercase;
       letter-spacing: .025em;
       cursor: pointer;
       transition: transform .2s ease, box-shadow .2s ease;
+      animation: auroraShift 5.5s ease-in-out infinite alternate;
     }
-    .aurora-button:hover { transform: translateY(-2px); box-shadow: 0 17px 34px rgba(91, 104, 214, .28); }
+    .aurora-button::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 8px -7px -11px;
+      border-radius: inherit;
+      background: var(--gradient);
+      background-size: 220% 100%;
+      filter: blur(17px);
+      opacity: .52;
+      animation: auroraShift 5.5s ease-in-out infinite alternate;
+      transition: opacity .25s ease, filter .25s ease;
+    }
+    .aurora-button:hover { transform: translateY(-3px); box-shadow: 0 18px 38px rgba(91, 104, 214, .36), 0 0 32px rgba(20, 207, 209, .28); }
+    .aurora-button:hover::before { opacity: .82; filter: blur(21px); }
+    .aurora-button:active { transform: translateY(0) scale(.985); }
     .aurora-button svg { width: 22px; height: 22px; }
+    @keyframes auroraShift { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
 
     .model-stage {
       position: relative;
       min-height: 610px;
       overflow: hidden;
       background:
-        url('public/museum/hero-instrument.webp') center / 72% auto no-repeat,
+        url('public/museum/hero-harp-poster.webp') center / 94% auto no-repeat,
         radial-gradient(circle at 48% 45%, rgba(255,255,255,.9), rgba(235,247,251,.64) 46%, rgba(215,234,244,.72) 100%),
         #e7f2f8;
+      border-radius: 18px;
+      box-shadow: inset 0 0 0 1px rgba(79, 135, 165, .08), 0 22px 55px rgba(77, 119, 145, .11);
       isolation: isolate;
     }
     .model-stage::before {
@@ -190,8 +215,8 @@
       background: conic-gradient(from 210deg, rgba(236,88,168,.16), rgba(60,132,218,.10), rgba(20,207,209,.2), rgba(236,88,168,.16));
       filter: blur(42px);
     }
-    model-viewer { width: 100%; height: 100%; min-height: 610px; --poster-color: transparent; }
-    .model-stage.is-model-loaded {
+    model-viewer { position: relative; z-index: 1; width: 100%; height: 100%; min-height: 610px; --poster-color: transparent; }
+    .model-stage.is-model-ready {
       background:
         radial-gradient(circle at 48% 45%, rgba(255,255,255,.96), rgba(235,247,251,.72) 46%, rgba(215,234,244,.75) 100%),
         #e7f2f8;
@@ -199,14 +224,40 @@
     .model-loading {
       position: absolute;
       inset: 0;
+      z-index: 3;
       display: grid;
       place-items: center;
       color: var(--muted);
       font-size: 14px;
       letter-spacing: .04em;
+      pointer-events: none;
+      transition: opacity .28s ease, visibility .28s ease;
     }
-    model-viewer[loaded] + .model-loading,
-    .model-viewer-failed .model-loading { display: none; }
+    .model-loading span {
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 10px 28px rgba(45,82,104,.1);
+      backdrop-filter: blur(12px);
+    }
+    .model-stage.is-model-ready .model-loading,
+    .model-stage.is-model-failed .model-loading { opacity: 0; visibility: hidden; }
+    .instrument-caption {
+      position: absolute;
+      z-index: 4;
+      top: 22px;
+      left: 22px;
+      max-width: min(310px, calc(100% - 100px));
+      padding: 14px 17px;
+      border: 1px solid rgba(255,255,255,.7);
+      border-radius: 12px;
+      color: #25333d;
+      background: rgba(247,252,255,.76);
+      box-shadow: 0 14px 34px rgba(39,76,99,.12);
+      backdrop-filter: blur(16px);
+    }
+    .instrument-caption strong { display: block; font-size: 16px; line-height: 1.15; }
+    .instrument-caption span { display: block; margin-top: 5px; color: #64717a; font-size: 12px; line-height: 1.35; }
     .model-hint {
       position: absolute;
       left: 24px; bottom: 22px;
@@ -231,8 +282,36 @@
       box-shadow: 0 12px 30px rgba(30, 75, 103, .12);
       backdrop-filter: blur(10px);
       cursor: pointer;
+      z-index: 5;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
     }
+    .fullscreen-button:hover { transform: scale(1.06); background: #fff; box-shadow: 0 15px 34px rgba(30,75,103,.2); }
     .fullscreen-button svg { width: 22px; height: 22px; }
+    .fullscreen-button .close-icon { display: none; }
+    .model-stage.is-expanded .fullscreen-button .expand-icon { display: none; }
+    .model-stage.is-expanded .fullscreen-button .close-icon { display: block; }
+    .model-backdrop {
+      position: fixed;
+      z-index: 90;
+      inset: 0;
+      background: rgba(11,25,38,.48);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .25s ease, visibility .25s ease;
+    }
+    .model-backdrop.is-visible { opacity: 1; visibility: visible; }
+    .model-stage.is-expanded {
+      position: fixed;
+      z-index: 100;
+      inset: max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+      width: auto;
+      min-height: 0;
+      border-radius: 24px;
+      box-shadow: 0 32px 90px rgba(4,21,34,.42);
+    }
+    .model-stage.is-expanded model-viewer { width: 100%; height: 100%; min-height: 0; }
+    body.model-modal-open { overflow: hidden; }
 
     .features {
       display: grid;
@@ -256,11 +335,11 @@
     .feature span { display: block; margin-top: 7px; color: var(--muted); font-size: 14px; line-height: 1.35; }
 
     .music-ribbon {
-      height: 170px;
+      height: 132px;
       overflow: hidden;
-      background: #fbfcff;
+      background: transparent;
     }
-    .music-ribbon img { width: 100%; height: 100%; object-fit: cover; opacity: .9; }
+    .music-ribbon img { width: 100%; height: 100%; object-fit: cover; opacity: .62; mix-blend-mode: multiply; }
 
     .section { padding: 118px 0; }
     .section-heading {
@@ -298,53 +377,140 @@
       position: relative;
       min-height: 0;
       overflow: hidden;
-      border-radius: 7px;
-      background: #fff;
-      transition: transform .32s ease, box-shadow .32s ease;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      background: linear-gradient(#fff,#fff) padding-box, linear-gradient(120deg, #d8e5ed, #e7d8ed, #d5eef1) border-box;
+      box-shadow: 0 10px 28px rgba(44,71,106,.08);
+      transition: transform .32s ease, box-shadow .32s ease, background-position .5s ease;
+    }
+    .collection-media { position: relative; display: block; overflow: hidden; aspect-ratio: 324 / 275; background: #eaf3f7; }
+    .collection-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 56%, rgba(15,35,49,.16));
+      opacity: .55;
+      transition: opacity .32s ease;
     }
     .collection-card img {
-      width: 100%; height: auto;
-      aspect-ratio: 324 / 373;
+      width: 100%; height: 100%;
+      aspect-ratio: 324 / 275;
       object-fit: cover;
+      transition: transform .55s cubic-bezier(.2,.7,.2,1), filter .4s ease;
     }
-    .collection-card:hover { transform: translateY(-5px); box-shadow: 0 18px 38px rgba(44,71,106,.13); }
+    .collection-copy { position: relative; z-index: 2; display: block; padding: 20px 20px 22px; background: rgba(255,255,255,.96); }
+    .collection-title {
+      display: block;
+      margin: 0;
+      color: #25282b;
+      font-size: 18px;
+      line-height: 1.15;
+      font-weight: 780;
+      text-transform: uppercase;
+      transition: letter-spacing .3s ease, color .3s ease;
+    }
+    .collection-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+      transition: color .3s ease, transform .3s ease;
+    }
+    .collection-meta svg { width: 19px; height: 19px; flex: 0 0 19px; color: var(--blue); transition: transform .3s ease, color .3s ease; }
+    .collection-card:hover,
+    .collection-card:focus-visible {
+      transform: translateY(-6px);
+      background: linear-gradient(#fff,#fff) padding-box, var(--gradient) border-box;
+      box-shadow: 0 20px 45px rgba(73,91,185,.19), 0 0 30px rgba(20,207,209,.19), 0 0 20px rgba(236,88,168,.12);
+      outline: none;
+    }
+    .collection-card:hover img,
+    .collection-card:focus-visible img { transform: scale(1.045); filter: saturate(1.08) contrast(1.03); }
+    .collection-card:hover .collection-media::after,
+    .collection-card:focus-visible .collection-media::after { opacity: .25; }
+    .collection-card:hover .collection-title,
+    .collection-card:focus-visible .collection-title {
+      color: transparent;
+      background: var(--gradient);
+      background-clip: text;
+      -webkit-background-clip: text;
+      letter-spacing: .018em;
+    }
+    .collection-card:hover .collection-meta,
+    .collection-card:focus-visible .collection-meta { color: #42515b; transform: translateX(2px); }
+    .collection-card:hover .collection-meta svg,
+    .collection-card:focus-visible .collection-meta svg { color: var(--cyan); transform: translateX(4px); }
+    .collection-scroll-hint { display: none; }
 
     .gallery { padding-top: 72px; }
-    .gallery-portal {
+    .gallery-shell {
       position: relative;
-      min-height: 470px;
-      display: grid;
-      grid-template-columns: .82fr 1.18fr;
       overflow: hidden;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #eef5fb 0%, #f7f5fb 58%, #e9fbfb 100%);
+      padding: clamp(38px, 5vw, 68px);
+      border: 1px solid rgba(87,145,173,.12);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 92% 4%, rgba(93,218,226,.24), transparent 29%),
+        radial-gradient(circle at 6% 96%, rgba(128,156,222,.18), transparent 32%),
+        #eaf6fc;
+      box-shadow: 0 22px 55px rgba(55,103,131,.1);
       isolation: isolate;
     }
-    .gallery-copy {
-      position: relative;
-      z-index: 2;
+    .gallery-heading {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      padding: clamp(42px, 5vw, 76px);
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 34px;
+      margin-bottom: 34px;
     }
-    .gallery-copy h2 { margin: 0; max-width: 520px; font-size: clamp(42px, 4vw, 62px); line-height: 1; letter-spacing: -.035em; text-transform: uppercase; }
-    .gallery-copy p:not(.eyebrow) { max-width: 470px; margin: 24px 0 0; color: var(--muted); font-size: 17px; line-height: 1.55; }
-    .gallery-copy .aurora-button { margin-top: 30px; }
-    .gallery-visual { position: relative; min-height: 470px; }
-    .gallery-photo {
-      position: absolute;
+    .gallery-heading h2 { margin: 0; max-width: 620px; font-size: clamp(42px, 4vw, 62px); line-height: 1; letter-spacing: -.035em; text-transform: uppercase; }
+    .gallery-heading p:not(.eyebrow) { max-width: 440px; margin: 0; color: #60727d; font-size: 16px; line-height: 1.5; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-template-rows: 245px 245px;
+      gap: 14px;
+    }
+    .gallery-tile {
+      position: relative;
       overflow: hidden;
-      border: 8px solid rgba(255,255,255,.84);
-      border-radius: 12px;
-      box-shadow: 0 20px 45px rgba(44,71,106,.16);
+      border-radius: 16px;
+      box-shadow: 0 14px 32px rgba(31,73,98,.14);
       background: #dfe9ef;
+      isolation: isolate;
     }
-    .gallery-photo img { width: 100%; height: 100%; object-fit: cover; }
-    .gallery-photo--one { inset: 8% 4% 12% 23%; transform: rotate(2deg); }
-    .gallery-photo--two { width: 39%; height: 53%; left: 2%; bottom: 5%; transform: rotate(-4deg); }
-    .gallery-photo--three { width: 33%; height: 43%; right: 2%; top: 3%; transform: rotate(5deg); }
+    .gallery-tile::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 30% 0 0;
+      background: linear-gradient(180deg, transparent, rgba(5,18,28,.82));
+      pointer-events: none;
+    }
+    .gallery-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1), filter .4s ease; }
+    .gallery-tile--main { grid-column: 1 / span 7; grid-row: 1 / span 2; }
+    .gallery-tile--wide { grid-column: 8 / -1; grid-row: 1; }
+    .gallery-tile--small { grid-column: 8 / -1; grid-row: 2; }
+    .gallery-caption {
+      position: absolute;
+      z-index: 2;
+      left: 24px; right: 24px; bottom: 22px;
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(0,0,0,.45);
+      transition: transform .35s ease;
+    }
+    .gallery-caption strong { display: block; font-size: clamp(20px, 2vw, 31px); line-height: 1.08; }
+    .gallery-caption span { display: block; max-width: 420px; margin-top: 7px; color: rgba(255,255,255,.82); font-size: 13px; line-height: 1.35; }
+    .gallery-tile:hover img,
+    .gallery-tile:focus-visible img { transform: scale(1.045); filter: saturate(1.08); }
+    .gallery-tile:hover .gallery-caption,
+    .gallery-tile:focus-visible .gallery-caption { transform: translateY(-4px); }
+    .gallery-action { display: flex; justify-content: flex-end; margin-top: 28px; }
+    .gallery-action .aurora-button { margin-top: 0; }
 
     .about-section { padding: 110px 0 140px; }
     .about {
@@ -354,6 +520,7 @@
       align-items: center;
     }
     .about h2 { margin-bottom: 40px; }
+    .about-intro { max-width: 560px; margin: -16px 0 34px; color: var(--muted); font-size: 16px; line-height: 1.6; }
     .contact-block { margin-top: 26px; }
     .contact-label {
       display: block;
@@ -429,7 +596,6 @@
       .hero h1 { font-size: clamp(50px, 6vw, 72px); }
       .feature { grid-template-columns: 56px 1fr; gap: 12px; padding: 14px 16px; }
       .feature-icon { width: 54px; height: 54px; }
-      .gallery-portal { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 820px) {
@@ -474,10 +640,11 @@
       .section { padding: 84px 0; }
       .section-heading { align-items: flex-start; flex-direction: column; }
       .collection-grid { grid-template-columns: 1fr 1fr; }
-      .gallery-portal { grid-template-columns: 1fr; }
-      .gallery-visual { min-height: 390px; order: -1; }
+      .gallery-heading { align-items: flex-start; flex-direction: column; }
+      .gallery-heading p:not(.eyebrow) { max-width: 620px; }
+      .gallery-grid { grid-template-rows: 220px 220px; }
       .about { grid-template-columns: 1fr; gap: 50px; }
-      .map-card { order: -1; }
+      .map-card { order: 0; }
       .footer-inner { grid-template-columns: 1fr 1fr; gap: 48px; }
       .footer-brand { grid-column: 1 / -1; }
     }
@@ -485,26 +652,57 @@
     @media (max-width: 540px) {
       .page-width { width: min(calc(100% - 28px), var(--page)); }
       .brand-text span { display: none; }
-      .hero h1 { font-size: clamp(43px, 14vw, 62px); line-height: 1; }
+      .header-inner { min-height: 74px; }
+      .mobile-nav { inset: 74px 14px auto; }
+      .hero { padding-top: 8px; padding-bottom: 38px; }
+      .hero-copy { padding: 32px 0 34px; }
+      .hero h1 { font-size: clamp(39px, 12vw, 52px); line-height: 1; }
       .hero-subtitle { font-size: 18px; }
       .aurora-button { width: 100%; min-height: 56px; padding-inline: 18px; font-size: 13px; }
-      .model-stage, model-viewer { min-height: 420px; }
+      .model-stage, model-viewer { min-height: 370px; }
+      .model-stage { border-radius: 15px; background-size: 108% auto, auto, auto; }
+      .instrument-caption { top: 12px; left: 12px; max-width: calc(100% - 82px); padding: 11px 13px; }
+      .instrument-caption strong { font-size: 14px; }
+      .instrument-caption span { font-size: 11px; }
       .model-hint { display: none; }
-      .features { grid-template-columns: 1fr; }
-      .feature { min-height: 100px; border-right: 0; border-bottom: 1px solid #dcdde2 !important; padding: 18px 0 !important; }
-      .feature:last-child { border-bottom: 0 !important; }
-      .music-ribbon { height: 115px; }
+      .fullscreen-button { right: 13px; bottom: 13px; width: 46px; height: 46px; }
+      .features { grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 38px; }
+      .feature {
+        min-height: 164px;
+        grid-template-columns: 1fr;
+        align-content: start;
+        gap: 10px;
+        padding: 16px !important;
+        border: 1px solid rgba(84,126,151,.12) !important;
+        border-radius: 14px;
+        background: rgba(247,251,253,.78);
+      }
+      .feature-icon { width: 46px; height: 46px; }
+      .feature strong { font-size: 13px; }
+      .feature span { font-size: 12px; }
+      .music-ribbon { height: 82px; }
       .section-heading h2, .about h2 { font-size: 38px; }
       .section-heading p { font-size: 15px; }
       .collection-grid { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 14px 18px 2px; }
-      .collection-card { flex: 0 0 82%; scroll-snap-align: start; }
+      .collection-card { flex: 0 0 78%; scroll-snap-align: start; }
+      .collection-copy { padding: 17px 17px 19px; }
+      .collection-title { font-size: 16px; }
+      .collection-scroll-hint { display: flex; align-items: center; gap: 8px; margin-top: 6px; color: var(--muted); font-size: 12px; }
+      .collection-scroll-hint::after { content: ""; width: 42px; height: 1px; background: linear-gradient(90deg, var(--violet), var(--cyan)); }
       .gallery { padding-top: 44px; }
-      .gallery-portal { min-height: 0; }
-      .gallery-copy { padding: 38px 26px 44px; }
-      .gallery-copy h2 { font-size: 36px; }
-      .gallery-copy p:not(.eyebrow) { font-size: 15px; }
-      .gallery-visual { min-height: 330px; }
-      .gallery-photo { border-width: 5px; }
+      .gallery-shell { padding: 28px 16px 22px; border-radius: 18px; }
+      .gallery-heading { gap: 16px; margin-bottom: 22px; }
+      .gallery-heading h2 { font-size: 36px; }
+      .gallery-heading p:not(.eyebrow) { font-size: 14px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 250px 176px; gap: 9px; }
+      .gallery-tile--main { grid-column: 1 / -1; grid-row: 1; }
+      .gallery-tile--wide { grid-column: 1; grid-row: 2; }
+      .gallery-tile--small { grid-column: 2; grid-row: 2; }
+      .gallery-tile { border-radius: 13px; }
+      .gallery-caption { left: 14px; right: 12px; bottom: 13px; }
+      .gallery-caption strong { font-size: 16px; overflow-wrap: anywhere; }
+      .gallery-caption span { display: none; }
+      .gallery-action { margin-top: 18px; }
       .about-section { padding: 76px 0 92px; }
       .about { gap: 42px; }
       .about h2 { margin-bottom: 30px; }
@@ -519,7 +717,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
     }
   </style>
 </head>
@@ -558,16 +756,19 @@
         </a>
       </div>
       <div class="model-stage" id="modelStage">
-        <model-viewer id="museumModel" src="public/museum/hero-instrument.glb" poster="public/museum/hero-instrument.webp" alt="Трёхмерная модель музыкального инструмента" camera-controls auto-rotate rotation-per-second="14deg" interaction-prompt="none" shadow-intensity="1.15" shadow-softness=".8" exposure="1.05" environment-image="neutral" camera-orbit="32deg 72deg 105%" min-camera-orbit="auto 35deg 65%" max-camera-orbit="auto 110deg 170%" field-of-view="28deg"></model-viewer>
-        <div class="model-loading">Загружается 3D-модель…</div>
+        <model-viewer id="museumModel" src="public/museum/hero-instrument.glb" poster="public/museum/hero-harp-poster.webp" alt="Трёхмерная модель традиционной арфы" camera-controls auto-rotate rotation-per-second="14deg" interaction-prompt="none" shadow-intensity="1.15" shadow-softness=".8" exposure="1.05" environment-image="neutral" camera-orbit="32deg 72deg 105%" min-camera-orbit="auto 35deg 65%" max-camera-orbit="auto 110deg 170%" field-of-view="28deg"></model-viewer>
+        <div class="model-loading" aria-live="polite"><span>Загружается 3D-модель…</span></div>
+        <div class="instrument-caption"><strong>Традиционная арфа</strong><span>Струнный инструмент · экспонат коллекции Юрия Шейкина</span></div>
         <div class="model-hint">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 10V6a2 2 0 1 1 4 0v3-1a2 2 0 1 1 4 0v2-1a2 2 0 1 1 4 0v5c0 4-3 7-7 7h-1c-3 0-5-1-7-4l-2-3a2 2 0 0 1 3-2l2 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Вращайте модель
         </div>
         <button class="fullscreen-button" id="fullscreenButton" type="button" aria-label="Развернуть модель на весь экран">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5m13 5h5v-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="expand-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5m13 5h5v-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="close-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </button>
       </div>
+      <div class="model-backdrop" id="modelBackdrop" aria-hidden="true"></div>
     </section>
 
     <section class="features page-width" aria-label="Возможности музея">
@@ -599,28 +800,26 @@
         <p>Познакомьтесь с музыкальными инструментами народов Северной Азии — от ритуальных мембранофонов до редких духовых инструментов.</p>
       </div>
       <div class="collection-grid">
-        <a class="collection-card" href="#" aria-label="Мембранофоны"><img src="public/museum/category-membranophones.svg" alt="Мембранофоны" loading="lazy"></a>
-        <a class="collection-card" href="#" aria-label="Хордофоны"><img src="public/museum/category-chordophones.svg" alt="Хордофоны" loading="lazy"></a>
-        <a class="collection-card" href="#" aria-label="Идиофоны"><img src="public/museum/category-idiophones.svg" alt="Идиофоны" loading="lazy"></a>
-        <a class="collection-card" href="#" aria-label="Аэрофоны"><img src="public/museum/category-aerophones.svg" alt="Аэрофоны" loading="lazy"></a>
+        <a class="collection-card" href="#" aria-label="Открыть мембранофоны"><span class="collection-media"><img src="public/museum/membranophone.webp" alt="Мембранофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Мембранофоны</strong><span class="collection-meta">Ударные инструменты <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
+        <a class="collection-card" href="#" aria-label="Открыть хордофоны"><span class="collection-media"><img src="public/museum/chordophone.webp" alt="Хордофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Хордофоны</strong><span class="collection-meta">Струнные инструменты <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
+        <a class="collection-card" href="#" aria-label="Открыть идиофоны"><span class="collection-media"><img src="public/museum/idiophone.webp" alt="Идиофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Идиофоны</strong><span class="collection-meta">Самозвучащие инструменты <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
+        <a class="collection-card" href="#" aria-label="Открыть аэрофоны"><span class="collection-media"><img src="public/museum/aerophone.webp" alt="Аэрофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Аэрофоны</strong><span class="collection-meta">Духовые инструменты <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
       </div>
+      <div class="collection-scroll-hint" aria-hidden="true">Листайте каталог</div>
     </section>
 
     <section class="section gallery page-width" id="gallery">
-      <div class="gallery-portal">
-        <div class="gallery-copy">
-          <p class="eyebrow">Архив изображений</p>
-          <h2>Фотографии инструментов</h2>
+      <div class="gallery-shell">
+        <div class="gallery-heading">
+          <div><p class="eyebrow">Архив изображений</p><h2>Фотографии инструментов</h2></div>
           <p>Экспедиционные и музейные фотографии традиционных музыкальных инструментов собраны в общей фотогалерее портала.</p>
-          <a class="aurora-button" href="portal-prototype.html?category=instruments#gallery">Смотреть фотографии
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
         </div>
-        <div class="gallery-visual" aria-hidden="true">
-          <div class="gallery-photo gallery-photo--one"><img src="public/museum/gallery-2.jpg" alt=""></div>
-          <div class="gallery-photo gallery-photo--two"><img src="public/museum/gallery-1.jpg" alt=""></div>
-          <div class="gallery-photo gallery-photo--three"><img src="public/museum/gallery-3.jpg" alt=""></div>
+        <div class="gallery-grid">
+          <a class="gallery-tile gallery-tile--main" href="portal-prototype.html?category=instruments#gallery"><img src="public/museum/gallery-1.jpg" alt="Исполнитель с традиционным мембранофоном" loading="lazy"><span class="gallery-caption"><strong>Мембранофоны Севера</strong><span>Обрядовые инструменты и полевые материалы экспедиций</span></span></a>
+          <a class="gallery-tile gallery-tile--wide" href="portal-prototype.html?category=instruments#gallery"><img src="public/museum/gallery-2.jpg" alt="Исполнитель с большим бубном" loading="lazy"><span class="gallery-caption"><strong>Исполнители</strong><span>Музыканты и хранители традиций</span></span></a>
+          <a class="gallery-tile gallery-tile--small" href="portal-prototype.html?category=instruments#gallery"><img src="public/museum/gallery-3.jpg" alt="Исполнитель с духовым инструментом" loading="lazy"><span class="gallery-caption"><strong>Духовые инструменты</strong><span>Архивные фотографии коллекции</span></span></a>
         </div>
+        <div class="gallery-action"><a class="aurora-button" href="portal-prototype.html?category=instruments#gallery">Открыть фотоархив <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
       </div>
     </section>
 
@@ -633,6 +832,7 @@
         <div>
           <p class="eyebrow">Якутск · Арктика</p>
           <h2>О нашем музее</h2>
+          <p class="about-intro">Коллекция объединяет редкие музыкальные инструменты народов Северной Азии и материалы полевых исследований Юрия Ильича Шейкина. Цифровой музей позволяет рассмотреть экспонаты, услышать их звучание и познакомиться с культурным контекстом.</p>
           <div class="contact-block"><span class="contact-label">Адрес</span><div class="contact-value">677000, Республика Саха (Якутия),<br>г. Якутск, ул. Орджоникидзе, д. 4, каб. 401</div></div>
           <div class="contact-block"><span class="contact-label">Часы работы</span><div class="contact-value">Понедельник–Пятница · 11:00–17:00<br><span style="color:var(--muted);font-weight:500">Перерыв 13:00–14:00</span></div></div>
           <div class="contact-row">
@@ -680,13 +880,40 @@
 
     const modelStage = document.getElementById('modelStage');
     const museumModel = document.getElementById('museumModel');
-    museumModel.addEventListener('load', () => modelStage.classList.add('is-model-loaded'));
-    museumModel.addEventListener('error', () => document.documentElement.classList.add('model-viewer-failed'));
-    document.getElementById('fullscreenButton').addEventListener('click', async () => {
-      try {
-        if (!document.fullscreenElement) await modelStage.requestFullscreen();
-        else await document.exitFullscreen();
-      } catch (_) {}
+    const modelBackdrop = document.getElementById('modelBackdrop');
+    const fullscreenButton = document.getElementById('fullscreenButton');
+    const markModelReady = () => {
+      modelStage.classList.add('is-model-ready');
+      modelStage.classList.remove('is-model-failed');
+    };
+    museumModel.addEventListener('load', markModelReady);
+    museumModel.addEventListener('poster-dismissed', markModelReady);
+    museumModel.addEventListener('error', () => modelStage.classList.add('is-model-failed'));
+    customElements.whenDefined('model-viewer').then(() => {
+      if (museumModel.loaded || museumModel.modelIsVisible) markModelReady();
+      let checks = 0;
+      const readyCheck = window.setInterval(() => {
+        checks += 1;
+        if (museumModel.loaded || museumModel.modelIsVisible) {
+          markModelReady();
+          window.clearInterval(readyCheck);
+        } else if (checks > 80) {
+          window.clearInterval(readyCheck);
+        }
+      }, 250);
+    });
+
+    const setModelExpanded = expanded => {
+      modelStage.classList.toggle('is-expanded', expanded);
+      modelBackdrop.classList.toggle('is-visible', expanded);
+      document.body.classList.toggle('model-modal-open', expanded);
+      fullscreenButton.setAttribute('aria-pressed', String(expanded));
+      fullscreenButton.setAttribute('aria-label', expanded ? 'Закрыть увеличенную модель' : 'Увеличить 3D-модель');
+    };
+    fullscreenButton.addEventListener('click', () => setModelExpanded(!modelStage.classList.contains('is-expanded')));
+    modelBackdrop.addEventListener('click', () => setModelExpanded(false));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && modelStage.classList.contains('is-expanded')) setModelExpanded(false);
     });
 
     document.querySelectorAll('a[href="#"]').forEach(link => link.addEventListener('click', event => event.preventDefault()));
