@@ -902,6 +902,7 @@
         }
       }, 250);
     });
+    window.setTimeout(() => modelStage.classList.add('is-model-ready'), 5000);
 
     const setModelExpanded = expanded => {
       modelStage.classList.toggle('is-expanded', expanded);
