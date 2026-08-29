@@ -56,6 +56,22 @@
       justify-content: space-between;
       gap: 36px;
     }
+    .header-identity { display: flex; align-items: center; gap: 18px; min-width: 0; }
+    .portal-return {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex: 0 0 auto;
+      padding-right: 18px;
+      border-right: 1px solid #dfe8ed;
+      color: #56707f;
+      font-size: 12px;
+      font-weight: 750;
+      white-space: nowrap;
+      transition: color .2s ease, transform .2s ease;
+    }
+    .portal-return svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+    .portal-return:hover { color: var(--blue); transform: translateX(-2px); }
     .brand {
       display: inline-flex;
       align-items: center;
@@ -567,6 +583,8 @@
     @media (max-width: 1100px) {
       .page-width { width: min(calc(100% - 40px), var(--page)); }
       .brand { min-width: 290px; }
+      .portal-return span { display: none; }
+      .portal-return { padding-right: 14px; }
       .desktop-nav { gap: 25px; }
       .hero { grid-template-columns: 1fr 1fr; gap: 36px; }
       .hero h1 { font-size: clamp(44px, 5.2vw, 58px); }
@@ -628,6 +646,8 @@
     @media (max-width: 540px) {
       .page-width { width: min(calc(100% - 28px), var(--page)); }
       .brand-text span { display: none; }
+      .header-identity { gap: 10px; }
+      .portal-return { padding-right: 10px; }
       .header-inner { min-height: 74px; }
       .mobile-nav { inset: 74px 14px auto; }
       .hero { padding-top: 8px; padding-bottom: 38px; }
@@ -699,13 +719,18 @@
 <body>
   <header class="site-header">
     <div class="header-inner page-width">
-      <a class="brand" href="#top" aria-label="На главную">
-        <img class="brand-mark" src="public/museum/logo-color.png" alt="">
-        <span class="brand-text">
-          <strong>Музей музыкальных инструментов</strong>
-          <span>Коллекция Юрия Шейкина · народы Северной Азии</span>
-        </span>
-      </a>
+      <div class="header-identity">
+        <a class="portal-return" href="portal-prototype.html" aria-label="Вернуться на портал лаборатории">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>На портал</span>
+        </a>
+        <a class="brand" href="#top" aria-label="На главную музея">
+          <img class="brand-mark" src="public/museum/logo-color.png" alt="">
+          <span class="brand-text">
+            <strong>Музей музыкальных инструментов</strong>
+            <span>Коллекция Юрия Шейкина · народы Северной Азии</span>
+          </span>
+        </a>
+      </div>
       <nav class="desktop-nav" aria-label="Основная навигация">
         <a class="is-active" href="#top">Главная</a>
         <a href="#collection">Коллекция</a>
@@ -714,7 +739,7 @@
       </nav>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Открыть меню"><span></span></button>
       <nav class="mobile-nav" id="mobileNav" aria-label="Мобильная навигация">
-        <a href="#top">Главная</a><a href="#collection">Коллекция</a><a href="#about">О музее</a><a href="#gallery">Фотогалерея</a>
+        <a href="portal-prototype.html">← Портал лаборатории</a><a href="#top">Главная музея</a><a href="#collection">Коллекция</a><a href="#about">О музее</a><a href="#gallery">Фотогалерея</a>
       </nav>
     </div>
   </header>
@@ -770,7 +795,7 @@
         <p>Познакомьтесь с музыкальными инструментами народов Северной Азии — от ритуальных мембранофонов до редких духовых инструментов.</p>
       </div>
       <div class="collection-grid">
-        <a class="collection-card" href="#" aria-label="Открыть мембранофоны"><span class="collection-media"><img src="public/museum/membranophone.webp" alt="Мембранофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Мембранофоны</strong><span class="collection-meta">Ударные инструменты <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
+        <a class="collection-card" href="membranofony.html" aria-label="Открыть каталог мембранофонов"><span class="collection-media"><img src="public/museum/membranophone.webp" alt="Мембранофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Мембранофоны</strong><span class="collection-meta">Ударные инструменты <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
         <a class="collection-card" href="#" aria-label="Открыть хордофоны"><span class="collection-media"><img src="public/museum/chordophone.webp" alt="Хордофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Хордофоны</strong><span class="collection-meta">Струнные инструменты <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
         <a class="collection-card" href="#" aria-label="Открыть идиофоны"><span class="collection-media"><img src="public/museum/idiophone.webp" alt="Идиофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Идиофоны</strong><span class="collection-meta">Самозвучащие инструменты <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
         <a class="collection-card" href="#" aria-label="Открыть аэрофоны"><span class="collection-media"><img src="public/museum/aerophone.webp" alt="Аэрофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Аэрофоны</strong><span class="collection-meta">Духовые инструменты <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
@@ -829,7 +854,7 @@
         <p class="footer-address">677000, Республика Саха (Якутия),<br>г. Якутск, ул. Орджоникидзе, д. 4, каб. 401<br><br>+7 999 244-80-75<br>kiskagiik@mail.ru</p>
         <p class="footer-copy">© 2026 Музей. Все права защищены.</p>
       </div>
-      <nav class="footer-nav" aria-label="Навигация в подвале"><a href="#top">Главная</a><a href="#about">Посетителям</a><a href="#collection">Музейные коллекции</a><a href="#about">О музее</a><a href="#gallery">Фотогалерея</a></nav>
+      <nav class="footer-nav" aria-label="Навигация в подвале"><a href="portal-prototype.html">← Портал лаборатории</a><a href="#top">Главная музея</a><a href="#about">Посетителям</a><a href="#collection">Музейные коллекции</a><a href="#about">О музее</a><a href="#gallery">Фотогалерея</a></nav>
       <div><p class="social-title">Мы в соцсетях:</p><div class="socials"><a class="social" href="#" aria-label="Telegram">TG</a><a class="social" href="#" aria-label="Яндекс Дзен">Я</a><a class="social" href="#" aria-label="ВКонтакте">VK</a></div></div>
     </div>
   </footer>

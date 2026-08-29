@@ -76,7 +76,7 @@ export default function PortalDirections() {
         <a
           className={`directionCard directionCard-${item.id}`}
           id={item.id}
-          href={`#${item.id}-content`}
+          href={item.id === "museum" ? "/museum-prototype.html" : `#${item.id}-content`}
           key={item.id}
         >
           <div className="directionCardTop">
