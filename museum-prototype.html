@@ -378,35 +378,18 @@
       box-shadow: 0 8px 24px rgba(44,71,106,.045);
       transition: transform .34s cubic-bezier(.2,.7,.2,1), box-shadow .34s ease, background .34s ease;
     }
-    .collection-card::after {
-      content: "";
-      position: absolute;
-      z-index: 1;
-      inset: -40% -65%;
-      background: linear-gradient(112deg, transparent 37%, rgba(255,255,255,.68) 48%, transparent 59%);
-      transform: translateX(-48%) rotate(4deg);
-      opacity: 0;
-      pointer-events: none;
-      transition: transform .65s ease, opacity .25s ease;
-    }
     .collection-media { position: absolute; inset: 0; display: block; overflow: hidden; background: #fff; }
-    .collection-media::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 53%, rgba(255,255,255,.1), rgba(255,255,255,.3) 58%, rgba(234,246,250,.42));
-      opacity: .16;
-      transition: opacity .32s ease;
-    }
     .collection-card img {
-      width: 100%; height: 100%;
+      position: absolute;
       object-fit: contain;
-      transform: scale(1.2);
-      transition: transform .62s cubic-bezier(.2,.7,.2,1), filter .4s ease, opacity .35s ease;
+      mix-blend-mode: multiply;
+      pointer-events: none;
     }
-    .collection-card:nth-child(2) img { transform: scale(1.26) translate(3%, 1%); }
-    .collection-card:nth-child(3) img { transform: scale(1.16) translateY(2%); }
-    .collection-card:nth-child(4) img { transform: scale(1.22) translateX(2%); }
+    .collection-card--membranophone img { width: 132%; height: 132%; left: -16%; top: -16%; transform: rotate(90deg) scale(1.06); }
+    .collection-card--chordophone img { width: 148%; height: 148%; left: -22%; top: -23%; }
+    .collection-card--idiophone img { width: 156%; height: 156%; left: -28%; top: 3%; }
+    .collection-card--aerophone .aerophone-top { width: 154%; height: 68%; left: -27%; top: -12%; }
+    .collection-card--aerophone .aerophone-bottom { width: 154%; height: 76%; left: -32%; bottom: -12%; }
     .collection-copy {
       position: absolute;
       z-index: 3;
@@ -429,60 +412,33 @@
       letter-spacing: .045em;
       text-transform: uppercase;
       text-shadow: 0 1px 0 #fff, 0 0 9px #fff, 0 0 20px rgba(255,255,255,.92);
-      transition: transform .32s ease, letter-spacing .32s ease, color .32s ease, text-shadow .32s ease;
+      transition: letter-spacing .32s ease;
     }
-    .collection-meta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      max-height: 0;
-      margin-top: 0;
-      overflow: hidden;
-      color: #52646f;
-      font-size: 11px;
-      font-weight: 720;
-      line-height: 1.35;
-      opacity: 0;
-      transform: translateY(9px);
-      transition: max-height .32s ease, margin .32s ease, color .3s ease, transform .32s ease, opacity .25s ease;
+    .collection-title::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      margin-top: 7px;
+      border-radius: 2px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .3s ease;
     }
-    .collection-meta svg { width: 16px; height: 16px; flex: 0 0 16px; color: var(--blue); transition: transform .3s ease, color .3s ease; }
     .collection-card:hover,
     .collection-card:focus-visible {
-      transform: translateY(-7px);
+      transform: translateY(-4px);
       background: linear-gradient(#fff,#fff) padding-box, var(--gradient) border-box;
-      box-shadow: 0 20px 46px rgba(73,91,185,.17), 0 0 28px rgba(20,207,209,.2), 0 0 20px rgba(236,88,168,.15);
+      box-shadow: 0 16px 38px rgba(73,91,185,.15), 0 0 25px rgba(20,207,209,.2), 0 0 18px rgba(236,88,168,.14);
       outline: none;
     }
-    .collection-card:hover::after,
-    .collection-card:focus-visible::after { opacity: .6; transform: translateX(47%) rotate(4deg); }
-    .collection-card:hover img,
-    .collection-card:focus-visible img { filter: saturate(1.08) contrast(1.03); opacity: .9; }
-    .collection-card:nth-child(1):hover img,
-    .collection-card:nth-child(1):focus-visible img { transform: scale(1.26); }
-    .collection-card:nth-child(2):hover img,
-    .collection-card:nth-child(2):focus-visible img { transform: scale(1.32) translate(3%, 1%); }
-    .collection-card:nth-child(3):hover img,
-    .collection-card:nth-child(3):focus-visible img { transform: scale(1.22) translateY(2%); }
-    .collection-card:nth-child(4):hover img,
-    .collection-card:nth-child(4):focus-visible img { transform: scale(1.28) translateX(2%); }
-    .collection-card:hover .collection-media::after,
-    .collection-card:focus-visible .collection-media::after { opacity: .42; }
     .collection-card:hover .collection-title,
     .collection-card:focus-visible .collection-title {
-      color: transparent;
-      background: var(--gradient);
-      background-clip: text;
-      -webkit-background-clip: text;
-      letter-spacing: .075em;
-      text-shadow: none;
-      transform: translateY(-4px);
+      letter-spacing: .065em;
     }
-    .collection-card:hover .collection-meta,
-    .collection-card:focus-visible .collection-meta { max-height: 38px; margin-top: 10px; color: #42515b; opacity: 1; transform: translateY(0); }
-    .collection-card:hover .collection-meta svg,
-    .collection-card:focus-visible .collection-meta svg { color: var(--cyan); transform: translateX(4px); }
+    .collection-card:hover .collection-title::after,
+    .collection-card:focus-visible .collection-title::after { transform: scaleX(1); }
     .collection-scroll-hint { display: none; }
 
     .gallery { padding-top: 72px; }
@@ -725,12 +681,12 @@
       .music-ribbon { height: 82px; }
       .section-heading h2, .about h2 { font-size: 38px; }
       .section-heading p { font-size: 15px; }
-      .collection-grid { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 14px 18px 2px; }
-      .collection-card { flex: 0 0 78%; scroll-snap-align: start; aspect-ratio: 4 / 4.7; }
-      .collection-copy { padding: 22px 16px; }
-      .collection-title { font-size: 16px; }
-      .collection-scroll-hint { display: flex; align-items: center; gap: 8px; margin-top: 6px; color: var(--muted); font-size: 12px; }
-      .collection-scroll-hint::after { content: ""; width: 42px; height: 1px; background: linear-gradient(90deg, var(--violet), var(--cyan)); }
+      .collection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; overflow: visible; padding: 0; }
+      .collection-card { width: 100%; aspect-ratio: 4 / 4.7; }
+      .collection-copy { padding: 16px 8px; }
+      .collection-title { font-size: clamp(10px, 3.25vw, 13px); letter-spacing: .025em; }
+      .collection-title::after { height: 1.5px; margin-top: 5px; }
+      .collection-scroll-hint { display: none; }
       .gallery { padding-top: 44px; }
       .gallery-shell { padding: 28px 16px 22px; border-radius: 18px; }
       .gallery-heading { gap: 16px; margin-bottom: 22px; }
@@ -842,12 +798,11 @@
         <p>Познакомьтесь с музыкальными инструментами народов Северной Азии — от ритуальных мембранофонов до редких духовых инструментов.</p>
       </div>
       <div class="collection-grid">
-        <a class="collection-card" href="membranofony.html" aria-label="Открыть каталог мембранофонов"><span class="collection-media"><img src="public/museum/membranophone.webp" alt="Мембранофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Мембранофоны</strong><span class="collection-meta">Ударные инструменты <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
-        <a class="collection-card" href="#" aria-label="Открыть хордофоны"><span class="collection-media"><img src="public/museum/chordophone.webp" alt="Хордофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Хордофоны</strong><span class="collection-meta">Струнные инструменты <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
-        <a class="collection-card" href="#" aria-label="Открыть идиофоны"><span class="collection-media"><img src="public/museum/idiophone.webp" alt="Идиофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Идиофоны</strong><span class="collection-meta">Самозвучащие инструменты <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
-        <a class="collection-card" href="#" aria-label="Открыть аэрофоны"><span class="collection-media"><img src="public/museum/aerophone.webp" alt="Аэрофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Аэрофоны</strong><span class="collection-meta">Духовые инструменты <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
+        <a class="collection-card collection-card--membranophone" href="membranofony.html" aria-label="Открыть каталог мембранофонов"><span class="collection-media"><img src="public/museum/membranophone.webp" alt="Мембранофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Мембранофоны</strong></span></a>
+        <a class="collection-card collection-card--chordophone" href="#" aria-label="Открыть хордофоны"><span class="collection-media"><img src="public/museum/chordophone.webp" alt="Хордофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Хордофоны</strong></span></a>
+        <a class="collection-card collection-card--idiophone" href="#" aria-label="Открыть идиофоны"><span class="collection-media"><img src="public/museum/idiophone.webp" alt="Идиофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Идиофоны</strong></span></a>
+        <a class="collection-card collection-card--aerophone" href="#" aria-label="Открыть аэрофоны"><span class="collection-media"><img class="aerophone-top" src="public/museum/aerophone.webp" alt="" loading="lazy"><img class="aerophone-bottom" src="public/museum/aerophone.webp" alt="Аэрофон из музейной коллекции" loading="lazy"></span><span class="collection-copy"><strong class="collection-title">Аэрофоны</strong></span></a>
       </div>
-      <div class="collection-scroll-hint" aria-hidden="true">Листайте каталог</div>
     </section>
 
     <section class="section gallery page-width" id="gallery">
