@@ -371,66 +371,23 @@
       display: block;
       border-radius: 11px;
       background: transparent;
-      transition: box-shadow .3s ease;
+      transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease, filter .3s ease;
     }
-    .collection-media { position: relative; display: block; width: 100%; }
-    .collection-art {
+    .collection-card-image {
       display: block;
       width: 100%;
       height: auto;
+      border-radius: inherit;
       pointer-events: none;
-    }
-    .collection-frame {
-      position: absolute;
-      z-index: 2;
-      inset: 0;
-      display: block;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-    .collection-copy {
-      position: absolute;
-      z-index: 3;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 28px 20px;
-      text-align: center;
-      pointer-events: none;
-    }
-    .collection-title {
-      display: block;
-      margin: 0;
-      color: #2f2f2f;
-      font-size: 20px;
-      line-height: 1.15;
-      font-family: Arial, "Segoe UI", sans-serif;
-      font-weight: 600;
-      letter-spacing: .018em;
-      text-transform: uppercase;
-    }
-    .collection-title::after {
-      content: "";
-      display: block;
-      width: 100%;
-      height: 2px;
-      margin-top: 7px;
-      border-radius: 2px;
-      background: var(--gradient);
-      transform: scaleX(0);
-      transform-origin: center;
-      transition: transform .3s ease;
     }
     .collection-card:hover,
     .collection-card:focus-visible {
-      box-shadow: 0 0 26px rgba(20,207,209,.22), 0 0 20px rgba(236,88,168,.18);
+      transform: translateY(-5px) scale(1.012);
+      filter: saturate(1.05) brightness(1.015);
+      box-shadow: 0 16px 34px rgba(38,85,186,.14), 0 0 24px rgba(3,255,216,.22), 0 0 18px rgba(237,115,170,.2);
       outline: none;
     }
-    .collection-card:hover .collection-title::after,
-    .collection-card:focus-visible .collection-title::after { transform: scaleX(1); }
+    .collection-card:active { transform: scale(.985); }
     .collection-scroll-hint { display: none; }
 
     .gallery { padding-top: 72px; }
@@ -675,9 +632,6 @@
       .section-heading p { font-size: 15px; }
       .collection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; overflow: visible; padding: 0; }
       .collection-card { width: 100%; }
-      .collection-copy { padding: 16px 8px; }
-      .collection-title { font-size: clamp(10px, 2.78vw, 12px); }
-      .collection-title::after { height: 1.5px; margin-top: 5px; }
       .collection-scroll-hint { display: none; }
       .gallery { padding-top: 44px; }
       .gallery-shell { padding: 28px 16px 22px; border-radius: 18px; }
@@ -790,10 +744,10 @@
         <p>Познакомьтесь с музыкальными инструментами народов Северной Азии — от ритуальных мембранофонов до редких духовых инструментов.</p>
       </div>
       <div class="collection-grid">
-        <a class="collection-card collection-card--membranophone" href="membranofony.html" aria-label="Открыть каталог мембранофонов"><span class="collection-media"><img class="collection-art" src="public/museum/category-membranophone-figma.webp" alt="Мембранофон из музейной коллекции" loading="lazy"><img class="collection-frame" src="public/museum/category-frame.svg" alt="" aria-hidden="true"></span><span class="collection-copy"><strong class="collection-title">Мембранофоны</strong></span></a>
-        <a class="collection-card collection-card--chordophone" href="#" aria-label="Открыть хордофоны"><span class="collection-media"><img class="collection-art" src="public/museum/category-chordophone-figma.webp" alt="Хордофон из музейной коллекции" loading="lazy"><img class="collection-frame" src="public/museum/category-frame.svg" alt="" aria-hidden="true"></span><span class="collection-copy"><strong class="collection-title">Хордофоны</strong></span></a>
-        <a class="collection-card collection-card--idiophone" href="#" aria-label="Открыть идиофоны"><span class="collection-media"><img class="collection-art" src="public/museum/category-idiophone-figma.webp" alt="Идиофон из музейной коллекции" loading="lazy"><img class="collection-frame" src="public/museum/category-frame.svg" alt="" aria-hidden="true"></span><span class="collection-copy"><strong class="collection-title">Идиофоны</strong></span></a>
-        <a class="collection-card collection-card--aerophone" href="#" aria-label="Открыть аэрофоны"><span class="collection-media"><img class="collection-art" src="public/museum/category-aerophone-figma.webp" alt="Аэрофон из музейной коллекции" loading="lazy"><img class="collection-frame" src="public/museum/category-frame.svg" alt="" aria-hidden="true"></span><span class="collection-copy"><strong class="collection-title">Аэрофоны</strong></span></a>
+        <a class="collection-card" href="membranofony.html" aria-label="Открыть каталог мембранофонов"><img class="collection-card-image" src="public/museum/category-card-membranophone.webp" alt="Мембранофоны" loading="lazy"></a>
+        <a class="collection-card" href="#" aria-label="Открыть хордофоны"><img class="collection-card-image" src="public/museum/category-card-chordophone.webp" alt="Хордофоны" loading="lazy"></a>
+        <a class="collection-card" href="#" aria-label="Открыть идиофоны"><img class="collection-card-image" src="public/museum/category-card-idiophone.webp" alt="Идиофоны" loading="lazy"></a>
+        <a class="collection-card" href="#" aria-label="Открыть аэрофоны"><img class="collection-card-image" src="public/museum/category-card-aerophone.webp" alt="Аэрофоны" loading="lazy"></a>
       </div>
     </section>
 
