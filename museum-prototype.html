@@ -686,11 +686,29 @@
       .collection-copy { padding: 16px 8px; }
       .collection-title { font-size: clamp(10px, 3.25vw, 13px); letter-spacing: .025em; }
       .collection-title::after { height: 1.5px; margin-top: 5px; }
-      .collection-card--membranophone img { width: 154%; height: 154%; left: -27%; top: -27%; transform: rotate(90deg) scale(1.06); }
-      .collection-card--chordophone img { width: 300%; height: 300%; left: -104%; top: -104%; }
-      .collection-card--idiophone img { width: 225%; height: 225%; left: -60%; top: -10%; }
-      .collection-card--aerophone .aerophone-top { width: 220%; height: 95%; left: -58%; top: -17%; }
-      .collection-card--aerophone .aerophone-bottom { width: 220%; height: 110%; left: -61%; bottom: -22%; }
+      .collection-card--membranophone img {
+        width: 160%; height: auto;
+        left: 50%; top: 50%;
+        transform: translate(-50%, -50%) rotate(90deg);
+      }
+      .collection-card--chordophone img {
+        width: 270%; height: auto;
+        left: 88%; top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .collection-card--idiophone img {
+        width: 180%; height: auto;
+        left: 50%; top: 22%;
+        transform: translateX(-50%);
+      }
+      .collection-card--aerophone .aerophone-top {
+        width: 230%; height: auto;
+        left: -62%; top: -43%; bottom: auto;
+      }
+      .collection-card--aerophone .aerophone-bottom {
+        width: 230%; height: auto;
+        left: -58%; top: 13%; bottom: auto;
+      }
       .collection-scroll-hint { display: none; }
       .gallery { padding-top: 44px; }
       .gallery-shell { padding: 28px 16px 22px; border-radius: 18px; }
