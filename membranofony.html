@@ -181,32 +181,6 @@
     @keyframes instrumentEntrance { from { opacity: 0; transform: translate(24px, 18px) scale(.94); } to { opacity: 1; transform: none; } }
     @keyframes heroAurora { from { transform: translate3d(-2%, -2%, 0) rotate(-4deg); } to { transform: translate3d(5%, 5%, 0) rotate(7deg); } }
 
-    .collection-story {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(430px, .8fr);
-      gap: 46px;
-      align-items: center;
-      margin-top: 20px;
-      padding: 30px 36px;
-      overflow: hidden;
-      border-radius: 16px;
-      color: #fff;
-      background:
-        radial-gradient(circle at 92% 8%, rgba(20,207,209,.19), transparent 32%),
-        radial-gradient(circle at 62% 110%, rgba(130,101,220,.24), transparent 38%),
-        #0b2231;
-      box-shadow: 0 18px 46px rgba(7,29,43,.12);
-    }
-    .collection-story::before { content: ""; position: absolute; inset: 0 0 auto; height: 2px; background: var(--gradient); }
-    .story-copy .eyebrow { margin-bottom: 9px; color: #70e5e6; }
-    .story-copy h2 { margin: 0; font-size: clamp(25px, 2.3vw, 36px); line-height: 1.05; letter-spacing: -.025em; }
-    .story-copy p:not(.eyebrow) { max-width: 720px; margin: 12px 0 0; color: rgba(255,255,255,.68); font-size: 13px; line-height: 1.55; }
-    .story-stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); margin: 0; }
-    .story-stats div { min-width: 0; padding: 4px 20px; border-left: 1px solid rgba(255,255,255,.14); }
-    .story-stats strong { display: block; font-size: clamp(23px, 2.3vw, 34px); line-height: 1; }
-    .story-stats span { display: block; margin-top: 8px; color: rgba(255,255,255,.58); font-size: 10px; line-height: 1.25; text-transform: uppercase; letter-spacing: .07em; }
-
     .catalog-main { padding: 20px 0 80px; }
     .toolbar {
       display: grid;
@@ -411,7 +385,6 @@
       .portal-return span { display: none; }
       .portal-return { padding-right: 14px; }
       .desktop-nav { gap: 22px; }
-      .collection-story { grid-template-columns: 1fr; gap: 24px; }
       .toolbar { grid-template-columns: minmax(240px, 1fr) minmax(360px, 1.7fr) 155px; }
       .culture-chips { overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
       .culture-chips::-webkit-scrollbar { display: none; }
@@ -449,7 +422,6 @@
       .hero-copy { padding: 38px 34px 180px; }
       .hero-image { position: absolute; inset: auto 0 0; height: 200px; }
       .hero-image img { width: min(470px, 82%); height: 230px; right: -2%; bottom: -45px; }
-      .collection-story { padding: 27px 28px; }
       .toolbar { grid-template-columns: 1fr auto; }
       .field--search { grid-column: 1 / -1; }
       .culture-chips { grid-column: 1; }
@@ -485,13 +457,6 @@
       .hero-count { margin-top: 10px; font-size: 12px; }
       .hero-image { height: 112px; }
       .hero-image img { width: 45%; height: auto; right: 1%; bottom: -20px; }
-      .collection-story { gap: 20px; margin-top: 12px; padding: 23px 20px; border-radius: 13px; }
-      .story-copy h2 { font-size: 23px; }
-      .story-copy p:not(.eyebrow) { font-size: 11px; }
-      .story-stats div { padding: 3px 9px; }
-      .story-stats div:first-child { border-left: 0; padding-left: 0; }
-      .story-stats strong { font-size: 20px; }
-      .story-stats span { margin-top: 6px; font-size: 8px; }
       .catalog-main { padding-top: 18px; padding-bottom: 58px; }
       .toolbar { grid-template-columns: 1fr; gap: 9px; }
       .field--search { grid-column: 1 / -1; }
@@ -567,19 +532,6 @@
         <span class="hero-count">6 экспонатов</span>
       </div>
       <div class="hero-image" aria-hidden="true"><img src="public/museum/catalog/6265-shaman-drum-cutout.webp" alt=""></div>
-    </section>
-
-    <section class="collection-story page-width" data-reveal aria-labelledby="storyTitle">
-      <div class="story-copy">
-        <p class="eyebrow">Как звучит коллекция</p>
-        <h2 id="storyTitle">Звук рождается в мембране</h2>
-        <p>Натянутая кожа или плёнка отзывается на удар и превращает движение в звук. В коллекции собраны не только инструменты, но и полевые истории народов Северной Азии.</p>
-      </div>
-      <div class="story-stats" aria-label="Коллекция в цифрах">
-        <div><strong>6</strong><span>экспонатов</span></div>
-        <div><strong>4</strong><span>народа</span></div>
-        <div><strong>1973–1985</strong><span>годы полевых сборов</span></div>
-      </div>
     </section>
 
     <section class="catalog-main page-width" aria-label="Каталог мембранофонов">
