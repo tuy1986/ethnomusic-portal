@@ -20,21 +20,18 @@ jobs:
       - name: Patch portal cards
         run: python3 .github/scripts/patch_portal_cards_v4.py
 
+      - name: Install ImageMagick
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y imagemagick
+
       - name: Prepare transparent book image
         shell: bash
         run: |
           SRC="public/portal/science-card-book.jpg"
           DST="public/portal/science-card-book.png"
-          if command -v magick >/dev/null 2>&1; then
-            BG=$(magick "$SRC" -format '%[pixel:p{0,0}]' info:)
-            magick "$SRC" -alpha on -fuzz 16% -transparent "$BG" -trim +repage "$DST"
-          elif command -v convert >/dev/null 2>&1; then
-            BG=$(convert "$SRC" -format '%[pixel:p{0,0}]' info:)
-            convert "$SRC" -alpha on -fuzz 16% -transparent "$BG" -trim +repage "$DST"
-          else
-            echo "ImageMagick is not available"
-            exit 1
-          fi
+          BG=$(convert "$SRC" -format '%[pixel:p{0,0}]' info:)
+          convert "$SRC" -alpha on -fuzz 16% -transparent "$BG" -trim +repage "$DST"
           test -s "$DST"
 
       - name: Commit results
