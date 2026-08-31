@@ -1,0 +1,98 @@
+name: Patch portal direction cards once
+
+on:
+  push:
+    branches:
+      - codex/aurora-visual-refinement
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/aurora-visual-refinement
+      - name: Update portal direction cards
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('portal-prototype.html')
+          html = path.read_text(encoding='utf-8')
+
+          marker = '/* portal-direction-cards-v3 */'
+          if marker not in html:
+              science_image = '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'
+
+              new_css = f'''
+/* portal-direction-cards-v3 */
+.directionGrid {{ gap:16px; margin-top:16px; }}
+.directionCard {{
+  min-height:295px;
+  display:block;
+  position:relative;
+  overflow:hidden;
+  padding:28px;
+  border:0;
+  border-radius:16px;
+  background:#fff;
+  box-shadow:none;
+  backdrop-filter:none;
+  isolation:isolate;
+  transition:transform .24s ease,box-shadow .24s ease;
+}}
+.directionCard::before {{ display:none !important; }}
+.directionCard::after {{ content:""; position:absolute; z-index:0; pointer-events:none; }}
+.directionCard:hover {{ transform:translateY(-3px); box-shadow:0 16px 34px rgba(21,36,48,.08); }}
+.directionCardTop,.directionIcon,.directionKicker,.directionCta {{ display:none !important; }}
+.directionCopy {{ position:relative; z-index:2; max-width:100%; }}
+.directionCard h2 {{ max-width:360px; margin:0; color:#343434; font-size:20px; line-height:1.02; letter-spacing:-.035em; font-weight:760; text-transform:uppercase; }}
+.directionCard p {{ position:relative; z-index:2; max-width:370px; margin:11px 0 0; color:#6f6f6f; font-size:16px; line-height:1.25; }}
+.directionCard-archive::after {{ left:-2%; right:-3%; bottom:-16px; height:205px; background:url("public/museum/notation-divider.svg") center bottom/118% 100% no-repeat; opacity:.83; transform:rotate(-1.5deg); transform-origin:center; }}
+.directionCard-museum::after {{ right:4%; bottom:10px; width:72%; height:80%; background:url("public/museum/hero-harp-poster-transparent.webp") right bottom/contain no-repeat; filter:drop-shadow(0 9px 8px rgba(37,39,44,.08)); }}
+.directionCard-science::after {{ right:-2px; bottom:-6px; width:56%; height:69%; background:url("data:image/jpeg;base64,{science_image}") right bottom/contain no-repeat; }}
+.directionCard:hover::after {{ transform:translateY(-2px); }}
+.directionCard-archive:hover::after {{ transform:rotate(-1.5deg) translateY(-2px); }}
+@media (max-width:860px) {{
+  .directionCard {{ min-height:260px; padding:26px; }}
+  .directionCard h2 {{ max-width:390px; font-size:20px; }}
+  .directionCard p {{ font-size:15px; }}
+  .directionCard-archive::after {{ height:175px; }}
+  .directionCard-museum::after {{ width:62%; }}
+  .directionCard-science::after {{ width:48%; }}
+}}
+@media (max-width:560px) {{
+  .directionGrid {{ gap:12px; }}
+  .directionCard {{ min-height:220px; padding:20px; border-radius:15px; }}
+  .directionCard h2 {{ max-width:290px; font-size:18px; }}
+  .directionCard p {{ max-width:290px; margin-top:8px; font-size:13px; }}
+  .directionCard-archive::after {{ left:-10%; right:-10%; bottom:-18px; height:148px; background-size:132% 100%; opacity:.78; }}
+  .directionCard-museum::after {{ right:1%; bottom:6px; width:65%; height:72%; }}
+  .directionCard-science::after {{ right:-8px; bottom:-5px; width:53%; height:62%; }}
+}}
+'''
+              html = html.replace('</style>\n</head>', new_css + '\n</style>\n</head>', 1)
+
+          html = html.replace('Экспедиционные записи, исполнители, жанры и музыкальные традиции.', 'Полевые записи 1966-2023 годов')
+          html = html.replace('Каталог инструментов, 3D-модели, изображения и связанные фонограммы.', 'Каталог инструментов, 3D-модели')
+          html = html.replace('Публикации, исследователи, экспедиции и материалы лаборатории.', 'Публикации, исследователи, экспедиции')
+
+          path.write_text(html, encoding='utf-8')
+          PY
+      - name: Commit portal update
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add portal-prototype.html
+          git commit -m "Redesign portal section cards from updated mockup"
+          git push origin HEAD:codex/aurora-visual-refinement
