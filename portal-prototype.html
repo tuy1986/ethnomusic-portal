@@ -790,6 +790,116 @@ body { overflow-x:hidden; }
   .galleryCard1 .galleryCopy strong { font-size:clamp(22px,7vw,30px); }
   .galleryCard1 .galleryCopy small { font-size:13px; }
 }
+
+/* portal-direction-cards-v3 */
+.directionGrid {
+  gap: 16px;
+  margin-top: 16px;
+}
+.directionCard {
+  min-height: 295px;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  padding: 28px;
+  border: 0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: none;
+  backdrop-filter: none;
+  isolation: isolate;
+  transition: transform .24s ease, box-shadow .24s ease;
+}
+.directionCard::before { display: none !important; }
+.directionCard::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  transition: transform .3s ease;
+}
+.directionCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px rgba(21,36,48,.08);
+}
+.directionCardTop,
+.directionIcon,
+.directionKicker,
+.directionCta { display: none !important; }
+.directionCopy {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+}
+.directionCard h2 {
+  max-width: 360px;
+  margin: 0;
+  color: #343434;
+  font-size: 20px;
+  line-height: 1.02;
+  letter-spacing: -.035em;
+  font-weight: 760;
+  text-transform: uppercase;
+}
+.directionCard p {
+  position: relative;
+  z-index: 2;
+  max-width: 370px;
+  margin: 11px 0 0;
+  color: #6f6f6f;
+  font-size: 16px;
+  line-height: 1.25;
+}
+.directionCard-archive::after {
+  left: -2%;
+  right: -3%;
+  bottom: -16px;
+  height: 205px;
+  background: url("public/museum/notation-divider.svg") center bottom / 118% 100% no-repeat;
+  opacity: .83;
+  transform: rotate(-1.5deg);
+  transform-origin: center;
+}
+.directionCard-museum::after {
+  right: 4%;
+  bottom: 10px;
+  width: 72%;
+  height: 80%;
+  background: url("public/museum/hero-harp-poster-transparent.webp") right bottom / contain no-repeat;
+  filter: drop-shadow(0 9px 8px rgba(37,39,44,.08));
+}
+.directionCard-science::after {
+  right: -2px;
+  bottom: -6px;
+  width: 56%;
+  height: 69%;
+  background: url("public/portal/science-card-book.jpg") right bottom / contain no-repeat;
+}
+.directionCard-museum:hover::after,
+.directionCard-science:hover::after { transform: translateY(-2px); }
+.directionCard-archive:hover::after { transform: rotate(-1.5deg) translateY(-2px); }
+
+@media (max-width: 860px) {
+  .directionCard { min-height: 260px; padding: 26px; }
+  .directionCard h2 { max-width: 390px; font-size: 20px; }
+  .directionCard p { font-size: 15px; }
+  .directionCard-archive::after { height: 175px; }
+  .directionCard-museum::after { width: 62%; }
+  .directionCard-science::after { width: 48%; }
+}
+@media (max-width: 560px) {
+  .directionGrid { gap: 12px; }
+  .directionCard { min-height: 220px; padding: 20px; border-radius: 15px; }
+  .directionCard h2 { max-width: 290px; font-size: 18px; }
+  .directionCard p { max-width: 290px; margin-top: 8px; font-size: 13px; }
+  .directionCard-archive::after {
+    left: -10%; right: -10%; bottom: -18px; height: 148px;
+    background-size: 132% 100%; opacity: .78;
+  }
+  .directionCard-museum::after { right: 1%; bottom: 6px; width: 65%; height: 72%; }
+  .directionCard-science::after { right: -8px; bottom: -5px; width: 53%; height: 62%; }
+}
+
 </style>
 </head>
 <body>
@@ -817,9 +927,9 @@ body { overflow-x:hidden; }
       </div>
     </section>
     <section class="pageWidth directionGrid" aria-label="Разделы портала">
-      <a class="directionCard directionCard-archive" id="archive" href="#archive-content"><div class="directionCardTop"><span class="directionNo">01</span><span class="directionArrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div><span class="directionIcon"><svg viewBox="0 0 64 64"><path d="M8 32h7l4-12 7 25 7-34 7 42 6-28 4 7h6"/><path d="M13 12.5A27 27 0 0 0 13 51.5M51 12.5A27 27 0 0 1 51 51.5" opacity=".48"/></svg></span><div class="directionCopy"><span class="directionKicker">Аудиоколлекция</span><h2>Электронный фонограммархив</h2><p>Экспедиционные записи, исполнители, жанры и музыкальные традиции.</p></div><span class="directionCta">Открыть раздел <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></a>
-      <a class="directionCard directionCard-museum" id="museum" href="museum-prototype.html"><div class="directionCardTop"><span class="directionNo">02</span><span class="directionArrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div><span class="directionIcon"><svg viewBox="0 0 64 64"><path d="M12 48h40M17 48V26h30v22M14 26l18-12 18 12M24 26v22M40 26v22"/><path d="M28 36c0-3 2-5 4-5s4 2 4 5-2 7-4 10c-2-3-4-7-4-10Z" opacity=".72"/></svg></span><div class="directionCopy"><span class="directionKicker">3D-экспозиция</span><h2>Музей музыкальных инструментов</h2><p>Каталог инструментов, 3D-модели, изображения и связанные фонограммы.</p></div><span class="directionCta">Открыть раздел <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></a>
-      <a class="directionCard directionCard-science" id="science" href="#"><div class="directionCardTop"><span class="directionNo">03</span><span class="directionArrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div><span class="directionIcon"><svg viewBox="0 0 64 64"><path d="M11 17c8-2 15 0 21 5v30c-6-5-13-7-21-5V17Zm42 0c-8-2-15 0-21 5v30c6-5 13-7 21-5V17Z"/><circle cx="32" cy="16" r="4"/><path d="M20 12c3-4 7-7 12-7s9 3 12 7" opacity=".55"/></svg></span><div class="directionCopy"><span class="directionKicker">Исследования</span><h2>Научная деятельность</h2><p>Публикации, исследователи, экспедиции и материалы лаборатории.</p></div><span class="directionCta">Открыть раздел <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></a>
+      <a class="directionCard directionCard-archive" id="archive" href="#archive-content"><div class="directionCardTop"><span class="directionNo">01</span><span class="directionArrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div><span class="directionIcon"><svg viewBox="0 0 64 64"><path d="M8 32h7l4-12 7 25 7-34 7 42 6-28 4 7h6"/><path d="M13 12.5A27 27 0 0 0 13 51.5M51 12.5A27 27 0 0 1 51 51.5" opacity=".48"/></svg></span><div class="directionCopy"><span class="directionKicker">Аудиоколлекция</span><h2>Электронный фонограммархив</h2><p>Полевые записи 1966-2023 годов</p></div><span class="directionCta">Открыть раздел <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></a>
+      <a class="directionCard directionCard-museum" id="museum" href="museum-prototype.html"><div class="directionCardTop"><span class="directionNo">02</span><span class="directionArrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div><span class="directionIcon"><svg viewBox="0 0 64 64"><path d="M12 48h40M17 48V26h30v22M14 26l18-12 18 12M24 26v22M40 26v22"/><path d="M28 36c0-3 2-5 4-5s4 2 4 5-2 7-4 10c-2-3-4-7-4-10Z" opacity=".72"/></svg></span><div class="directionCopy"><span class="directionKicker">3D-экспозиция</span><h2>Музей музыкальных инструментов</h2><p>Каталог инструментов, 3D-модели</p></div><span class="directionCta">Открыть раздел <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></a>
+      <a class="directionCard directionCard-science" id="science" href="#"><div class="directionCardTop"><span class="directionNo">03</span><span class="directionArrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div><span class="directionIcon"><svg viewBox="0 0 64 64"><path d="M11 17c8-2 15 0 21 5v30c-6-5-13-7-21-5V17Zm42 0c-8-2-15 0-21 5v30c6-5 13-7 21-5V17Z"/><circle cx="32" cy="16" r="4"/><path d="M20 12c3-4 7-7 12-7s9 3 12 7" opacity=".55"/></svg></span><div class="directionCopy"><span class="directionKicker">Исследования</span><h2>Научная деятельность</h2><p>Публикации, исследователи, экспедиции</p></div><span class="directionCta">Открыть раздел <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></a>
     </section>
     <section class="pageWidth contentPanel audioPanel" id="archive-content">
       <div class="sectionHeading compact"><div><span class="eyebrow dark">Фонограммархив</span><h2>Аудиоархив</h2></div><span class="audioArchiveLink" role="link" aria-disabled="true" title="Раздел находится в разработке">Перейти в фонограммархив <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></div>
