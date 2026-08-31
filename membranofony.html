@@ -29,7 +29,6 @@
       font-family: Inter, "Segoe UI", Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
-    body.dialog-open { overflow: hidden; }
     button, input, select, a { font: inherit; }
     button { color: inherit; }
     a { color: inherit; text-decoration: none; }
@@ -327,50 +326,6 @@
     .footer-nav a:hover { color: #fff; }
     .footer-source { padding-top: 4px; color: rgba(255,255,255,.58); font-size: 12px; line-height: 1.55; }
 
-    .detail-dialog {
-      width: min(980px, calc(100% - 32px));
-      max-height: min(860px, calc(100svh - 32px));
-      padding: 0;
-      overflow: hidden;
-      border: 0;
-      border-radius: 20px;
-      color: var(--ink);
-      background: #fff;
-      box-shadow: 0 30px 100px rgba(6,29,43,.32);
-    }
-    .detail-dialog::backdrop { background: rgba(5,22,33,.62); backdrop-filter: blur(6px); }
-    .dialog-close {
-      position: absolute;
-      z-index: 4;
-      top: 18px;
-      right: 18px;
-      width: 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      border: 0;
-      border-radius: 50%;
-      background: rgba(255,255,255,.92);
-      box-shadow: 0 7px 24px rgba(20,48,66,.12);
-      cursor: pointer;
-    }
-    .dialog-close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; }
-    .dialog-layout { display: grid; grid-template-columns: minmax(310px, .9fr) 1.15fr; max-height: inherit; }
-    .dialog-media { min-height: 530px; display: grid; place-items: center; padding: 48px 34px; background: #f3f8fa; }
-    .dialog-media img { width: 100%; max-height: 470px; object-fit: contain; mix-blend-mode: multiply; }
-    .dialog-content { overflow-y: auto; padding: 54px 54px 48px; }
-    .dialog-kicker { margin: 0 0 12px; color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
-    .dialog-content h2 { margin: 0; padding-right: 20px; font-size: clamp(27px, 3vw, 40px); line-height: 1.02; letter-spacing: -.03em; }
-    .dialog-subtitle { margin: 14px 0 0; color: var(--muted); font-size: 14px; }
-    .dialog-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; margin: 28px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .dialog-fact { padding: 17px 0; }
-    .dialog-fact:nth-child(n+3) { border-top: 1px solid var(--line); }
-    .dialog-fact span { display: block; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-    .dialog-fact strong { display: block; margin-top: 7px; font-size: 13px; line-height: 1.4; }
-    .dialog-description { color: #475761; font-size: 14px; line-height: 1.65; white-space: pre-line; }
-    .source-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; color: var(--blue); font-size: 12px; font-weight: 750; }
-    .source-link svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; }
-
     @media (max-width: 1120px) {
       .page-width { width: min(calc(100% - 40px), var(--page)); }
       .portal-return span { display: none; }
@@ -419,10 +374,6 @@
       .field--sort { grid-column: 2; min-width: 155px; }
       .footer-inner { grid-template-columns: 1fr 1fr; }
       .footer-brand { grid-column: 1 / -1; }
-      .dialog-layout { grid-template-columns: 1fr; overflow-y: auto; }
-      .dialog-media { min-height: 300px; padding: 50px 30px 20px; }
-      .dialog-media img { max-height: 290px; }
-      .dialog-content { overflow: visible; padding: 36px 30px 42px; }
     }
     @media (max-width: 560px) {
       .page-width { width: min(calc(100% - 28px), var(--page)); }
@@ -464,13 +415,6 @@
       .card-title { font-size: 16px; }
       .footer-inner { min-height: 0; grid-template-columns: 1fr; gap: 38px; padding-top: 46px; }
       .footer-brand { grid-column: auto; }
-      .detail-dialog { width: calc(100% - 18px); max-height: calc(100svh - 18px); border-radius: 16px; }
-      .dialog-close { top: 10px; right: 10px; }
-      .dialog-media { min-height: 245px; padding: 42px 20px 12px; }
-      .dialog-media img { max-height: 225px; }
-      .dialog-content { padding: 28px 20px 36px; }
-      .dialog-facts { grid-template-columns: 1fr; }
-      .dialog-fact:nth-child(n+2) { border-top: 1px solid var(--line); }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -561,21 +505,6 @@
       <div class="footer-source">Сведения об экспонатах перенесены из действующего каталога Музея музыкальных инструментов АГИКИ.</div>
     </div>
   </footer>
-
-  <dialog class="detail-dialog" id="detailDialog" aria-labelledby="dialogTitle">
-    <button class="dialog-close" id="dialogClose" type="button" aria-label="Закрыть карточку"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg></button>
-    <div class="dialog-layout">
-      <div class="dialog-media"><img id="dialogImage" src="" alt=""></div>
-      <div class="dialog-content">
-        <p class="dialog-kicker" id="dialogKicker"></p>
-        <h2 id="dialogTitle"></h2>
-        <p class="dialog-subtitle" id="dialogSubtitle"></p>
-        <div class="dialog-facts" id="dialogFacts"></div>
-        <div class="dialog-description" id="dialogDescription"></div>
-        <a class="source-link" id="sourceLink" href="#" target="_blank" rel="noreferrer">Карточка в исходном каталоге <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-      </div>
-    </div>
-  </dialog>
 
   <script>
     const items = [
@@ -675,7 +604,6 @@
     const resultsCount = document.getElementById('resultsCount');
     const resetButton = document.getElementById('resetButton');
     const emptyState = document.getElementById('emptyState');
-    const dialog = document.getElementById('detailDialog');
 
     function uniqueValues(key) {
       return [...new Set(items.map(item => item[key]))].sort((a, b) => a.localeCompare(b, 'ru'));
@@ -729,10 +657,10 @@
 
     function cardTemplate(item, index) {
       const isWide = [0, 3, 4].includes(index);
-      return `<button class="catalog-card${isWide ? ' catalog-card--wide' : ''}" type="button" data-item-id="${item.id}" data-reveal style="--reveal-delay: ${Math.min(index, 5) * 65}ms" aria-label="Подробнее: ${item.title}">
+      return `<a class="catalog-card${isWide ? ' catalog-card--wide' : ''}" href="instrument.html?id=${item.id}" data-item-id="${item.id}" data-reveal style="--reveal-delay: ${Math.min(index, 5) * 65}ms" aria-label="Открыть страницу экспоната: ${item.title}">
         <span class="card-media"><img src="${item.image}" alt="${item.title}" loading="lazy"><span class="card-id">№ ${item.id}</span></span>
         <span class="card-copy"><span><strong class="card-title">${item.title}</strong><span class="card-meta">${item.subtitle}</span><span class="card-archive">${archiveLabels.get(item.id)}</span></span><span class="card-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
-      </button>`;
+      </a>`;
     }
 
     function filteredItems() {
@@ -765,25 +693,6 @@
       });
     }
 
-    function openDetail(item) {
-      document.getElementById('dialogImage').src = item.image;
-      document.getElementById('dialogImage').alt = item.title;
-      document.getElementById('dialogKicker').textContent = `Экспонат № ${item.id} · ${item.type}`;
-      document.getElementById('dialogTitle').textContent = item.title;
-      document.getElementById('dialogSubtitle').textContent = item.subtitle;
-      document.getElementById('dialogFacts').innerHTML = [
-        ['Народ', item.culture], ['Регион', item.region], ['Материалы', item.material], ['Размеры', item.size]
-      ].map(([label, value]) => `<div class="dialog-fact"><span>${label}</span><strong>${value}</strong></div>`).join('');
-      document.getElementById('dialogDescription').textContent = item.description;
-      document.getElementById('sourceLink').href = item.source;
-      dialog.showModal();
-      document.body.classList.add('dialog-open');
-    }
-    function closeDialog() {
-      dialog.close();
-      document.body.classList.remove('dialog-open');
-    }
-
     [searchInput, cultureFilter, regionFilter, materialFilter, sortSelect].forEach(control => control.addEventListener('input', render));
     cultureChips.addEventListener('click', event => {
       const chip = event.target.closest('[data-culture]');
@@ -798,15 +707,6 @@
       render();
       searchInput.focus();
     });
-    grid.addEventListener('click', event => {
-      const card = event.target.closest('[data-item-id]');
-      if (!card) return;
-      openDetail(items.find(item => item.id === Number(card.dataset.itemId)));
-    });
-    document.getElementById('dialogClose').addEventListener('click', closeDialog);
-    dialog.addEventListener('click', event => { if (event.target === dialog) closeDialog(); });
-    dialog.addEventListener('close', () => document.body.classList.remove('dialog-open'));
-
     const menuButton = document.querySelector('.menu-button');
     const mobileNav = document.getElementById('mobileNav');
     menuButton.addEventListener('click', () => {
