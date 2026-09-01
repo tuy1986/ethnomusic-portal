@@ -631,7 +631,13 @@
       .music-ribbon { height: 82px; }
       .section-heading h2, .about h2 { font-size: 38px; }
       .section-heading p { font-size: 15px; }
-      .collection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; overflow: visible; padding: 0; }
+      .collection-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 16px;
+        overflow: visible;
+        padding: 2px;
+      }
       .collection-card { width: 100%; }
       .collection-scroll-hint { display: none; }
       .gallery { padding-top: 44px; }
