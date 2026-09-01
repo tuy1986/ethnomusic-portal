@@ -323,7 +323,20 @@
       [data-reveal] { opacity: 1; transform: none; }
     }
   </style>
-  <script src="public/museum/model-viewer-umd.min.js"></script>
+  <script>
+    (async () => {
+      try {
+        const response = await fetch('public/museum/model-viewer.min.js');
+        if (!response.ok) throw new Error('Не удалось загрузить модуль 3D-просмотра');
+        const source = await response.text();
+        const moduleUrl = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
+        await import(moduleUrl);
+        URL.revokeObjectURL(moduleUrl);
+      } catch (error) {
+        document.documentElement.classList.add('model-viewer-failed');
+      }
+    })();
+  </script>
 </head>
 <body>
   <header class="site-header">

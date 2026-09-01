@@ -5,7 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Прототип главной страницы Музея музыкальных инструментов народов Северной Азии">
   <title>Музей музыкальных инструментов — коллекция Юрия Шейкина</title>
-  <script src="public/museum/model-viewer-umd.min.js"></script>
+  <script>
+    (async () => {
+      try {
+        const response = await fetch('public/museum/model-viewer.min.js');
+        if (!response.ok) throw new Error('Не удалось загрузить модуль 3D-просмотра');
+        const source = await response.text();
+        const moduleUrl = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
+        await import(moduleUrl);
+        URL.revokeObjectURL(moduleUrl);
+      } catch (error) {
+        document.documentElement.classList.add('model-viewer-failed');
+      }
+    })();
+  </script>
   <style>
     :root {
       --ink: #202124;
