@@ -867,5 +867,14 @@
 
     document.querySelectorAll('a[href="#"]').forEach(link => link.addEventListener('click', event => event.preventDefault()));
   </script>
+<script>
+  if (location.hostname === 'htmlpreview.github.io') {
+    const previewRoot = 'https://htmlpreview.github.io/?https://github.com/tuy1986/ethnomusic-portal/blob/codex/aurora-visual-refinement/';
+    document.querySelectorAll('a[href]').forEach((link) => {
+      const href = link.getAttribute('href');
+      if (href && /^[^:#?]+\.html(?:[?#].*)?$/.test(href)) link.href = previewRoot + href;
+    });
+  }
+</script>
 </body>
 </html>
