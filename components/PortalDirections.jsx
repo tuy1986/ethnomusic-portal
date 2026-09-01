@@ -1,7 +1,7 @@
 const directions = [
   {
     id: "archive",
-    href: "#archive-content",
+    href: "/phonogram-archive.html",
     image: "/portal/archive-card.svg",
     title: "Электронный фонограммархив",
   },

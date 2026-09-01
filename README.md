@@ -31,3 +31,13 @@ npm run dev
 ## Быстрый просмотр
 
 `portal-prototype.html` — самостоятельный HTML-прототип, который использует файлы из папки `public`.
+
+## Электронный фонограммархив
+
+- `phonogram-archive.html` — главная страница и каталог;
+- `phonogram.html` — карточка фонограммы;
+- `expeditions.html` и `expedition.html` — указатель и карточка экспедиции;
+- `performers.html` и `performer.html` — указатель и карточка исполнителя;
+- `archive-about.html` — сведения о фондах и цифровой работе.
+
+Общие стили и логика проигрывателя находятся в `archive.css` и `archive.js`.

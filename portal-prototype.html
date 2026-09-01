@@ -717,7 +717,7 @@ main,
 .audioPanel .roundButton.secondary { color:rgba(244,249,252,.9); border-color:rgba(188,213,229,.28); background:rgba(7,20,34,.18); box-shadow:inset 0 0 16px rgba(90,145,186,.06),0 0 18px rgba(29,206,211,.03); }
 .audioPanel .miniPlay { background:rgba(235,243,245,.28); }
 .audioPanel .waveform::before { opacity:.92; }
-.audioArchiveLink { display:inline-flex; align-items:center; gap:10px; color:rgba(244,249,250,.78); font-size:13px; font-weight:650; white-space:nowrap; cursor:default; }
+.audioArchiveLink { display:inline-flex; align-items:center; gap:10px; color:rgba(244,249,250,.78); font-size:13px; font-weight:650; white-space:nowrap; cursor:pointer; }
 .audioArchiveLink b { color:#52d6ce; font-size:16px; font-weight:500; }
 @media (max-width:520px) { .audioArchiveLink { gap:6px; font-size:11px; } }
 .desktopNav a::after { content:""; position:absolute; left:0; right:0; bottom:1px; height:1px; background:currentColor; transform: scaleX(0); transform-origin: right; transition: transform .2s ease; }
@@ -866,12 +866,12 @@ body { overflow-x:hidden; }
       </div>
     </section>
     <section class="pageWidth directionGrid" aria-label="Разделы портала">
-      <a class="directionCard directionCard-archive" id="archive" href="#archive-content" aria-label="Электронный фонограммархив"><img src="public/portal/archive-card.svg" alt=""><span class="directionTitleAccent" aria-hidden="true"></span></a>
+      <a class="directionCard directionCard-archive" id="archive" href="phonogram-archive.html" aria-label="Электронный фонограммархив"><img src="public/portal/archive-card.svg" alt=""><span class="directionTitleAccent" aria-hidden="true"></span></a>
       <a class="directionCard directionCard-museum" id="museum" href="museum-prototype.html" aria-label="Музей музыкальных инструментов"><img src="public/portal/museum-card.svg" alt=""><span class="directionTitleAccent" aria-hidden="true"></span></a>
       <a class="directionCard directionCard-science" id="science" href="#" aria-label="Научная деятельность"><img src="public/portal/science-card.svg" alt=""><span class="directionTitleAccent" aria-hidden="true"></span></a>
     </section>
     <section class="pageWidth contentPanel audioPanel" id="archive-content">
-      <div class="sectionHeading compact"><div><span class="eyebrow dark">Фонограммархив</span><h2>Аудиоархив</h2></div><span class="audioArchiveLink" role="link" aria-disabled="true" title="Раздел находится в разработке">Перейти в фонограммархив <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></div>
+      <div class="sectionHeading compact"><div><span class="eyebrow dark">Фонограммархив</span><h2>Аудиоархив</h2></div><a class="audioArchiveLink" href="phonogram-archive.html">Перейти в фонограммархив <svg class="inlineArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></div>
       <div class="audioLayout">
         <article class="featuredTrack"><span class="trackTag" id="trackTag">Эвенки · Саха</span><h3 id="trackTitle"></h3><p id="trackMeta"></p><div class="waveform" id="waveform"></div><audio id="archiveAudio" preload="metadata"></audio><div class="playerControls"><span class="time" id="currentTime">0:00</span><button class="roundButton secondary" id="previousTrack" aria-label="Предыдущая запись"><svg class="skipIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5v14M18 6.5 10 12l8 5.5Z"/></svg></button><button class="roundButton primary" id="playButton" aria-label="Воспроизвести">▶</button><button class="roundButton secondary" id="nextTrack" aria-label="Следующая запись"><svg class="skipIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 5v14M6 6.5l8 5.5-8 5.5Z"/></svg></button><span class="time" id="totalTime">0:00</span></div></article>
         <div class="trackList" id="trackList"></div>
@@ -894,7 +894,7 @@ body { overflow-x:hidden; }
       <p class="footerAddress">Якутск, Республика Саха (Якутия)<br><br><a href="tel:+74112000000">+7 (4112) 00-00-00</a><br><a href="mailto:info@ethnomusic-lab.ru">info@ethnomusic-lab.ru</a></p>
       <p class="footerCopy">© 2026 Лаборатория. Все права защищены.</p>
     </div>
-    <nav class="footerNav" aria-label="Навигация в подвале"><a href="#top">Главная</a><a href="#map">Этносы</a><a href="#archive-content">Фонограммархив</a><a href="museum-prototype.html">Музей музыкальных инструментов</a><a href="#science">Исследования</a><a href="#sheykin">Ю. И. Шейкин</a><a href="#gallery">Фотогалерея</a></nav>
+    <nav class="footerNav" aria-label="Навигация в подвале"><a href="#top">Главная</a><a href="#map">Этносы</a><a href="phonogram-archive.html">Фонограммархив</a><a href="museum-prototype.html">Музей музыкальных инструментов</a><a href="#science">Исследования</a><a href="#sheykin">Ю. И. Шейкин</a><a href="#gallery">Фотогалерея</a></nav>
     <div><p class="footerSocialTitle">Мы в соцсетях:</p><div class="footerSocials"><a class="footerSocial" href="#" aria-label="Telegram">TG</a><a class="footerSocial" href="#" aria-label="Яндекс Дзен">Я</a><a class="footerSocial" href="#" aria-label="ВКонтакте">VK</a></div></div>
   </div>
 </footer>
