@@ -2,6 +2,7 @@ export const mapGroups = [
   {
     id: "ugric",
     label: "Югорские народы",
+    shortLabel: "Югорские",
     color: "#ff6800",
     title: "Югорские народы",
     subtitle: "Народы Сибири",
@@ -11,6 +12,7 @@ export const mapGroups = [
   {
     id: "samoyedic",
     label: "Северо-самодийские народы",
+    shortLabel: "Самодийские",
     color: "#ffc000",
     title: "Нганасаны",
     subtitle: "Самодийский народ в Сибири",
@@ -20,6 +22,7 @@ export const mapGroups = [
   {
     id: "ket-selkup",
     label: "Кето-селькупские народы Енисея",
+    shortLabel: "Кето-селькупские",
     color: "#f4ff00",
     title: "Кето-селькупские народы",
     subtitle: "Народы Енисея",
@@ -29,6 +32,7 @@ export const mapGroups = [
   {
     id: "tungusic-siberia",
     label: "Тунгусские народы Сибири",
+    shortLabel: "Тунгусские",
     color: "#baff00",
     title: "Тунгусские народы",
     subtitle: "Народы Сибири",
@@ -38,6 +42,7 @@ export const mapGroups = [
   {
     id: "tungus-manchu",
     label: "Тунгусо-маньчжурские народы Приамурья и Сахалина",
+    shortLabel: "Тунгусо-маньчжурские",
     color: "#18eb00",
     title: "Тунгусо-маньчжурские народы",
     subtitle: "Приамурье и Сахалин",
@@ -47,6 +52,7 @@ export const mapGroups = [
   {
     id: "paleo-se",
     label: "Палеоазиатские народы юго-востока Сибири",
+    shortLabel: "Палеоазиатские · ЮВ",
     color: "#00e0cb",
     title: "Палеоазиатские народы",
     subtitle: "Юго-восток Сибири",
@@ -56,6 +62,7 @@ export const mapGroups = [
   {
     id: "north-turkic",
     label: "Северотюркские народы Сибири",
+    shortLabel: "Северотюркские",
     color: "#1600ee",
     title: "Северотюркские народы",
     subtitle: "Народы Сибири",
@@ -65,6 +72,7 @@ export const mapGroups = [
   {
     id: "paleo-ne",
     label: "Палеоазиатские народы северо-востока Сибири",
+    shortLabel: "Палеоазиатские · СВ",
     color: "#d000ec",
     title: "Палеоазиатские народы",
     subtitle: "Северо-восток Сибири",

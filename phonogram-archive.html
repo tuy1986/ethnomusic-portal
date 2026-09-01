@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Электронный фонограммархив Лаборатории этномузыковедения им. Ю. И. Шейкина">
+  <title>Фонограммархив — Лаборатория этномузыковедения</title>
+  <link rel="stylesheet" href="archive.css">
+  <script src="archive.js" defer></script>
+</head>
+<body data-page="catalog" data-initial-track="0">
+  <header class="archive-header">
+    <div class="archive-page-width archive-header-inner">
+      <div class="archive-identity">
+        <a class="archive-return" href="portal-prototype.html" aria-label="Вернуться на портал">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg>
+        </a>
+        <a class="archive-brand" href="phonogram-archive.html">
+          <span class="archive-brand-mark"><img src="public/logo.png" alt=""></span>
+          <span class="archive-brand-copy"><strong>Электронный фонограммархив</strong><small>Лаборатория этномузыковедения им. Ю. И. Шейкина</small></span>
+        </a>
+      </div>
+      <nav class="archive-nav" id="archive-navigation" aria-label="Навигация фонограммархива">
+        <a class="is-active" href="phonogram-archive.html#catalog">Каталог</a>
+        <a href="expeditions.html">Экспедиции</a>
+        <a href="performers.html">Исполнители</a>
+        <a href="archive-about.html">Об архиве</a>
+      </nav>
+      <button class="archive-menu" type="button" aria-expanded="false" aria-controls="archive-navigation" aria-label="Открыть меню"><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="archive-hero">
+      <div class="archive-page-width archive-hero-grid">
+        <div class="archive-hero-copy">
+          <span class="archive-eyebrow">Голоса и музыка Северной Азии</span>
+          <h1>Фонограмм<br>архив</h1>
+          <p class="archive-hero-lead">Полевые записи, собранные в экспедициях Лаборатории этномузыковедения. Слушайте фонограммы и изучайте сведения об исполнителях, жанрах и местах записи.</p>
+          <div class="archive-stats" aria-label="Состав архива">
+            <div class="archive-stat"><strong>238</strong><span>фонограмм</span></div>
+            <div class="archive-stat"><strong>170</strong><span>экспедиций</span></div>
+            <div class="archive-stat"><strong>20</strong><span>этносов</span></div>
+          </div>
+        </div>
+
+        <div class="hero-soundstage">
+          <img class="hero-notation" src="public/museum/notation-divider.svg" alt="">
+          <article class="hero-track">
+            <span class="hero-track-label" data-current-tag>Выбранная запись · Эвенки · Песня</span>
+            <h2 data-current-title>Эбэм ырыата (Песня бабушки)</h2>
+            <p class="hero-track-meta" data-current-meta>Готовцева Анна Егоровна · 2014</p>
+            <div class="aurora-wave" aria-hidden="true"></div>
+            <div class="hero-player-controls">
+              <button class="play-button" type="button" data-current-play aria-label="Воспроизвести">▶</button>
+              <div class="seek-wrap">
+                <input class="seek" data-seek type="range" min="0" max="100" value="0" aria-label="Позиция воспроизведения">
+                <div class="time-row"><span data-current-time>0:00</span><span data-total-time>0:05</span></div>
+              </div>
+              <a class="track-detail-link" href="phonogram.html">О записи →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="catalog-surface">
+      <div class="archive-page-width">
+        <section class="archive-search-panel" aria-label="Поиск по фонограммархиву">
+          <div class="search-main">
+            <label class="search-field">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+              <input id="archive-search" type="search" placeholder="Название, исполнитель, жанр или место записи" autocomplete="off">
+            </label>
+            <button class="search-submit" type="button" data-search-submit>Найти в архиве</button>
+          </div>
+          <div class="filter-row">
+            <select class="filter-select" data-filter="ethnos" aria-label="Фильтр по этносу">
+              <option value="">Все этносы</option>
+              <option value="Эвенки">Эвенки</option>
+              <option value="Саха">Саха</option>
+            </select>
+            <select class="filter-select" data-filter="genre" aria-label="Фильтр по жанру">
+              <option value="">Все жанры</option>
+              <option value="Песня">Песня</option>
+              <option value="Звукоподражание">Звукоподражание</option>
+              <option value="Обрядовая песня">Обрядовая песня</option>
+              <option value="Танцевальная песня">Танцевальная песня</option>
+            </select>
+            <select class="filter-select" data-filter="year" aria-label="Фильтр по году">
+              <option value="">Все годы</option>
+              <option value="2014">2014</option>
+            </select>
+            <button class="reset-filters" type="button" data-reset-filters>Сбросить фильтры</button>
+          </div>
+        </section>
+
+        <section class="catalog-section" id="catalog">
+          <div class="section-heading">
+            <div><span class="section-kicker">Слушать архив</span><h2>Каталог фонограмм</h2></div>
+            <span class="result-count" id="result-count">5 записей</span>
+          </div>
+
+          <div class="record-list">
+            <article class="record-row" data-track="0" data-ethnos="Эвенки" data-genre="Песня" data-year="2014" data-search="Эбэм ырыата Песня бабушки Готовцева Анна Егоровна Эвенки песня Республика Саха Якутия 2014">
+              <button class="record-play" type="button" data-track-play="0">▶</button>
+              <div class="record-title"><strong>Эбэм ырыата (Песня бабушки)</strong><small>Готовцева Анна Егоровна</small></div>
+              <div class="mini-wave" aria-hidden="true"></div>
+              <div class="record-meta">Республика Саха (Якутия)<br>Экспедиционная запись · 2014</div>
+              <div class="record-tags"><span class="record-tag">Эвенки</span><span class="record-tag">Песня</span></div>
+              <span class="record-duration">0:05</span>
+              <a class="record-link" href="phonogram.html" aria-label="Открыть запись"><svg viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+            </article>
+
+            <article class="record-row" data-track="1" data-ethnos="Эвенки" data-genre="Песня" data-year="2014" data-search="Эбэҥкилии ырыа Эвенкийская песня Готовцева Анна Егоровна Эвенки песня Республика Саха Якутия 2014">
+              <button class="record-play" type="button" data-track-play="1">▶</button>
+              <div class="record-title"><strong>Эбэҥкилии ырыа (Эвенкийская песня)</strong><small>Готовцева Анна Егоровна</small></div>
+              <div class="mini-wave" aria-hidden="true"></div>
+              <div class="record-meta">Республика Саха (Якутия)<br>Экспедиционная запись · 2014</div>
+              <div class="record-tags"><span class="record-tag">Эвенки</span><span class="record-tag">Песня</span></div>
+              <span class="record-duration">1:03</span>
+              <a class="record-link" href="phonogram.html" aria-label="Открыть запись"><svg viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+            </article>
+
+            <article class="record-row" data-track="2" data-ethnos="Саха" data-genre="Звукоподражание" data-year="2014" data-search="Табаны ыҥырыы Зов оленя Николаев Егор Иосифович Саха звукоподражание Республика Саха Якутия 2014">
+              <button class="record-play" type="button" data-track-play="2">▶</button>
+              <div class="record-title"><strong>Табаны ыҥырыы (Зов оленя)</strong><small>Николаев Егор Иосифович</small></div>
+              <div class="mini-wave" aria-hidden="true"></div>
+              <div class="record-meta">Республика Саха (Якутия)<br>Экспедиционная запись · 2014</div>
+              <div class="record-tags"><span class="record-tag">Саха</span><span class="record-tag">Звукоподражание</span></div>
+              <span class="record-duration">0:19</span>
+              <a class="record-link" href="phonogram.html" aria-label="Открыть запись"><svg viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+            </article>
+
+            <article class="record-row" data-track="3" data-ethnos="Эвенки" data-genre="Обрядовая песня" data-year="2014" data-search="Морсуо оҕото Песня о Морсуо обрядовый коллектив Дылкэн Эвенки обрядовая песня Республика Саха Якутия 2014">
+              <button class="record-play" type="button" data-track-play="3">▶</button>
+              <div class="record-title"><strong>Морсуо оҕото (Песня о Морсуо)</strong><small>Обрядовый коллектив «Дылкэн»</small></div>
+              <div class="mini-wave" aria-hidden="true"></div>
+              <div class="record-meta">Республика Саха (Якутия)<br>Экспедиционная запись · 2014</div>
+              <div class="record-tags"><span class="record-tag">Эвенки</span><span class="record-tag">Обрядовая</span></div>
+              <span class="record-duration">1:30</span>
+              <a class="record-link" href="phonogram.html" aria-label="Открыть запись"><svg viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+            </article>
+
+            <article class="record-row" data-track="4" data-ethnos="Эвенки" data-genre="Танцевальная песня" data-year="2014" data-search="Ёхорьё эвенкийский круговой танец Колодезникова Егорова Лыскаева Эвенки танцевальная песня Республика Саха Якутия 2014">
+              <button class="record-play" type="button" data-track-play="4">▶</button>
+              <div class="record-title"><strong>Ёхорьё (эвенкийский круговой танец)</strong><small>Н. П. Колодезникова, М. И. Егорова, Л. И. Лыскаева</small></div>
+              <div class="mini-wave" aria-hidden="true"></div>
+              <div class="record-meta">Республика Саха (Якутия)<br>Экспедиционная запись · 2014</div>
+              <div class="record-tags"><span class="record-tag">Эвенки</span><span class="record-tag">Танцевальная</span></div>
+              <span class="record-duration">0:36</span>
+              <a class="record-link" href="phonogram.html" aria-label="Открыть запись"><svg viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+            </article>
+          </div>
+          <div class="empty-result">По выбранным параметрам записей пока не найдено.</div>
+
+          <div class="route-grid" aria-label="Разделы фонограммархива">
+            <a class="route-card" href="expeditions.html"><span>Полевые материалы</span><div><h3>Экспедиции</h3><p>Маршруты, годы и состав собранных коллекций.</p></div><b>Смотреть экспедиции →</b></a>
+            <a class="route-card" href="performers.html"><span>Носители традиции</span><div><h3>Исполнители</h3><p>Певцы, сказители, музыканты и участники обрядов.</p></div><b>Открыть указатель →</b></a>
+            <a class="route-card" href="archive-about.html"><span>О коллекции</span><div><h3>Об архиве</h3><p>Состав фондов, принципы описания и условия использования.</p></div><b>Узнать подробнее →</b></a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="archive-footer">
+    <div class="archive-page-width archive-footer-inner">
+      <div><strong>Электронный фонограммархив Лаборатории этномузыковедения им. Ю. И. Шейкина</strong><p>Полевые аудиозаписи традиционной музыки народов России и Северной Азии.</p></div>
+      <nav aria-label="Разделы"><a href="phonogram-archive.html#catalog">Каталог</a><a href="expeditions.html">Экспедиции</a><a href="performers.html">Исполнители</a><a href="archive-about.html">Об архиве</a></nav>
+      <div><span class="footer-caption">Основной портал</span><p><a href="portal-prototype.html">Лаборатория этномузыковедения</a><br>Якутск, Республика Саха (Якутия)</p></div>
+    </div>
+  </footer>
+</body>
+</html>
