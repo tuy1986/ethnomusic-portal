@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Электронный фонограммархив Лаборатории этномузыковедения им. Ю. И. Шейкина">
   <title>Электронный фонограммархив — Лаборатория этномузыковедения</title>
-  <link rel="stylesheet" href="archive.css">
-  <link rel="stylesheet" href="archive-home.css?v=20261012-4">
-  <script src="archive.js?v=20261012-5" defer></script>
+  <link rel="stylesheet" href="archive.css?v=20261012-2">
+  <link rel="stylesheet" href="archive-home.css?v=20261012-5">
+  <script src="archive.js?v=20261012-6" defer></script>
 </head>
 <body class="archive-home-v2" data-page="archive-home" data-initial-track="0">
   <header class="archive-home-header" id="top">
@@ -85,8 +85,11 @@
             <button class="player-step" type="button" data-player-action="previous" aria-label="Предыдущая запись">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5v14M18 6.5 10 12l8 5.5Z"/></svg>
             </button>
-            <button class="player-main" type="button" data-current-play aria-label="Воспроизвести">
-              <span data-player-icon><svg class="media-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.2 6.6 18 12l-9.8 5.4Z"/></svg></span>
+            <button class="player-main" type="button" data-current-play data-playing="false" aria-label="Воспроизвести">
+              <span class="playback-icons" aria-hidden="true">
+                <svg class="media-glyph media-glyph-play" viewBox="0 0 24 24"><path d="M8.2 6.6 18 12l-9.8 5.4Z"/></svg>
+                <svg class="media-glyph media-glyph-pause" viewBox="0 0 24 24"><rect x="7.5" y="6.2" width="3.2" height="11.6" rx="1.1"/><rect x="13.3" y="6.2" width="3.2" height="11.6" rx="1.1"/></svg>
+              </span>
             </button>
             <button class="player-step" type="button" data-player-action="next" aria-label="Следующая запись">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 5v14M6 6.5l8 5.5-8 5.5Z"/></svg>

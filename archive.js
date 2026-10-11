@@ -58,8 +58,9 @@
     }
   ];
 
-  const playIcon = '<svg class="media-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.2 6.6 18 12l-9.8 5.4Z"/></svg>';
-  const pauseIcon = '<svg class="media-glyph" viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="6.2" width="3.2" height="11.6" rx="1.1"/><rect x="13.3" y="6.2" width="3.2" height="11.6" rx="1.1"/></svg>';
+  const playIcon = '<svg class="media-glyph media-glyph-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.2 6.6 18 12l-9.8 5.4Z"/></svg>';
+  const pauseIcon = '<svg class="media-glyph media-glyph-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="6.2" width="3.2" height="11.6" rx="1.1"/><rect x="13.3" y="6.2" width="3.2" height="11.6" rx="1.1"/></svg>';
+  const playbackIcons = `<span class="playback-icons" aria-hidden="true">${playIcon}${pauseIcon}</span>`;
 
   function formatTime(value) {
     if (!Number.isFinite(value) || value < 0) return "0:00";
@@ -111,7 +112,7 @@
   dock.className = "player-dock";
   dock.setAttribute("aria-label", "Текущая фонограмма");
   dock.innerHTML = `
-    <button class="play-button small" type="button" data-dock-play aria-label="Воспроизвести">${playIcon}</button>
+    <button class="play-button small" type="button" data-dock-play data-playing="false" aria-label="Воспроизвести">${playbackIcons}</button>
     <div class="dock-copy"><strong data-current-title>Фонограмма</strong><small data-current-meta>Исполнитель</small></div>
     <div class="dock-progress"><input class="seek" data-seek type="range" min="0" max="100" value="0" aria-label="Позиция воспроизведения"></div>
     <div class="dock-controls"><button class="dock-skip" type="button" data-player-action="previous" aria-label="Предыдущая запись">‹</button><button class="dock-skip" type="button" data-player-action="next" aria-label="Следующая запись">›</button></div>
@@ -141,17 +142,19 @@
     document.querySelectorAll("[data-track-play]").forEach((button) => {
       const active = Number(button.dataset.trackPlay) === currentIndex;
       const playing = active && !audio.paused;
-      if (button.classList.contains("record-play")) button.innerHTML = playing ? pauseIcon : playIcon;
+      if (button.classList.contains("record-play")) {
+        if (!button.querySelector(".playback-icons")) button.innerHTML = playbackIcons;
+        button.dataset.playing = String(playing);
+      }
       button.setAttribute("aria-label", playing ? "Пауза" : `Воспроизвести: ${tracks[Number(button.dataset.trackPlay)]?.title || "фонограмма"}`);
     });
     document.querySelectorAll("[data-current-play]").forEach((button) => {
-      const icon = button.querySelector("[data-player-icon]") || button;
-      icon.innerHTML = audio.paused ? playIcon : pauseIcon;
+      button.dataset.playing = String(!audio.paused);
       button.setAttribute("aria-label", audio.paused ? "Воспроизвести" : "Пауза");
     });
     const dockPlay = document.querySelector("[data-dock-play]");
     if (dockPlay) {
-      dockPlay.innerHTML = audio.paused ? playIcon : pauseIcon;
+      dockPlay.dataset.playing = String(!audio.paused);
       dockPlay.setAttribute("aria-label", audio.paused ? "Воспроизвести" : "Пауза");
     }
     document.querySelectorAll(".record-row").forEach((row) => row.classList.toggle("is-active", Number(row.dataset.track) === currentIndex && !audio.paused));
