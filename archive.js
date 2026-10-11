@@ -58,8 +58,8 @@
     }
   ];
 
-  const playIcon = "▶";
-  const pauseIcon = "Ⅱ";
+  const playIcon = '<svg class="media-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.2 6.6 18 12l-9.8 5.4Z"/></svg>';
+  const pauseIcon = '<svg class="media-glyph" viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="6.2" width="3.2" height="11.6" rx="1.1"/><rect x="13.3" y="6.2" width="3.2" height="11.6" rx="1.1"/></svg>';
 
   function formatTime(value) {
     if (!Number.isFinite(value) || value < 0) return "0:00";
@@ -129,17 +129,17 @@
     document.querySelectorAll("[data-track-play]").forEach((button) => {
       const active = Number(button.dataset.trackPlay) === currentIndex;
       const playing = active && !audio.paused;
-      if (button.classList.contains("record-play")) button.textContent = playing ? pauseIcon : playIcon;
+      if (button.classList.contains("record-play")) button.innerHTML = playing ? pauseIcon : playIcon;
       button.setAttribute("aria-label", playing ? "Пауза" : `Воспроизвести: ${tracks[Number(button.dataset.trackPlay)]?.title || "фонограмма"}`);
     });
     document.querySelectorAll("[data-current-play]").forEach((button) => {
       const icon = button.querySelector("[data-player-icon]") || button;
-      icon.textContent = audio.paused ? playIcon : pauseIcon;
+      icon.innerHTML = audio.paused ? playIcon : pauseIcon;
       button.setAttribute("aria-label", audio.paused ? "Воспроизвести" : "Пауза");
     });
     const dockPlay = document.querySelector("[data-dock-play]");
     if (dockPlay) {
-      dockPlay.textContent = audio.paused ? playIcon : pauseIcon;
+      dockPlay.innerHTML = audio.paused ? playIcon : pauseIcon;
       dockPlay.setAttribute("aria-label", audio.paused ? "Воспроизвести" : "Пауза");
     }
     document.querySelectorAll(".record-row").forEach((row) => row.classList.toggle("is-active", Number(row.dataset.track) === currentIndex && !audio.paused));

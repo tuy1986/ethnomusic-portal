@@ -281,6 +281,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   font-size: 18px;
 }
 .play-button.small { width: 44px; height: 44px; font-size: 14px; }
+.play-button .media-glyph { width: 20px; height: 20px; display: block; fill: currentColor; }
+.play-button.small .media-glyph { width: 17px; height: 17px; }
 .play-button:hover { transform: translateY(-1px); }
 .seek-wrap { min-width: 0; }
 .seek {

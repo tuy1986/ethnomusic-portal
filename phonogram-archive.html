@@ -6,8 +6,8 @@
   <meta name="description" content="Электронный фонограммархив Лаборатории этномузыковедения им. Ю. И. Шейкина">
   <title>Электронный фонограммархив — Лаборатория этномузыковедения</title>
   <link rel="stylesheet" href="archive.css">
-  <link rel="stylesheet" href="archive-home.css?v=20261012-2">
-  <script src="archive.js?v=20261011-2" defer></script>
+  <link rel="stylesheet" href="archive-home.css?v=20261012-3">
+  <script src="archive.js?v=20261012-3" defer></script>
 </head>
 <body class="archive-home-v2" data-page="archive-home" data-initial-track="0">
   <header class="archive-home-header" id="top">
@@ -60,7 +60,9 @@
           <div class="aurora-visualizer" aria-hidden="true">
             <span class="aurora-orbit aurora-orbit-one"></span>
             <span class="aurora-orbit aurora-orbit-two"></span>
-            <img class="aurora-star" src="public/archive/aurora-star.jpg" alt="">
+            <video class="aurora-star" autoplay muted loop playsinline preload="metadata" poster="public/archive/aurora-star.jpg">
+              <source src="public/archive/aurora-star.mp4" type="video/mp4">
+            </video>
           </div>
 
           <article class="now-playing">
@@ -83,7 +85,9 @@
             <button class="player-step" type="button" data-player-action="previous" aria-label="Предыдущая запись">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5v14M18 6.5 10 12l8 5.5Z"/></svg>
             </button>
-            <button class="player-main" type="button" data-current-play aria-label="Воспроизвести"><span data-player-icon>▶</span></button>
+            <button class="player-main" type="button" data-current-play aria-label="Воспроизвести">
+              <span data-player-icon><svg class="media-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.2 6.6 18 12l-9.8 5.4Z"/></svg></span>
+            </button>
             <button class="player-step" type="button" data-player-action="next" aria-label="Следующая запись">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 5v14M6 6.5l8 5.5-8 5.5Z"/></svg>
             </button>
