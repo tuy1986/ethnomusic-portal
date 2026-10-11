@@ -540,6 +540,25 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  transform: translateY(0) scale(1);
+  transition: transform .42s cubic-bezier(.2,.75,.25,1), box-shadow .42s ease;
+}
+
+.gradient-card:hover {
+  transform: translateY(-6px) scale(1.012);
+  box-shadow:
+    0 20px 42px rgba(53,70,130,.16),
+    0 0 0 1px rgba(255,255,255,.38),
+    0 0 28px rgba(83,225,220,.2),
+    0 0 38px rgba(225,86,255,.13);
+}
+
+.gradient-card:hover::before { animation-duration: 3.6s; }
+.gradient-card:hover::after { animation-duration: 2.7s; opacity: .88; }
+
+.gradient-card:focus-visible {
+  outline: 3px solid rgba(86,98,255,.72);
+  outline-offset: 5px;
 }
 
 .gradient-card::before,
@@ -547,25 +566,66 @@
   content: "";
   position: absolute;
   z-index: -1;
-  inset: -44%;
+  inset: -38%;
   pointer-events: none;
-  transform: translate3d(0,0,0) rotate(0deg);
-  animation: gradient-drift 10s ease-in-out infinite alternate;
+  background-size: 155% 155%;
+  background-position: 8% 12%;
+  transform: translate3d(0,0,0) rotate(0deg) scale(1.02);
+  will-change: transform, background-position;
+  animation: gradient-drift 8s cubic-bezier(.45,.05,.55,.95) infinite alternate;
 }
 
 .gradient-card::after {
-  inset: -18%;
-  opacity: .56;
-  filter: blur(30px);
-  animation-duration: 7s;
+  inset: -28%;
+  opacity: .72;
+  background-size: 115% 115%;
+  filter: blur(24px);
+  animation-name: gradient-glimmer;
+  animation-duration: 5.8s;
   animation-direction: alternate-reverse;
 }
 
 @keyframes gradient-drift {
-  0% { transform: translate3d(-5%, -4%, 0) rotate(-7deg) scale(1); }
-  48% { transform: translate3d(7%, 1%, 0) rotate(7deg) scale(1.08); }
-  100% { transform: translate3d(-1%, 8%, 0) rotate(-3deg) scale(1.15); }
+  0% {
+    background-position: 0% 12%;
+    transform: translate3d(-9%, -7%, 0) rotate(-8deg) scale(1.02);
+  }
+  48% {
+    background-position: 88% 42%;
+    transform: translate3d(10%, 2%, 0) rotate(8deg) scale(1.1);
+  }
+  100% {
+    background-position: 24% 100%;
+    transform: translate3d(-3%, 10%, 0) rotate(-4deg) scale(1.16);
+  }
 }
+
+@keyframes gradient-glimmer {
+  0% {
+    background-position: 10% 10%;
+    transform: translate3d(-16%, -10%, 0) scale(.92);
+    opacity: .38;
+  }
+  50% {
+    background-position: 70% 44%;
+    transform: translate3d(11%, 3%, 0) scale(1.08);
+    opacity: .78;
+  }
+  100% {
+    background-position: 94% 90%;
+    transform: translate3d(-1%, 15%, 0) scale(1.16);
+    opacity: .52;
+  }
+}
+
+.gradient-card:nth-child(2)::before { animation-delay: -2.1s; }
+.gradient-card:nth-child(3)::before { animation-delay: -4.4s; }
+.gradient-card:nth-child(4)::before { animation-delay: -6.2s; }
+.gradient-card:nth-child(5)::before { animation-delay: -3.3s; }
+.gradient-card:nth-child(2)::after { animation-delay: -3.7s; }
+.gradient-card:nth-child(3)::after { animation-delay: -1.5s; }
+.gradient-card:nth-child(4)::after { animation-delay: -4.8s; }
+.gradient-card:nth-child(5)::after { animation-delay: -2.6s; }
 
 .genre-card {
   aspect-ratio: 1;
@@ -581,7 +641,11 @@
 }
 
 .genre-card::before { background: var(--genre-gradient); }
-.genre-card::after { background: radial-gradient(circle at 50% 24%, rgba(255,255,255,.72), transparent 40%); }
+.genre-card::after {
+  background:
+    radial-gradient(circle at 28% 22%, rgba(255,255,255,.9), transparent 28%),
+    radial-gradient(circle at 76% 72%, rgba(255,255,255,.42), transparent 32%);
+}
 .genre-card-rose { --genre-gradient: linear-gradient(145deg, #fff3f6 2%, #ffd5df 42%, #ff91bd 100%); }
 .genre-card-amber { --genre-gradient: linear-gradient(145deg, #fff7dc 2%, #ffe2a3 47%, #ffae55 100%); }
 .genre-card-mint { --genre-gradient: linear-gradient(145deg, #e6f7ff 0%, #c6eeef 42%, #55d8bd 100%); }
@@ -600,7 +664,8 @@
   transition: transform .45s ease;
 }
 .genre-card:hover svg { transform: translateY(-4px) scale(1.04) rotate(2deg); }
-.genre-card strong { font-size: clamp(12px, 1.35vw, 18px); line-height: 1; text-align: center; text-transform: uppercase; }
+.genre-card strong { font-size: clamp(12px, 1.35vw, 18px); line-height: 1; text-align: center; text-transform: uppercase; transition: transform .38s ease, text-shadow .38s ease; }
+.genre-card:hover strong { transform: translateY(-2px); text-shadow: 0 0 18px rgba(255,255,255,.75); }
 
 .ethnos-grid {
   display: grid;
@@ -619,7 +684,11 @@
 }
 
 .ethnos-card::before { background: var(--ethnos-gradient); }
-.ethnos-card::after { background: radial-gradient(circle at 42% 44%, rgba(255,255,255,.18), transparent 42%); }
+.ethnos-card::after {
+  background:
+    radial-gradient(circle at 24% 28%, rgba(255,255,255,.4), transparent 27%),
+    radial-gradient(circle at 78% 72%, rgba(255,255,255,.22), transparent 33%);
+}
 .ethnos-card-nanai { --ethnos-gradient: radial-gradient(circle at 82% 45%, #b9a8ff 0 15%, transparent 38%), linear-gradient(135deg, #4b46ef, #806cf8 48%, #bfafff); }
 .ethnos-card-chukchi { --ethnos-gradient: radial-gradient(circle at 70% 82%, #ffd5cf 0 12%, transparent 36%), linear-gradient(145deg, #a50e39, #ec386b 44%, #f0b7c5); }
 .ethnos-card-evenki { --ethnos-gradient: radial-gradient(circle at 18% 4%, #f7a18c 0 8%, transparent 32%), linear-gradient(155deg, #64265b, #ac466d 40%, #5d279c 75%, #9c7ae9); }
@@ -632,6 +701,12 @@
   text-align: center;
   text-transform: uppercase;
   text-shadow: 0 3px 20px rgba(20,20,35,.18);
+  transition: transform .38s ease, text-shadow .38s ease;
+}
+
+.ethnos-card:hover strong {
+  transform: scale(1.035);
+  text-shadow: 0 3px 20px rgba(20,20,35,.18), 0 0 22px rgba(255,255,255,.72);
 }
 
 .archive-home-footer {
