@@ -82,6 +82,18 @@
   document.querySelectorAll(".aurora-wave").forEach((wave) => makeWave(wave, 38));
   document.querySelectorAll(".mini-wave").forEach((wave) => makeWave(wave, 23));
 
+  const auroraVideos = document.querySelectorAll("video.aurora-star");
+  const startAuroraVideos = () => auroraVideos.forEach((video) => {
+    video.muted = true;
+    video.play().catch(() => {});
+  });
+  auroraVideos.forEach((video) => video.addEventListener("canplay", startAuroraVideos, { once: true }));
+  window.addEventListener("pageshow", startAuroraVideos);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) startAuroraVideos();
+  });
+  startAuroraVideos();
+
   const menuButton = document.querySelector(".archive-menu");
   const menu = document.querySelector(".archive-nav");
   if (menuButton && menu) {

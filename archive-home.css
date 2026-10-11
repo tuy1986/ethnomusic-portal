@@ -205,6 +205,7 @@
   place-items: center;
   margin: -42px -16% -54px;
   isolation: isolate;
+  pointer-events: none;
 }
 
 .aurora-visualizer::before,
@@ -347,6 +348,8 @@
 }
 
 .archive-player-controls {
+  position: relative;
+  z-index: 5;
   display: flex;
   align-items: center;
   gap: 20px;
