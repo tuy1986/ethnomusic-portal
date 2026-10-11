@@ -230,7 +230,10 @@
     document.querySelectorAll("[data-seek]").forEach((seek) => { seek.value = String(progress); });
   });
   audio.addEventListener("loadedmetadata", updateCopy);
-  audio.addEventListener("play", updateCopy);
+  audio.addEventListener("play", () => {
+    startAuroraVideos();
+    updateCopy();
+  });
   audio.addEventListener("pause", updateCopy);
   audio.addEventListener("ended", () => {
     ensureLoaded(currentIndex + 1);
