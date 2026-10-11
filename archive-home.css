@@ -435,7 +435,7 @@
   object-fit: cover;
 }
 
-.playlist-genre-thumb svg { width: 30px; height: 30px; fill: none; stroke: rgba(255,255,255,.82); stroke-width: 1.5; }
+.playlist-genre-thumb img { width: 76%; height: 76%; object-fit: contain; }
 .playlist-genre-thumb.genre-blue { background: linear-gradient(145deg, #7864ff, #6ee0d0); }
 .playlist-genre-thumb.genre-pink { background: linear-gradient(145deg, #7b4bec, #ff91c8); }
 .archive-playlist-item button > span:last-child { min-width: 0; }
@@ -652,18 +652,14 @@
 .genre-card-blue { --genre-gradient: linear-gradient(145deg, #efeaff 0%, #c6d6ff 44%, #63bff7 100%); }
 .genre-card-pink { --genre-gradient: linear-gradient(145deg, #f9eaff 0%, #ebcaf7 40%, #f286c4 100%); }
 
-.genre-card svg {
+.genre-card > img {
   width: 58%;
   max-width: 132px;
   height: auto;
-  fill: none;
-  stroke: rgba(255,255,255,.92);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  object-fit: contain;
   transition: transform .45s ease;
 }
-.genre-card:hover svg { transform: translateY(-4px) scale(1.04) rotate(2deg); }
+.genre-card:hover > img { transform: translateY(-4px) scale(1.04) rotate(2deg); }
 .genre-card strong { font-size: clamp(12px, 1.35vw, 18px); line-height: 1; text-align: center; text-transform: uppercase; transition: transform .38s ease, text-shadow .38s ease; }
 .genre-card:hover strong { transform: translateY(-2px); text-shadow: 0 0 18px rgba(255,255,255,.75); }
 
@@ -737,7 +733,9 @@
 .archive-socials { justify-self: end; color: #fff; text-align: right; }
 .archive-socials strong { display: block; margin-bottom: 22px; font-size: 14px; }
 .archive-socials div { display: flex; justify-content: flex-end; gap: 14px; }
-.archive-socials a { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; color: #65707d; background: #fff; font-size: 13px; font-weight: 800; }
+.archive-socials a { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; transition: transform .28s ease, filter .28s ease; }
+.archive-socials a:hover { transform: translateY(-3px); filter: drop-shadow(0 7px 10px rgba(18,27,42,.25)); }
+.archive-socials img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .archive-copyright { position: absolute; left: 0; bottom: 58px; margin: 0; color: #fff; font-size: 13px; letter-spacing: -.02em; }
 
 .archive-home-v2 .player-dock {
