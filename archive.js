@@ -59,7 +59,7 @@
   ];
 
   const playIcon = '<svg class="media-glyph media-glyph-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.2 6.6 18 12l-9.8 5.4Z"/></svg>';
-  const pauseIcon = '<svg class="media-glyph media-glyph-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="6.2" width="3.2" height="11.6" rx="1.1"/><rect x="13.3" y="6.2" width="3.2" height="11.6" rx="1.1"/></svg>';
+  const pauseIcon = '<svg class="media-glyph media-glyph-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.75 7v10M15.25 7v10" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"/></svg>';
   const playbackIcons = `<span class="playback-icons" aria-hidden="true">${playIcon}${pauseIcon}</span>`;
 
   function formatTime(value) {
