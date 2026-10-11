@@ -89,7 +89,7 @@
   color: #fff;
   background:
     radial-gradient(circle at 48% 47%, rgba(62,255,143,.035), transparent 24%),
-    #101010;
+    #000;
 }
 
 .archive-stage::after {
@@ -236,6 +236,7 @@
   width: 100%;
   height: 100%;
   display: block;
+  background: #000;
   object-fit: contain;
   mix-blend-mode: screen;
   -webkit-mask-image: radial-gradient(ellipse 48% 72% at 50% 51%, #000 0 54%, rgba(0,0,0,.9) 66%, transparent 100%);
