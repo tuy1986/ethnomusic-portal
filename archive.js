@@ -9,6 +9,7 @@
       genre: "Песня",
       place: "Республика Саха (Якутия)",
       duration: 5.4,
+      thumb: "public/archive/performer-gargulgyrgyna.jpg",
       src: archiveBase + "1.%20Песня%20бабушки.%20Исп.%20А.Е.%20Горохова.mp3"
     },
     {
@@ -19,6 +20,7 @@
       genre: "Песня",
       place: "Республика Саха (Якутия)",
       duration: 63.072,
+      thumb: "public/archive/performer-kimonko.jpg",
       src: archiveBase + "3.%20Эвенкийская%20песня%20Исп.%20А.Е.%20Горохова.mp3"
     },
     {
@@ -29,6 +31,7 @@
       genre: "Звукоподражание",
       place: "Республика Саха (Якутия)",
       duration: 18.756,
+      thumb: "public/archive/performer-nikolaev.jpg",
       src: archiveBase + "4.%20Зов%20оленя.%20Звукоподражание.%20Е.И.%20Николаев.mp3"
     },
     {
@@ -39,6 +42,7 @@
       genre: "Обрядовая песня",
       place: "Республика Саха (Якутия)",
       duration: 89.568,
+      thumb: "public/archive/performer-kalyundziga.jpg",
       src: archiveBase + "7.%20Морсуо%20о5ото.%20Квинтет%20Илкэн.mp3"
     },
     {
@@ -49,6 +53,7 @@
       genre: "Танцевальная песня",
       place: "Республика Саха (Якутия)",
       duration: 35.88,
+      thumb: "public/archive/performer-tevlyankau.jpg",
       src: archiveBase + "10.%20Ехорье.mp3"
     }
   ];
@@ -116,15 +121,20 @@
     document.querySelectorAll("[data-current-title]").forEach((element) => { element.textContent = track.title; });
     document.querySelectorAll("[data-current-meta]").forEach((element) => { element.textContent = `${track.performer} · ${track.year}`; });
     document.querySelectorAll("[data-current-tag]").forEach((element) => { element.textContent = `Выбранная запись · ${track.ethnos} · ${track.genre}`; });
+    document.querySelectorAll("[data-current-thumb]").forEach((element) => {
+      element.src = track.thumb;
+      element.alt = track.performer;
+    });
     document.querySelectorAll("[data-total-time]").forEach((element) => { element.textContent = formatTime(audio.duration || track.duration); });
     document.querySelectorAll("[data-track-play]").forEach((button) => {
       const active = Number(button.dataset.trackPlay) === currentIndex;
       const playing = active && !audio.paused;
-      button.textContent = playing ? pauseIcon : playIcon;
+      if (button.classList.contains("record-play")) button.textContent = playing ? pauseIcon : playIcon;
       button.setAttribute("aria-label", playing ? "Пауза" : `Воспроизвести: ${tracks[Number(button.dataset.trackPlay)]?.title || "фонограмма"}`);
     });
     document.querySelectorAll("[data-current-play]").forEach((button) => {
-      button.textContent = audio.paused ? playIcon : pauseIcon;
+      const icon = button.querySelector("[data-player-icon]") || button;
+      icon.textContent = audio.paused ? playIcon : pauseIcon;
       button.setAttribute("aria-label", audio.paused ? "Воспроизвести" : "Пауза");
     });
     const dockPlay = document.querySelector("[data-dock-play]");
@@ -133,7 +143,9 @@
       dockPlay.setAttribute("aria-label", audio.paused ? "Воспроизвести" : "Пауза");
     }
     document.querySelectorAll(".record-row").forEach((row) => row.classList.toggle("is-active", Number(row.dataset.track) === currentIndex && !audio.paused));
+    document.querySelectorAll(".archive-playlist-item").forEach((row) => row.classList.toggle("is-current", Number(row.dataset.track) === currentIndex));
     document.querySelectorAll(".aurora-wave").forEach((wave) => wave.classList.toggle("is-playing", !audio.paused));
+    document.querySelectorAll(".aurora-visualizer").forEach((wave) => wave.classList.toggle("is-playing", !audio.paused));
   }
 
   function ensureLoaded(index) {
@@ -168,8 +180,17 @@
 
   document.querySelectorAll("[data-player-action]").forEach((button) => {
     button.addEventListener("click", () => {
-      const direction = button.dataset.playerAction === "previous" ? -1 : 1;
-      ensureLoaded(currentIndex + direction);
+      const action = button.dataset.playerAction;
+      if (action === "repeat") {
+        audio.loop = !audio.loop;
+        document.querySelectorAll('[data-player-action="repeat"]').forEach((control) => control.classList.toggle("is-active", audio.loop));
+        return;
+      }
+
+      const nextIndex = action === "shuffle"
+        ? (currentIndex + 1 + Math.floor(Math.random() * (tracks.length - 1))) % tracks.length
+        : currentIndex + (action === "previous" ? -1 : 1);
+      ensureLoaded(nextIndex);
       document.body.classList.add("has-player");
       audio.play().catch(() => updateCopy());
     });
