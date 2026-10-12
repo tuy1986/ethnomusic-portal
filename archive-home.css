@@ -606,6 +606,11 @@
 .gradient-card:hover::before { animation-duration: 3.6s; }
 .gradient-card:hover::after { animation-duration: 2.7s; opacity: .88; }
 
+.gradient-card:active {
+  transform: scale(.985);
+  filter: brightness(1.035);
+}
+
 .gradient-card:focus-visible {
   outline: 3px solid rgba(86,98,255,.72);
   outline-offset: 5px;
@@ -729,16 +734,61 @@
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.1);
 }
 
-.ethnos-card::before { background: var(--ethnos-gradient); }
+.ethnos-card::before {
+  background: var(--ethnos-gradient);
+  background-size: 175% 175%;
+  animation: ethnos-gradient-shift 5.2s ease-in-out infinite alternate;
+}
 .ethnos-card::after {
+  inset: -42%;
+  opacity: .82;
   background:
-    radial-gradient(circle at 24% 28%, rgba(255,255,255,.4), transparent 27%),
-    radial-gradient(circle at 78% 72%, rgba(255,255,255,.22), transparent 33%);
+    radial-gradient(circle at 25% 34%, rgba(255,255,255,.78) 0 7%, rgba(157,255,245,.38) 18%, transparent 39%),
+    radial-gradient(circle at 76% 68%, rgba(255,206,246,.54) 0 8%, rgba(255,255,255,.2) 20%, transparent 42%);
+  background-size: 120% 120%;
+  filter: blur(18px);
+  animation: ethnos-aurora-sweep 4.1s ease-in-out infinite alternate;
 }
 .ethnos-card-nanai { --ethnos-gradient: radial-gradient(circle at 82% 45%, #b9a8ff 0 15%, transparent 38%), linear-gradient(135deg, #4b46ef, #806cf8 48%, #bfafff); }
 .ethnos-card-chukchi { --ethnos-gradient: radial-gradient(circle at 70% 82%, #ffd5cf 0 12%, transparent 36%), linear-gradient(145deg, #a50e39, #ec386b 44%, #f0b7c5); }
 .ethnos-card-evenki { --ethnos-gradient: radial-gradient(circle at 18% 4%, #f7a18c 0 8%, transparent 32%), linear-gradient(155deg, #64265b, #ac466d 40%, #5d279c 75%, #9c7ae9); }
 .ethnos-card-sakha { --ethnos-gradient: radial-gradient(circle at 15% 15%, #37b7bd, transparent 32%), radial-gradient(circle at 82% 35%, #ff766e, transparent 38%), linear-gradient(155deg, #4cc0b5, #e9ca5d 48%, #71b9bf); }
+
+@keyframes ethnos-gradient-shift {
+  0% {
+    background-position: 0% 8%;
+    transform: translate3d(-7%, -5%, 0) rotate(-4deg) scale(1.04);
+    filter: saturate(.96) brightness(.96);
+  }
+  52% {
+    background-position: 100% 46%;
+    transform: translate3d(9%, 2%, 0) rotate(5deg) scale(1.12);
+    filter: saturate(1.12) brightness(1.04);
+  }
+  100% {
+    background-position: 24% 100%;
+    transform: translate3d(-2%, 9%, 0) rotate(-3deg) scale(1.18);
+    filter: saturate(1.03) brightness(1);
+  }
+}
+
+@keyframes ethnos-aurora-sweep {
+  0% {
+    background-position: 0% 18%;
+    transform: translate3d(-19%, -12%, 0) rotate(-6deg) scale(.92);
+    opacity: .48;
+  }
+  55% {
+    background-position: 72% 48%;
+    transform: translate3d(10%, 2%, 0) rotate(4deg) scale(1.08);
+    opacity: .92;
+  }
+  100% {
+    background-position: 100% 88%;
+    transform: translate3d(20%, 14%, 0) rotate(8deg) scale(1.2);
+    opacity: .62;
+  }
+}
 
 .ethnos-card strong {
   font-size: 30px;
