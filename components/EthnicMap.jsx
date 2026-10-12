@@ -19,7 +19,12 @@ function PeopleCard({ group }) {
         <div><dt>Аудио:</dt><dd>{group.stats.audio}</dd></div>
         <div><dt>Публикации:</dt><dd>{group.stats.publications}</dd></div>
       </dl>
-      <button type="button">Подробнее</button>
+      <button className="auroraButton" type="button">
+        <span>Подробнее</span>
+        <svg className="auroraButtonArrow" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 12h14m-5-5 5 5-5 5" />
+        </svg>
+      </button>
     </article>
   );
 }
@@ -32,35 +37,35 @@ export default function EthnicMap() {
   );
 
   return (
-    <section className="pageWidth mapSection" id="about">
+    <section className="pageWidth mapSection" id="map">
       <div className="mapPanel">
         <div className="sectionHeading mapHeading">
           <div>
             <span className="eyebrow dark">Интерактивная коллекция</span>
             <h2>Карта расселения народов Сибири</h2>
           </div>
-          <p>Наведите на группу в легенде или на точку. Карточка остаётся в одном месте и не перекрывает карту.</p>
-        </div>
-
-        <div className="mapLegend" aria-label="Группы народов">
-          {mapGroups.map((group) => (
-            <button
-              key={group.id}
-              type="button"
-              className={activeId === group.id ? "legendItem isActive" : "legendItem"}
-              onMouseEnter={() => setActiveId(group.id)}
-              onFocus={() => setActiveId(group.id)}
-              onClick={() => setActiveId(group.id)}
-              style={{ "--group-color": group.color }}
-              aria-pressed={activeId === group.id}
-            >
-              <span className="legendDot" />
-              {group.label}
-            </button>
-          ))}
         </div>
 
         <div className="mapStage">
+          <div className="mapLegend" aria-label="Группы народов">
+            {mapGroups.map((group) => (
+              <button
+                key={group.id}
+                type="button"
+                className={activeId === group.id ? "legendItem isActive" : "legendItem"}
+                onMouseEnter={() => setActiveId(group.id)}
+                onFocus={() => setActiveId(group.id)}
+                onClick={() => setActiveId(group.id)}
+                style={{ "--group-color": group.color }}
+                aria-pressed={activeId === group.id}
+              >
+                <span className="legendDot" />
+                <span className="legendTextFull">{group.label}</span>
+                <span className="legendTextShort">{group.shortLabel}</span>
+              </button>
+            ))}
+          </div>
+
           <div className="mapVisual">
             <div className="mapCanvas">
               <img src="/map-outline.svg" alt="Контурная карта Сибири" />

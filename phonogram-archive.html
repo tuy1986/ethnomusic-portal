@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Электронный фонограммархив Лаборатории этномузыковедения им. Ю. И. Шейкина">
+  <title>Электронный фонограммархив — Лаборатория этномузыковедения</title>
+  <link rel="stylesheet" href="archive.css?v=20261012-2">
+  <link rel="stylesheet" href="archive-home.css?v=20261012-9">
+  <script src="archive.js?v=20261012-7" defer></script>
+</head>
+<body class="archive-home-v2" data-page="archive-home" data-initial-track="0">
+  <header class="archive-home-header" id="top">
+    <div class="archive-home-width archive-home-header-inner">
+      <div class="archive-home-identity">
+        <a class="archive-home-return" href="portal-prototype.html" aria-label="Вернуться на страницу лаборатории">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg>
+        </a>
+        <a class="archive-home-brand" href="phonogram-archive.html" aria-label="Электронный фонограммархив — главная">
+          <img src="public/museum/logo-white.png" alt="">
+          <span>Электронный<br>фонограммархив</span>
+        </a>
+      </div>
+
+      <nav class="archive-home-nav archive-nav" id="archive-navigation" aria-label="Навигация фонограммархива">
+        <a class="is-active" href="phonogram-archive.html">Главная</a>
+        <a href="#performers">Исполнители</a>
+        <a href="#genres">Жанры</a>
+        <a href="#ethnoses">Этносы</a>
+      </nav>
+
+      <button class="archive-menu archive-home-menu" type="button" aria-expanded="false" aria-controls="archive-navigation" aria-label="Открыть меню"><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="archive-stage" aria-label="Аудиоплеер и навигация по архиву">
+      <div class="archive-home-width archive-stage-grid">
+        <aside class="archive-filters" aria-label="Фильтры фонограммархива">
+          <details class="archive-filter" open>
+            <summary>Экспедиция</summary>
+            <div class="pma-list">
+              <a class="is-active" href="expedition.html?pma=7">ПМА №7</a>
+              <a href="expedition.html?pma=10">ПМА №10</a>
+              <a href="expedition.html?pma=11">ПМА №11</a>
+              <a href="expedition.html?pma=8">ПМА №8</a>
+              <a href="expedition.html?pma=15">ПМА №15</a>
+            </div>
+          </details>
+          <details class="archive-filter">
+            <summary>Исполнитель</summary>
+            <div class="filter-links"><a href="#performers">Все исполнители</a><a href="performers.html">Алфавитный указатель</a></div>
+          </details>
+          <details class="archive-filter">
+            <summary>Жанр</summary>
+            <div class="filter-links"><a href="#genres">Все жанры</a><a href="phonogram-archive.html?genre=song#genres">Песни</a><a href="phonogram-archive.html?genre=legend#genres">Предания</a></div>
+          </details>
+          <details class="archive-filter">
+            <summary>Этнос</summary>
+            <div class="filter-links"><a href="#ethnoses">Все этносы</a><a href="phonogram-archive.html?ethnos=sakha#ethnoses">Якуты (саха)</a><a href="phonogram-archive.html?ethnos=evenki#ethnoses">Эвенки</a></div>
+          </details>
+        </aside>
+
+        <div class="archive-player" aria-live="polite">
+          <div class="aurora-visualizer" aria-hidden="true">
+            <span class="aurora-orbit aurora-orbit-one"></span>
+            <span class="aurora-orbit aurora-orbit-two"></span>
+            <video class="aurora-star" autoplay muted loop playsinline preload="auto">
+              <source src="public/archive/aurora-star.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <article class="now-playing">
+            <img class="now-playing-thumb" data-current-thumb src="public/archive/performer-gargulgyrgyna.jpg" alt="">
+            <div class="now-playing-copy">
+              <strong data-current-title>Эбэм ырыата (Песня бабушки)</strong>
+              <span data-current-meta>Готовцева Анна Егоровна · 2014</span>
+            </div>
+          </article>
+
+          <div class="archive-progress">
+            <input class="seek" data-seek type="range" min="0" max="100" value="0" aria-label="Позиция воспроизведения">
+            <div class="archive-time"><span data-current-time>0:00</span><span data-total-time>0:05</span></div>
+          </div>
+
+          <div class="archive-player-controls">
+            <button class="player-utility" type="button" data-player-action="shuffle" aria-label="Перемешать записи">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3.4c4.2 0 4.5 10 9.2 10H20m-3-3 3 3-3 3M4 17h3.4c1.2 0 2.1-.8 2.9-2m3.2-6c.8-1.2 1.8-2 3.1-2H20m-3-3 3 3-3 3"/></svg>
+            </button>
+            <button class="player-step" type="button" data-player-action="previous" aria-label="Предыдущая запись">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5v14M18 6.5 10 12l8 5.5Z"/></svg>
+            </button>
+            <button class="player-main" type="button" data-current-play data-playing="false" aria-label="Воспроизвести">
+              <span class="playback-icons" aria-hidden="true">
+                <svg class="media-glyph media-glyph-play" viewBox="0 0 24 24"><path d="M8.2 6.6 18 12l-9.8 5.4Z"/></svg>
+                <svg class="media-glyph media-glyph-pause" viewBox="0 0 24 24"><path d="M8.75 7v10M15.25 7v10" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"/></svg>
+              </span>
+            </button>
+            <button class="player-step" type="button" data-player-action="next" aria-label="Следующая запись">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 5v14M6 6.5l8 5.5-8 5.5Z"/></svg>
+            </button>
+            <button class="player-utility" type="button" data-player-action="repeat" aria-label="Повторять запись">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h9.5a3.5 3.5 0 0 1 0 7H15M7 4 4 7l3 3m10 4 3 3-3 3H7.5a3.5 3.5 0 0 1 0-7H9"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <ol class="archive-playlist" aria-label="Список фонограмм">
+          <li class="archive-playlist-item is-current" data-track="0">
+            <span class="playlist-index">1</span>
+            <button type="button" data-track-play="0">
+              <img src="public/archive/performer-gargulgyrgyna.jpg" alt="">
+              <span><strong>Эбэм ырыата (Песня бабушки)</strong><small>Готовцева Анна Егоровна</small></span>
+            </button>
+          </li>
+          <li class="archive-playlist-item" data-track="1">
+            <span class="playlist-index">2</span>
+            <button type="button" data-track-play="1">
+              <img src="public/archive/performer-kimonko.jpg" alt="">
+              <span><strong>Эбэҥкилии ырыа (Эвенкийская песня)</strong><small>Готовцева Анна Егоровна</small></span>
+            </button>
+          </li>
+          <li class="archive-playlist-item" data-track="2">
+            <span class="playlist-index">3</span>
+            <button type="button" data-track-play="2">
+              <span class="playlist-genre-thumb genre-blue"><img src="public/archive/ornaments/ornament-4-1.png" alt=""></span>
+              <span><strong>Табаны ыҥырыы (Зов оленя)</strong><small>Николаев Егор Иосифович</small></span>
+            </button>
+          </li>
+          <li class="archive-playlist-item" data-track="3">
+            <span class="playlist-index">4</span>
+            <button type="button" data-track-play="3">
+              <img src="public/archive/performer-kalyundziga.jpg" alt="">
+              <span><strong>Морсуо оҕото (Песня о Морсуо)</strong><small>Коллектив «Дылкэн»</small></span>
+            </button>
+          </li>
+          <li class="archive-playlist-item" data-track="4">
+            <span class="playlist-index">5</span>
+            <button type="button" data-track-play="4">
+              <span class="playlist-genre-thumb genre-pink"><img src="public/archive/ornaments/ornament-8-1.png" alt=""></span>
+              <span><strong>Ёхорьё (эвенкийский круговой танец)</strong><small>Н. Колодезникова и другие</small></span>
+            </button>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <div class="archive-home-content">
+      <section class="archive-home-width archive-home-section" id="performers">
+        <div class="archive-section-heading"><h2>Исполнители</h2><a href="performers.html">Смотреть всех <span>→</span></a></div>
+        <div class="performer-grid">
+          <a class="performer-card" href="performer.html?name=gargulgyrgyna">
+            <img src="public/archive/performer-gargulgyrgyna.jpg" alt="Гаргульгыргына Анна Сергеевна">
+            <span><small>Гаргульгыргына</small><strong>Анна Сергеевна</strong></span>
+          </a>
+          <a class="performer-card" href="performer.html?name=kimonko">
+            <img src="public/archive/performer-kimonko.jpg" alt="Кимонко Ингили Батович">
+            <span><small>Кимонко</small><strong>Ингили Батович</strong></span>
+          </a>
+          <a class="performer-card" href="performer.html?name=nikolaev">
+            <img src="public/archive/performer-nikolaev.jpg" alt="Николаев Егор Иосифович">
+            <span><small>Николаев</small><strong>Егор Иосифович</strong></span>
+          </a>
+          <a class="performer-card" href="performer.html?name=tevlyankau">
+            <img src="public/archive/performer-tevlyankau.jpg" alt="Тевлянкау Елена Михайловна">
+            <span><small>Тевлянкау</small><strong>Елена Михайловна</strong></span>
+          </a>
+        </div>
+      </section>
+
+      <section class="archive-home-width archive-home-section" id="genres">
+        <div class="archive-section-heading"><h2>Жанры</h2></div>
+        <div class="genre-grid">
+          <a class="gradient-card genre-card genre-card-rose" href="phonogram-archive.html?genre=imitation">
+            <img src="public/archive/ornaments/ornament-4.png" alt="">
+            <strong>Звукоподражание</strong>
+          </a>
+          <a class="gradient-card genre-card genre-card-amber" href="phonogram-archive.html?genre=song">
+            <img src="public/archive/ornaments/ornament-3.png" alt="">
+            <strong>Песня</strong>
+          </a>
+          <a class="gradient-card genre-card genre-card-mint" href="phonogram-archive.html?genre=legend">
+            <img src="public/archive/ornaments/ornament-5.png" alt="">
+            <strong>Предание</strong>
+          </a>
+          <a class="gradient-card genre-card genre-card-blue" href="phonogram-archive.html?genre=lullaby">
+            <img src="public/archive/ornaments/ornament-6.png" alt="">
+            <strong>Колыбельная</strong>
+          </a>
+          <a class="gradient-card genre-card genre-card-pink" href="phonogram-archive.html?genre=tale">
+            <img src="public/archive/ornaments/ornament-8.png" alt="">
+            <strong>Сказание</strong>
+          </a>
+        </div>
+      </section>
+
+      <section class="archive-home-width archive-home-section archive-ethnos-section" id="ethnoses">
+        <div class="archive-section-heading"><h2>Этносы</h2></div>
+        <div class="ethnos-grid">
+          <a class="gradient-card ethnos-card ethnos-card-nanai" href="phonogram-archive.html?ethnos=nanai"><strong>Нанайцы</strong></a>
+          <a class="gradient-card ethnos-card ethnos-card-chukchi" href="phonogram-archive.html?ethnos=chukchi"><strong>Чукчи</strong></a>
+          <a class="gradient-card ethnos-card ethnos-card-evenki" href="phonogram-archive.html?ethnos=evenki"><strong>Эвенки</strong></a>
+          <a class="gradient-card ethnos-card ethnos-card-sakha" href="phonogram-archive.html?ethnos=sakha"><strong>Якуты<br>(саха)</strong></a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="archive-home-footer">
+    <div class="archive-home-width archive-home-footer-grid">
+      <div class="archive-footer-contact">
+        <a class="archive-home-brand archive-footer-brand" href="phonogram-archive.html">
+          <img src="public/museum/logo-white.png" alt="">
+          <span>Электронный фонограммархив<br>Лаборатории этномузыковедения им. Ю. И. Шейкина</span>
+        </a>
+        <address>677000, Республика Саха (Якутия),<br>г. Якутск, ул. Орджоникидзе, д. 4, каб. 401</address>
+        <a href="tel:+79992448075">+7 999 244-80-75</a>
+        <a href="mailto:kiskagiik@mail.ru">kiskagiik@mail.ru</a>
+      </div>
+
+      <nav class="archive-footer-nav" aria-label="Разделы портала">
+        <a href="portal-prototype.html">Главная</a>
+        <a href="portal-prototype.html#map">Народы</a>
+        <a href="archive-about.html">Материалы</a>
+        <a href="portal-prototype.html#sheykin">Ю. И. Шейкин</a>
+        <a href="phonogram-archive.html">Аудиоархив</a>
+        <a href="portal-prototype.html#gallery">Фотогалерея</a>
+      </nav>
+
+      <div class="archive-socials">
+        <strong>Мы в соцсетях:</strong>
+        <div>
+          <a href="#" aria-label="Telegram"><img src="public/archive/social/telegram.png" alt=""></a>
+          <a href="#" aria-label="Яндекс"><img src="public/archive/social/yandex.png" alt=""></a>
+          <a href="#" aria-label="ВКонтакте"><img src="public/archive/social/vk.png" alt=""></a>
+        </div>
+      </div>
+
+      <p class="archive-copyright">© 2026 МУЗЕЙ. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
+    </div>
+  </footer>
+</body>
+</html>
